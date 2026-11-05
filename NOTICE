@@ -1,0 +1,56 @@
+megakernel-b300
+Copyright (c) 2026 EZO Labs Inc.
+
+EZO Labs' own files in this repository are licensed under the MIT License.
+See LICENSE.
+
+The files under setup/patches/ and setup/sglang-fork/, and
+setup/quality/nvidia_kl.py, are modifications of SGLang
+(https://github.com/sgl-project/sglang) and of sgl-nvidia-mega
+(https://github.com/sgl-project/sgl-nvidia-mega), both licensed under the
+Apache License, Version 2.0. They carry changes by EZO Labs Inc. and are
+distributed under the Apache License, Version 2.0, whose full text is in
+setup/patches/LICENSE and setup/sglang-fork/LICENSE.
+
+SGLang at the commit this repository's fork delta is cut against
+(3a3a8611a45f5a81fd07ffa6b0ed3ba33e7a4db9) ships no NOTICE file.
+sgl-nvidia-mega at the commit the plugin patches are cut against
+(54b428921749fef89fcbd043000f839ac9cc4638) ships the NOTICE text
+reproduced verbatim below, as Apache License 2.0 section 4(d) requires it
+to travel with derivative works.
+
+---- sgl-nvidia-mega NOTICE, verbatim ----
+sgl-nvidia-mega
+Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES and SGLang contributors.
+Licensed under the Apache License 2.0.
+
+Portions are adapted from SGLang (https://github.com/sgl-project/sglang): the stock
+decode step of DeepSeek-V4.1 (the layer loop, the mHC boundaries, the attention, the
+MoE, Engram and the head) follows SGLang's own model code (Apache License 2.0,
+Copyright SGLang Team). Each adapted file names its origin in its header.
+
+Portions are adapted from SGLang (https://github.com/sgl-project/sglang): the stock
+verify step of Qwen3.5 (the layer loop, the GatedDeltaNet, the attention and the MoE)
+follows SGLang's own model code (Apache License 2.0, Copyright SGLang Team). Qwen3.5's
+GatedDeltaNet verify slots follow SGLang's linear-attention backend; its causal conv
+update (Apache License 2.0, Copyright contributors to the vLLM project, Copyright (c)
+2024 Tri Dao); its gated RMSNorm Triton kernel, which SGLang adapted from
+flash-linear-attention (MIT License, Copyright (c) 2024 Tri Dao); and its ReplaySSM
+verify kernel, which SGLang ported from the vLLM ReplaySSM reference implementation
+(Apache License 2.0, Copyright contributors to the vLLM project). Each adapted file
+names its origin in its header.
+
+Portions are adapted from FlashInfer (https://github.com/flashinfer-ai/flashinfer):
+the Lamport all-reduce primitives and the low-latency all-reduce (Apache License
+2.0, Copyright (c) 2026 by FlashInfer team), and the epilogue of the wo_b GEMM
+that publishes into the all-reduce mailbox (BSD-3-Clause, Copyright (c) 2026
+NVIDIA CORPORATION & AFFILIATES; the full notice is kept in that file). Each
+adapted file names its origin in its header. The Kimi K3 split-K GEMM in
+sgl_nvidia_mega/kimi_k3/cutedsl/gemm/splitk.py is adapted from FlashInfer's
+flashinfer/gemm/kernels/dense_bf16_gemm_sm100_splitk.py at v0.7.0.post1
+(Apache License 2.0). FlashInfer's NOTICE file reads:
+
+FlashInfer
+Copyright 2025-2026 NVIDIA
+Copyright 2023-2026 FlashInfer community (https://flashinfer.ai/)
+---- end of sgl-nvidia-mega NOTICE ----

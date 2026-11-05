@@ -13,6 +13,7 @@ The published article, the measured record with its raw data, and the setup kit 
 [![SGLang fork](https://img.shields.io/badge/SGLang_fork-9a9ede7-555555?style=flat)](setup/sglang-fork/README.md)
 [![Plugin](https://img.shields.io/badge/sgl--nvidia--mega-54b4289-555555?style=flat)](setup/patches/sgl-nvidia-mega-b300-spec.patch)
 [![Article](https://img.shields.io/badge/article-ezolabs.io-3b6ef6?style=flat)](https://ezolabs.io/research/megakernel-b300)
+[![License](https://img.shields.io/badge/license-MIT-555555?style=flat)](#license)
 
 [Results](#results) · [How it works](#how-it-works) · [Reproduce](#reproduce) · [Layout](#repository-layout) · [Provenance](#provenance) · [Article](https://ezolabs.io/research/megakernel-b300)
 
@@ -209,6 +210,8 @@ The full runbook is [`setup/README.md`](setup/README.md). The steps of record, i
 ```
 megakernel-b300/
 ├── README.md
+├── LICENSE           MIT, for EZO Labs' own files
+├── NOTICE            the Apache-2.0 scope, with the upstream notice
 ├── article/          the published post
 │   ├── megakernel-b300.md   the post
 │   ├── figures/             four SVGs; three with the CSVs behind them
@@ -262,3 +265,9 @@ Checks before publishing: [`record/data/scripts/sanitize_scan.sh`](record/data/s
   note         = {EZO-R-2026-07}
 }
 ```
+
+## License
+
+This repository's own files are MIT-licensed; see [`LICENSE`](LICENSE).
+
+The files under [`setup/patches/`](setup/patches) and [`setup/sglang-fork/`](setup/sglang-fork), plus [`setup/quality/nvidia_kl.py`](setup/quality/nvidia_kl.py), are modifications of SGLang ([sgl-project/sglang](https://github.com/sgl-project/sglang)) and sgl-nvidia-mega ([sgl-project/sgl-nvidia-mega](https://github.com/sgl-project/sgl-nvidia-mega)), both Apache-2.0. They stay under the Apache License 2.0; see [`setup/patches/LICENSE`](setup/patches/LICENSE). [`NOTICE`](NOTICE) records this scope and carries the upstream notice.
