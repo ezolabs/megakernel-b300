@@ -34,7 +34,7 @@ index 0000000000..775714ae5b
 +
 +| Hosted label                              | Our label            | Where it runs |
 +| ----------------------------------------- | -------------------- | ------------- |
-+| `ubuntu-latest`, `ubuntu-22.04`, `ubuntu-24.04` | `arc-sglang`   | ARC runner scale set on s15 in the cluster (installed, listener Running; image: `runner-image/`) |
++| `ubuntu-latest`, `ubuntu-22.04`, `ubuntu-24.04` | `arc-sglang`   | ARC runner scale set in a self-hosted cluster (installed, listener Running; image: `runner-image/`) |
 +| `ubuntu-2x.04-arm`                        | `sglang-linux-arm64` | no runner, by decision (see below) |
 +| `macos-latest`, `macos-NN`                | `sglang-macos`       | runner `iris2-sglang` on iris2 (Mac Studio, Apple M4 Max, ARM64; online) |
 +| `windows-latest`, `windows-20NN`          | `sglang-windows`     | no runner, by decision (see below) |
@@ -2228,7 +2228,7 @@ index 0000000000..ba64c495a2
 +    runs-on: arc-sglang
 +    timeout-minutes: 60
 +    env:
-+      IMAGE: ghcr.io/ezolabs/arc-sglang-runner
++      IMAGE: ghcr.io/<sglang-fork-owner>/arc-sglang-runner
 +      BASE_REF: ghcr.io/actions/actions-runner:latest
 +    steps:
 +      - name: Checkout
@@ -49699,7 +49699,7 @@ index 0000000000..a148f23f0a
 +Usage (numpy only; seed defaults to 0):
 +    python test/registered/unit/layers/dsv41_exact_trim_sim.py [seed]
 +
-+Results (page-anchored, fork-op item #268, seed 0, run on s6 with
++Results (page-anchored, fork-op item #268, seed 0, run on the build host with
 +/opt/box-f-fork/venv-cpu; seq-anchored item #88 numbers in parentheses):
 +  * 60k-token cold fill at chunk 4096, row-layers vs. full prefill:
 +    tail-only   saving 17.92% (18.00%), late_rows=38496 (38400), logits +

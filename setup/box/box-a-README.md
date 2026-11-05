@@ -257,7 +257,7 @@ The full #621 tables are in the [tuning record](../../box-c/qa/box-a-tuning-2026
 ### `box-a-latest` (#869, 10-29): not adopted (retired mid-window)
 
 Fork branch `box-a-latest` `d03143934671` = `prod-tool-strict-default` `faabdcae` (#901) + upstream #45673,
-#43978, #46835 (parallel host-pool allocation) + min_p validation `219c0feb`. Tests passed on s6. It was
+#43978, #46835 (parallel host-pool allocation) + min_p validation `219c0feb`. Tests passed on the build host. It was
 the Caddy h2-window swap (16 MiB connection window) plus this tree, with `PAR_ALLOC=32`:
 
 - The cut was 02:05:07Z. READY came at 02:17:05Z, 473 s into the boot, and host-pool allocation took

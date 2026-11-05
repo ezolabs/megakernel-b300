@@ -210,7 +210,7 @@ like-for-like. Do not rerun it.
    Record exactly what was applied.
 2. **The SGLang tree.** It must be at or past `8f1b7691ca` and should be the commit `S` whose
    `docker/Dockerfile` pins `SGL_NVIDIA_MEGA_COMMIT` to `P`, or later. Build it as a **new fork branch**
-   (`box-a-mk-<YYYYMMDD>`) on s6, per [`box-c/10-updating.md`](../../box-c/10-updating.md) "Syncing the fork to
+   (`box-a-mk-<YYYYMMDD>`) on the build host, per [`box-c/10-updating.md`](../../box-c/10-updating.md) "Syncing the fork to
    latest upstream" and "Cherry-picking one more upstream PR": `S` plus whatever of box-a's final it
    lacks. Test each with `git merge-base --is-ancestor <c> S`:
    - #46700's tombstone clamp
