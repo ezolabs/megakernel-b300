@@ -4,10 +4,10 @@
 > online for testing changes and upstream merges). Tests and upstream merges run here out of rotation; a
 > validated build serves on box-a first, then box-b is rebooted onto it; never both out; a stop → start smoke
 > after each session, and it stays online. Before that it was stopped 2026-10-31 09:45:40Z to 13:55Z by the user's choice, to save money
-> (record: [`../../box-c/qa/box-a-maintenance-20261031/`](../../box-c/qa/box-a-maintenance-20261031/README.md)),
-> then started for sweep b's tests ([`../../box-c/qa/sglang-takes-20261031/`](../../box-c/qa/sglang-takes-20261031/NOTES.md)),
+> (record: `../../box-c/qa/box-a-maintenance-20261031/`),
+> then started for sweep b's tests (`../../box-c/qa/sglang-takes-20261031/`),
 > and rolled onto fork `prod` `9a9ede7ae0` on 10-31
-> ([`ROLL-box-a.md`](../../box-c/qa/sglang-takes-20261031/ROLL-box-a.md)). How it is run: `../../README.md`
+> (`box-c/qa/sglang-takes-20261031/ROLL-box-a.md`). How it is run: `../../README.md`
 > "Standing orders" and the update-sglang workflow's steps 5 and 7.
 > Contract end 2026-11-27T01:20:44Z.
 
@@ -16,7 +16,7 @@
 > `box-a` in `box-c-prod` (prod config v254) and `box-a-dev` in `box-c-dev` (dev v224), on
 > `tools/args/stack-b300-box-a-mk.args` + `env-box-a-mk.txt` (the NVIDIA megakernel, our SGLang fork
 > `box-a-mk-latest` @ `9ec65dacaf`), with the TP probe and `hangwatch.py` on. The return, every command and
-> its rollback: [`../../box-c/qa/box-a-megakernel-20261029/raw/box-a-return/NOTES.md`](../../box-c/qa/box-a-megakernel-20261029/raw/box-a-return/NOTES.md);
+> its rollback: `../../box-c/qa/box-a-megakernel-20261029/raw/box-a-return/NOTES.md`;
 > how it is run: `box-c/07-operations.md` "box-a: the megakernel canary in the pools". What follows is the
 > 10-26 → 10-29 service and its retirement, kept as written.
 
@@ -30,7 +30,7 @@ instance was stopped at 2026-10-29 05:27:26Z. It is stopped, **never destroyed**
 instance keeps its disk, so the model, venvs and trees on it survive for the retry, until its
 contract ends (2026-11-27T01:20:44Z).
 
-This file is the whole record in one place. The dated detail lives in the run records it links. All times
+This file is the whole record in one place. The dated detail lives in the run records it names. All times
 are UTC.
 
 ## Identity
@@ -42,7 +42,7 @@ are UTC.
 | host | 2× Xeon 6776P (256 threads, 2 NUMA nodes, every GPU on NUMA0), 3023 GiB RAM, 1,500 GB disk, everything under `/`; Ubuntu 24.04.4, kernel 7.0.0-29-generic, container hostname `<CONTAINER_HOSTNAME>` |
 | ssh | `root@<BOX_IP> -p <SSH_PORT>` (the direct mapping of container port 22). The provider's listed `ssh_port` never answered |
 | front door | `https://box-a.<DOMAIN>:<APP_PORT_EXT>` (DNS record deleted 10-29 03:06:51Z; container 8001 → external <APP_PORT_EXT>), Caddy with a Let's Encrypt cert behind the router allowlist; engine on loopback `:8002` |
-| box file | [`../../boxes/box-a.env`](../../boxes/box-a.env) (since 10-30 07:24Z: config X; the final's values are its rollback comments) |
+| box file | [`boxes/box-a.env`](boxes/box-a.env) (since 10-30 07:24Z: config X; the final's values are its rollback comments) |
 | router rows | prod `box-a` in pool `box-c-prod` (sealed KV-event tunnel `box-a-kv`), dev `box-a-dev` in `box-c-dev`; direct router row priority 5 (below box-c's 10). Out of both pools 10-29 (v214) → 10-30 07:22-07:24Z, back in both since (dev v224, prod v254; kv 49,879,552) |
 | state | **serving** (router pools) since 2026-10-30 07:24Z; was stopped 2026-10-29 05:27:26Z (`actual_status` `exited` at 05:29:09Z) until started for the megakernel retry; contract end 2026-11-27T01:20:44Z |
 | standing order | never `hostctl start`, `hostctl stop` or destroy <INSTANCE_ID> without the user's word |
@@ -51,10 +51,10 @@ are UTC.
 
 | date | what |
 | --- | --- |
-| 2026-10-26 | rented; the L3a repack copied box to box from box-c (510 GB, 56 files, sha256-verified), tree and venv built, first boot, glue-graph fix ([bring-up record](../../box-c/qa/box-a-bringup-20261026/README.md)) |
-| 10-26 → 10-27 | overnight tuning round on the idle box ([tuning record](../../box-c/qa/box-a-tuning-20261026/README.md)) |
+| 2026-10-26 | rented; the L3a repack copied box to box from box-c (510 GB, 56 files, sha256-verified), tree and venv built, first boot, glue-graph fix (bring-up record) |
+| 10-26 → 10-27 | overnight tuning round on the idle box (tuning record) |
 | 10-27, early | joined the router: `box-a` in `box-c-prod` (config v162 → v166), `box-a-dev` in `box-c-dev` (v131 → v135) |
-| 10-27 → 10-28 | ship 1: the stacked args become box-a's final ([ship-1 record](../../box-c/qa/box-a-ship1-20261027/README.md)) |
+| 10-27 → 10-28 | ship 1: the stacked args become box-a's final (ship-1 record) |
 | 10-28 12:50:14Z | the final moves onto fork `prod` `819756d4` (upstream #46700's SWA tombstone clamp) |
 | 10-28 | n-gram copy and graph-accept arms (#694 and others), CPU turbo-core pins (#696) |
 | 10-28 19:39Z → 10-29 01:07Z | megakernel MK2 and MK3 (#621), then the final restored |
@@ -64,8 +64,8 @@ are UTC.
 | 10-29 03:00:31Z / 03:02:08Z | out of the pools: `box-a-dev` left `box-c-dev` (dev config v214), then `box-a` left `box-c-prod` (prod v214); DNS record deleted 03:06:51Z |
 | 10-29 05:17–05:25Z | the fault drill on box-c (#866), after router release 14: 15 s held, 0 client errors |
 | 10-29 05:27:26Z | `hostctl stop instance <INSTANCE_ID>`; `actual_status` `exited` at 05:29:09Z |
-| 10-29 → 10-30 | started again for the megakernel retry ([record](../../box-c/qa/box-a-megakernel-20261029/README.md)); verdict SAFE as a monitored canary |
-| 10-30 07:22Z / 07:24Z | back in the pools on config X: `box-a-dev` into `box-c-dev` (dev v224), then `box-a` into `box-c-prod` (prod v254) (#39, [return record](../../box-c/qa/box-a-megakernel-20261029/raw/box-a-return/NOTES.md)) |
+| 10-29 → 10-30 | started again for the megakernel retry (`box-c/qa/box-a-megakernel-20261029/README.md`); verdict SAFE as a monitored canary |
+| 10-30 07:22Z / 07:24Z | back in the pools on config X: `box-a-dev` into `box-c-dev` (dev v224), then `box-a` into `box-c-prod` (prod v254) (#39, return record) |
 
 ## Role
 
@@ -89,8 +89,8 @@ the drill ran.
 | piece | value |
 | --- | --- |
 | tree | our SGLang fork `prod` = `box-a-ship1-46700` = **`819756d4632e9a1f07234e97c11137a591a79193`**: `box-a-ship1` `ace628a0` (prod 452f2438 + box-e-img-order 35e6d667 + box-e-swa-interior-evict 9e295882, left off) + upstream #46700's SWA tombstone clamp. Checked out at `/workspace/box-e-up`, editable in `/opt/sglang-box-e` |
-| args | [`stack-b300-box-a.args`](../../args/stack-b300-box-a.args): TP4 / EP4, mem-fraction 0.75, DSpark block 5 with block verification, decode graphs to bs 64, max-running 64, context 1,048,576, chunked prefill 8192, prefill-decode interval 4, `--swa-prefix-tails 2048`, priority scheduling, the short-prefill lane, KV events (zmq 5557/5558) and load publish, HiCache (`ratio 2`, `write_through`, `kernel`, `page_first`, host-memory `cache`), the breakable prefill CUDA graph (bs 2048, context 131,072), the trtllm all-reduce fusion |
-| env | [`env-box-a-w1.txt`](../../args/env-box-a-w1.txt): `env-box-e.txt` + `SGLANG_DSV41_ENGRAM_HOST_TABLE=1` with `LAYOUT=shared` (tuning knob c) + `TRITON_PRINT_AUTOTUNING=1` |
+| args | `stack-b300-box-a.args`: TP4 / EP4, mem-fraction 0.75, DSpark block 5 with block verification, decode graphs to bs 64, max-running 64, context 1,048,576, chunked prefill 8192, prefill-decode interval 4, `--swa-prefix-tails 2048`, priority scheduling, the short-prefill lane, KV events (zmq 5557/5558) and load publish, HiCache (`ratio 2`, `write_through`, `kernel`, `page_first`, host-memory `cache`), the breakable prefill CUDA graph (bs 2048, context 131,072), the trtllm all-reduce fusion |
+| env | `env-box-a-w1.txt`: `env-box-e.txt` + `SGLANG_DSV41_ENGRAM_HOST_TABLE=1` with `LAYOUT=shared` (tuning knob c) + `TRITON_PRINT_AUTOTUNING=1` |
 | CPU | `SCHED_CPU_PIN="16 17 32 33"`: TP0–3 schedulers pinned to node-0 turbo cores (4,600 MHz busy) |
 | front door | stock Caddy v2.11.7, sha256 `22e29521…5aba` (#869's h2-window swap was rolled back, see below) |
 | model | `<MODEL_PATH>` (476 GB, L3a; `config.json` sha256 `8be45ce0…1879`) |
@@ -108,7 +108,7 @@ case fails on it: 361/362 stream and 362/363 non-stream calls defective. Prod is
 A verdict is the gate's, against the base each run names. "A/A band" is the paired noise band of two boots
 of the same config (`box-c/qa/window2-tp4/harness/gates.py`).
 
-### Bring-up (2026-10-26; [record](../../box-c/qa/box-a-bringup-20261026/README.md))
+### Bring-up (2026-10-26; `box-c/qa/box-a-bringup-20261026/README.md`)
 
 | arm | numbers | verdict |
 | --- | --- | --- |
@@ -118,7 +118,7 @@ of the same config (`box-c/qa/window2-tp4/harness/gates.py`).
 Against box-c's 8×B200 baseline of that day, box-a won at C8/C16 throughput and warm resume. It lost at
 C1–C4 decode, cold prefill and the cold-fill crater.
 
-### Tuning round (#152, 10-26 → 10-27; [record](../../box-c/qa/box-a-tuning-20261026/README.md))
+### Tuning round (#152, 10-26 → 10-27; `box-c/qa/box-a-tuning-20261026/README.md`)
 
 | knob | numbers | verdict |
 | --- | --- | --- |
@@ -132,7 +132,7 @@ C1–C4 decode, cold prefill and the cold-fill crater.
 | (h) prefill-decode interval 4 | crater +42% / +46% | **adopted** |
 | FIN (c + e + h) vs A0 | cold 60k TTFT 3.55 → 2.20 s, crater 44 → 66 tok/s, KV 25,377,024 → 55,363,328 | **served** from 10-27 ~05:00Z |
 
-### Ship 1: the stack (#385, 10-27 → 10-28; [record](../../box-c/qa/box-a-ship1-20261027/README.md))
+### Ship 1: the stack (#385, 10-27 → 10-28; `box-c/qa/box-a-ship1-20261027/README.md`)
 
 Per stream decode tok/s / TTFT s (aggregate at C8/C16):
 
@@ -195,7 +195,7 @@ One lead: the captured region holds three in-graph TP broadcasts under `SGLANG_S
 ### Megakernel (`sgl-nvidia-mega`, #301 and #621): not adopted
 
 The plugin was upstream `sgl-project/sgl-nvidia-mega` at `39595061519a` (#26), carrying one local patch,
-[`sgl-nvidia-mega-b300-spec.patch`](sgl-nvidia-mega-b300-spec.patch). The patch lowers
+[`sgl-nvidia-mega-b300-spec.patch`](../patches/sgl-nvidia-mega-b300-spec.patch). The patch lowers
 `resident_blocks` from 152 to 148 (GB300's SM floor down to B300's 148 SMs; unofficial) and adds
 `Feature.KV_OFFLOAD` to the spec's features (needed by MK3). The plugin ran in its own venv
 `/opt/sglang-mega` (SGLang `fd3545a4` editable, plugin editable). MK2/MK3 overlaid the final tree with
@@ -250,9 +250,9 @@ The plugin was upstream `sgl-project/sgl-nvidia-mega` at `39595061519a` (#26), c
   was met. No-hangs and box-c-fit were not.
 
 The design note on making the megakernel indexable is
-[`../../box-c/qa/box-a-ship1-20261027/megakernel-kv.md`](../../box-c/qa/box-a-ship1-20261027/megakernel-kv.md).
-The full #621 tables are in the [tuning record](../../box-c/qa/box-a-tuning-20261026/README.md)
-"Megakernel" and [`agent-speed`](../../box-c/qa/agent-speed-20261026/README.md) §3.5.
+`../../box-c/qa/box-a-ship1-20261027/megakernel-kv.md`.
+The full #621 tables are in the tuning record
+"Megakernel" and `agent-speed` §3.5.
 
 ### `box-a-latest` (#869, 10-29): not adopted (retired mid-window)
 
@@ -328,7 +328,7 @@ read-only, while box-a served the final.
 
 | what | where |
 | --- | --- |
-| in this repo | [bring-up](../../box-c/qa/box-a-bringup-20261026/README.md), [tuning + megakernel](../../box-c/qa/box-a-tuning-20261026/README.md), [ship 1](../../box-c/qa/box-a-ship1-20261027/README.md) (its `raw/`), [agent-speed §3.5, §4, §7](../../box-c/qa/agent-speed-20261026/README.md), [`../../box-c/CHANGELOG.md`](../../box-c/CHANGELOG.md) |
+| in the source repo | bring-up, tuning + megakernel, ship 1 (its `raw/`), agent-speed §3.5, §4, §7, `../../box-c/CHANGELOG.md` |
 | on the Mac (git-ignored scratch) | `<HOME>/workspace/inference/.tmp/`: `box-a-mk2/` (#621: NOTES.md, raw/, gates-MK*.txt, l3a-MK2a-s0/, and the Mac-side `mkwatch.sh`, `begin-hold.sh`, `end-hold.sh`, `health-read.sh`, also archived at `<HOME>/workspace/backups/box-a/mac-side/` with their own `SHA256SUMS`), `box-a-ship1/`, `box-a-fusion-off/`, `box-a-turbo-map/`, `box-a-arms-ngram-accept/` (NOTES-694.md), `ngram-copy/`, `ngram-offline/`, `ngram-wide-verify/`, `fork-ngram-fixes/`, `box-a-window-869/`, `box-c-mk-fit/`, `host-cost/`; the overnight summary `overnight-report.md` |
 | the box archive | `<HOME>/workspace/backups/box-a/` (above) |
 | L3a runs | the release gate's run output for box-a (git-ignored) in the checkout that ran them; the MK2a run is `<HOME>/workspace/inference/.tmp/box-a-mk2/l3a-MK2a-s0/` |
@@ -346,12 +346,12 @@ The order is the user's. It is not tied to box-c's reset and has no deadline.
    - The KV-event tunnel `deploy/box-a-kv` is scaled to 0.
 
    box-c's copies `box-c-a` and `box-c-b` are now the whole pool, and the restart recipes in
-   [`../../box-c/07-operations.md`](../../box-c/07-operations.md) read that way. Nothing routes to box-a
+   `../../box-c/07-operations.md` read that way. Nothing routes to box-a
    any more.
 3. **The fault drill on box-c:** done 2026-10-29 05:17–05:25Z (#866), after router release 14. box-c's
    Caddy and both `box-c-kv` tunnels were stopped 15.0 s with `box-c-a` held out: the router held every
    request (7 served, 0 expired), no client saw an error, the slowest held request took 17.7 s
-   against the 20 s hold ([`../../box-c/CHANGELOG.md`](../../box-c/CHANGELOG.md), the #866 drill entry).
+   against the 20 s hold (`../../box-c/CHANGELOG.md`, the #866 drill entry).
 4. **`hostctl stop instance <INSTANCE_ID>`:** done 2026-10-29 05:27:26Z, the user's order's last step;
    `actual_status` read `exited` at 05:29:09Z. The instance is never destroyed. Its 1,500 GB disk
    keeps billing its disk, and its contract ends 2026-11-27T01:20:44Z. A restart

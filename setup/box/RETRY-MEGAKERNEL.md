@@ -2,16 +2,16 @@
 
 The user's retry, named at box-a's retirement on 2026-10-29: in about a week, run the `sgl-nvidia-mega`
 megakernel on box-a again, **if upstream has fixed its numeric drift**. This file is the whole procedure.
-The record it rests on is [`README.md`](README.md) "Megakernel". The local plugin patch it needs is
-[`sgl-nvidia-mega-b300-spec.patch`](sgl-nvidia-mega-b300-spec.patch). The repo copy is the durable one;
+The record it rests on is [`box-a-README.md`](box-a-README.md) "Megakernel". The local plugin patch it needs is
+[`sgl-nvidia-mega-b300-spec.patch`](../patches/sgl-nvidia-mega-b300-spec.patch). The repo copy is the durable one;
 the same bytes are in the archive at `<HOME>/workspace/backups/box-a/meta/`.
 
 ## Result of the 10-29 retry (2026-10-30)
 
 **SAFE to serve on box-a as config X, as a monitored canary beside box-c; the hang rate is bounded, not shown low.**
-Record and every number: [`box-c/qa/box-a-megakernel-20261029/README.md`](../../box-c/qa/box-a-megakernel-20261029/README.md).
+Record and every number: `box-c/qa/box-a-megakernel-20261029/README.md`.
 - Config X: `box-a-mk-latest` @ `9ec65dacaf` (pushed, not on prod), plugin `54b4289` + the B300 patch,
-  [`args/mk-latest.{args,env}`](../../box-c/qa/box-a-megakernel-20261029/args/) on `/opt/sglang-mk29`, serving with
+  [`arms/mk-latest.{args,env}`](../config/arms/) on `/opt/sglang-mk29`, serving with
   `SGLANG_MK_TP_PROBE=1 SGLANG_MK_TP_PROBE_EVERY=100 SGLANG_MK_TP_PROBE_ASSERT=1` and `hangwatch.py --service
   --on-hang kill`.
 - Speed: +38.8 / +29.6 / +23.7 / +11.7 / ~0% decode per stream at C1/2/4/8/16 (S4), +33.0 / +29.8 / +23.9 /
@@ -31,11 +31,11 @@ Record and every number: [`box-c/qa/box-a-megakernel-20261029/README.md`](../../
   Prod reaches box-a with top_k always dropped and top_p < 1 only on thinking requests whose client sets top_p
   (the router clamps it to [0.95, 1.0]); how often is not measured.
 - Nothing owed: the router known-bad test (#39) passed on the dev pool 10-30 07:29-07:34Z
-  ([`README.md`](../../box-c/qa/box-a-megakernel-20261029/README.md) "Hangs"). The megakernel stays off box-c (SR-144,
+  (`box-c/qa/box-a-megakernel-20261029/README.md` "Hangs"). The megakernel stays off box-c (SR-144,
   gate 7); box-c runs the same `prod` tree without it since 10-30 (#96).
 - Since 10-30 12:51Z box-a serves **config X'**: the fork's `prod` `4943d6ed90` (`box-a-mk-latest` merged in, plus
-  upstream #46645, #38565, #47149) with [`stack-b300-box-a-mk2.args` + `env-box-a-mk2.txt`](../../args/);
-  config X is its rollback. Record: [`box-c/qa/prod-merge-20261030/raw/gate/NOTES.md`](../../box-c/qa/prod-merge-20261030/raw/gate/NOTES.md).
+  upstream #46645, #38565, #47149) with [`stack-b300-box-a-mk2.args` + `env-box-a-mk2.txt`](args/);
+  config X is its rollback. Record: `box-c/qa/prod-merge-20261030/raw/gate/NOTES.md`.
 - Serving hours in the router pools, 10-30. Hours by load band come from vmsingle
   `sglang:num_running_reqs{backend="box-a"}` (15 s samples). Hangwatch keeps no bands, and its per-minute peak puts
   the loaded time higher, so the loaded hours here are a floor.
@@ -67,8 +67,8 @@ Record and every number: [`box-c/qa/box-a-megakernel-20261029/README.md`](../../
   - `b61745e` does not add our `Feature.KV_OFFLOAD`.
   - `SLOTS=sm148` alone replaces the 39 shipped slots and runs stock code.
   - Verdict: SKIP now, fold it in at the next plugin bump
-    ([`sglang-sweep-20261031/NOTES.md`](../../box-c/qa/sglang-sweep-20261031/NOTES.md)). Revisit if upstream finds a
-    wide-batch fault on 148 SMs ([`README.md`](../../box-c/qa/box-a-megakernel-20261029/README.md) "Plugin").
+    (`sglang-sweep-20261031/NOTES.md`). Revisit if upstream finds a
+    wide-batch fault on 148 SMs (`box-c/qa/box-a-megakernel-20261029/README.md` "Plugin").
 
 The rest of this file is the procedure as run, with the 10-29 bars.
 
@@ -88,7 +88,7 @@ sglang #44632 raised SGLang's own cap to 40) and the plugin's other numeric slot
 
 **Superseded in part, 2026-10-29.** The short teacher-forced 94.35% is `--ep-size 1` alone: a plain EP1
 engine with no megakernel scores 100% / KL 0 against MK3a and has the same 203 flips (S1,
-[`box-c/qa/box-a-megakernel-20261029/README.md`](../../box-c/qa/box-a-megakernel-20261029/README.md)
+`box-c/qa/box-a-megakernel-20261029/README.md`
 "Drift"). What the plugin moves is decode: MK greedy is 0–1/32 byte-equal with plain EP1. The
 batch-dependence row compared MK loaded with MK idle and was never run on the final at the same load.
 The bars below replace these.
@@ -118,13 +118,13 @@ needs an SGLang tree at or past `8f1b7691ca` (path B below). The old pair (path 
 ## 1. Bring box-a back (the user's word first)
 
 box-a is stopped, never destroyed, and its disk is intact: `hostctl stop instance <INSTANCE_ID>` at
-2026-10-29 05:27:26Z, `actual_status` `exited` at 05:29:09Z ([`README.md`](README.md) "Stopping
+2026-10-29 05:27:26Z, `actual_status` `exited` at 05:29:09Z ([`box-a-README.md`](box-a-README.md) "Stopping
 box-a"). The stopped disk (1,500 GB) still bills its storage. The instance's contract ends
 2026-11-27T01:20:44Z. The provider's Instances FAQ says the instance is stopped at that date and its data stays until it is destroyed, but to assume the
 instance is lost then; only the host can extend the contract. So start the retry before then, or
 rebuild from the archive (§4). A start also needs machine <MACHINE_ID>'s four B300s free (step 1 below).
 These are on the box, with the
-[KV_OFFLOAD + resident-blocks patch](sgl-nvidia-mega-b300-spec.patch) already applied in the plugin
+[KV_OFFLOAD + resident-blocks patch](../patches/sgl-nvidia-mega-b300-spec.patch) already applied in the plugin
 checkout:
 
 - the model, `<MODEL_PATH>`
@@ -141,7 +141,7 @@ checkout:
    A start needs machine <MACHINE_ID>'s four B300s to be free. If they are rented, it waits, and that is the
    user's call. Never `hostctl destroy`; never create a replacement without the user.
 2. **The box file.** If the IP or port mappings changed, edit
-   [`boxes/box-a.env`](../../boxes/box-a.env): `BOX_IP`,
+   [`boxes/box-a.env`](boxes/box-a.env): `BOX_IP`,
    `SSH_PORT` (the direct `22/tcp` mapping; the provider's `ssh_port` never answered), `APP_PORT_EXT` (the
    `8001/tcp` mapping). box-a's A record was deleted at the pool exit (2026-10-29 03:06:51Z), so
    `dns.sh` always runs, moved IP or not. Then, from the repo root:
@@ -154,7 +154,7 @@ checkout:
    `env-box-a-w1.txt`, ~10 min) under the watchdog. Wait for READY. box-a is in no router pool (its rows
    were removed on 2026-10-29: dev v214 03:00:31Z, prod v214 03:02:08Z), so nothing reaches it. **Keep it out of every pool for the whole retry.**
    Anything that does join a pool goes through the window-keep / every-pod confirm in
-   [`box-c/07-operations.md`](../../box-c/07-operations.md). The 10-28 MK2b lapse came from a window
+   `box-c/07-operations.md`. The 10-28 MK2b lapse came from a window
    re-armed on a replaced pod.
 4. **Check the disk survived.**
    ```bash
@@ -210,7 +210,7 @@ like-for-like. Do not rerun it.
    Record exactly what was applied.
 2. **The SGLang tree.** It must be at or past `8f1b7691ca` and should be the commit `S` whose
    `docker/Dockerfile` pins `SGL_NVIDIA_MEGA_COMMIT` to `P`, or later. Build it as a **new fork branch**
-   (`box-a-mk-<YYYYMMDD>`) on the build host, per [`box-c/10-updating.md`](../../box-c/10-updating.md) "Syncing the fork to
+   (`box-a-mk-<YYYYMMDD>`) on the build host, per `box-c/10-updating.md` "Syncing the fork to
    latest upstream" and "Cherry-picking one more upstream PR": `S` plus whatever of box-a's final it
    lacks. Test each with `git merge-base --is-ancestor <c> S`:
    - #46700's tombstone clamp
@@ -257,7 +257,7 @@ like-for-like. Do not rerun it.
 Follow `<HOME>/workspace/backups/box-a/MANIFEST.md` "What a retry / rebuild needs".
 
 - **Box and base.** Create a 4×B300 box like box-a, at the user's word and through
-  [`agent-speed`](../../box-c/qa/agent-speed-20261026/README.md) §7: the provider image as in the box file, 1,500 GB
+  `agent-speed` §7: the provider image as in the box file, 1,500 GB
   disk, `XDG_CACHE_HOME=/workspace/cache-box-a`.
 - **Model.** Copy the L3a repack box to box from box-c, sha256-checked against `meta/model.txt`. Never via
   a public host.
@@ -267,7 +267,7 @@ Follow `<HOME>/workspace/backups/box-a/MANIFEST.md` "What a retry / rebuild need
 - **MK venv.** Check out fork `prod-20261026` = `fd3545a46b53` to `/workspace/mega/sglang`. Then
   `cp -a /opt/sglang-box-e /opt/sglang-mega` and run the two installs in §3.3. The plugin goes to
   `/workspace/mega/sgl-nvidia-mega-b300` at `39595061519a`, plus
-  [`sgl-nvidia-mega-b300-spec.patch`](sgl-nvidia-mega-b300-spec.patch). The archive also holds that
+  [`sgl-nvidia-mega-b300-spec.patch`](../patches/sgl-nvidia-mega-b300-spec.patch). The archive also holds that
   checkout whole, with `.git`.
 - **Check the freeze.** Check against `meta/pip-freeze-sglang-mega.txt`.
 - **Tools and harnesses.** Restore `/workspace/tools/` with `stage.sh`, and `/workspace/box-a-mk2/` and
@@ -284,21 +284,21 @@ has tip `9ec65dacaf`, with ancestry `9ec65dacaf` → `a5c32f373c` → `41bb61ec5
 and `a5c32f373c` adds the probe extension (env-gated, off by default), so the tip reproduces the code S4
 measured. On box-a: `/workspace/mk29/sglang`, the venv's editable tree, at `9ec65dacaf`, clean since 10-30 (it
 held `41bb61ec53` + that fix, uncommitted, when S3 and S4 booted it;
-[`raw/build-latest/tree-ff.md`](../../box-c/qa/box-a-megakernel-20261029/raw/build-latest/tree-ff.md)), and
+`raw/build-latest/tree-ff.md`), and
 `/workspace/mk29/sglang-next`, the same commit, no longer needed. Plugin `/workspace/mk29/sgl-nvidia-mega` (`54b42892` +
 the B300 patch); the sync arms' plugin copies are `/workspace/mk29/sgl-nvidia-mega-syncall` and
 `/workspace/mk29/sgl-nvidia-mega-syncsample`. Venvs `/opt/sglang-mk29` (mk-latest),
 `/opt/sglang-mk29s` (syncall), `/opt/sglang-mk29r` (syncsample); cache `/workspace/cache-mk29`. The
 arms' args and env are
-[`box-c/qa/box-a-megakernel-20261029/args/`](../../box-c/qa/box-a-megakernel-20261029/args/), and the build
-record is [`merge-latest.md`](../../box-c/qa/box-a-megakernel-20261029/merge-latest.md). Every arm is
+[`config/arms/`](../config/arms/), and the build
+record is `box-c/qa/box-a-megakernel-20261029/merge-latest.md`. Every arm is
 judged against its own tree's controls: latest-F (the final's args, EP4) and latest-EP1 (the same with
 EP1, no megakernel). As run: latest-F was booted (S3) and is bit-identical to the final, so latest-EP1 was not
 booted and S1's old-tree EP1 boots stand in for it. The 10-29 results are recorded in
-[`box-c/qa/box-a-megakernel-20261029/README.md`](../../box-c/qa/box-a-megakernel-20261029/README.md).
+`box-c/qa/box-a-megakernel-20261029/README.md`.
 
 1. **NVIDIA's KL test** on each arm's own server
-   ([`harness/nvidia_kl.py`](../../box-c/qa/box-a-megakernel-20261029/harness/nvidia_kl.py): decode vs
+   ([`quality/nvidia_kl.py`](../quality/nvidia_kl.py): decode vs
    prefill re-score, k3, 3 repeats). The bars are `KL_BOUND` 0.03 short and `LONG_KL_BOUND` 0.06 long. The
    old final scored 0.0048 / 0.0109. This bounds one server against itself. It does not compare two
    servers.
@@ -306,7 +306,7 @@ booted and S1's old-tree EP1 boots stand in for it. The 10-29 results are record
    - MK vs latest-EP1 within latest-EP1's own A/A. On the old trees this was 100% / KL 0.
    - MK vs latest-F no worse than latest-EP1 vs latest-F. On the old trees that was 94.35% / KL 4.0e-2.
    - That EP1 cost sits 0.5 pt under box-c's accepted TP8 → TP4 move (94.83% short,
-     [`box-c/qa/window2-tp4/README.md`](../../box-c/qa/window2-tp4/README.md)). Accepting it is the user's call.
+     `box-c/qa/window2-tp4/README.md`). Accepting it is the user's call.
      As run: the root judged the two equivalent (~17 flips of ~3,600, inside Poisson noise) and accepted it.
    - The long half is noise at the A/A floor (94.0–95.2% on every boot) and is reported, not judged.
 3. **Greedy under load.** Run `greedy.py` (32 prompts, T0) at idle and under the same `synthmix.py` load,
@@ -398,7 +398,7 @@ the `-F` boot on a new tree.
    new plugin, which may have changed the workspace.
 
 Record every arm in a new `box-c/qa/box-a-mk-retry-<YYYYMMDD>/README.md` with the same tables as the
-[tuning record](../../box-c/qa/box-a-tuning-20261026/README.md) "Megakernel".
+tuning record "Megakernel".
 
 ## 6. What flips the verdict
 
@@ -422,7 +422,7 @@ not the full adoption above. The user ruled on 10-29 that box-a returns serving 
 final of record; the return is #39's step.
 
 If the drift is unchanged, record the arm and the plugin commit, then put box-a back to stopped. The
-stop order is in [`README.md`](README.md) "Stopping box-a".
+stop order is in [`box-a-README.md`](box-a-README.md) "Stopping box-a".
 
 ## 7. After the retry
 

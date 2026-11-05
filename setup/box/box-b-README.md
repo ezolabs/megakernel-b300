@@ -6,27 +6,27 @@ box-b is a copy of box-a's serving stack on a second 4× B300: one TP4 SGLang en
 `args/stack-b300-box-a-mk2.args` + `env-box-a-mk2.txt`, the TP probe and `hangwatch.py` on). The user
 asked for it on 2026-10-30 ("rent this 4xb300 box ASAP while it's available and set it up as box-b, same stack as
 box-a"), to take box-c's traffic share before box-c is shut down. The bring-up record, every command and gate:
-[`../../box-c/qa/box-b-bringup-20261030/NOTES.md`](../../box-c/qa/box-b-bringup-20261030/NOTES.md). All times UTC.
+`../../box-c/qa/box-b-bringup-20261030/NOTES.md`. All times UTC.
 
 > **STOPPED since 2026-11-05 01:57:49Z** (the provider `exited` 01:58:27Z; never destroyed), by the order given
 > once both boxes ran the prod branch stably. box-a serves alone; rows `box-b` / `box-b-dev` stay pool members, parked by
 > autopool (they keep the pools' `probe` designation, which the router reads only at config validation). Last tree
 > served: fork `prod` `163591d9fc` + `stack-b300-box-a-mk2.args` + `env-box-a-mk2.txt` + the `/freeze_gc` timer. Way
 > back, only on the user's word: `hostctl start instance <INSTANCE_ID>` (the slot may not come back), then autopool rejoins
-> the rows once the doors answer. Stopped, it bills storage only. Record: [`../../box-c/qa/box-b-shutdown-20261105/NOTES.md`](../../box-c/qa/box-b-shutdown-20261105/NOTES.md).
+> the rows once the doors answer. Stopped, it bills storage only. Record: `../../box-c/qa/box-b-shutdown-20261105/NOTES.md`.
 
 > **Before the stop, box-b served beside box-a.** It served alone 2026-10-31 09:44Z to 16:21Z while box-a was stopped
-> ([`../../box-c/qa/box-a-maintenance-20261031/`](../../box-c/qa/box-a-maintenance-20261031/README.md)). By the
+> (`../../box-c/qa/box-a-maintenance-20261031/`). By the
 > user's order of 2026-10-31, box-a is the test box and box-b the blue half of each roll: once a build is
 > validated on box-a and box-a serves it, box-b is cut (window on `box-b` every pod + `box-b-dev`) and restarted on
 > the same `prod` tree, so both serve one build; never both out. Never stop box-b without the user's word.
 > box-b holds the pool probe designation (`box-b` / `box-b-dev`, #222), and the s5 failover counts any healthy
 > door. Its roll onto `9a9ede7ae0`, with its own origin key (#135):
-> [`../../box-c/qa/box-b-roll-20261031/NOTES.md`](../../box-c/qa/box-b-roll-20261031/NOTES.md).
+> `../../box-c/qa/box-b-roll-20261031/NOTES.md`.
 
 > **Records.** Before the cut, the box's content-free records (serve-log metadata, hangwatch episodes, the
 > installed args and env, onstart, `nvidia-smi -q`, the venv's package list, a `/metrics` snapshot) were copied
-> to the Mac on 2026-11-05: [`records-20261105/`](records-20261105/README.md) in git, the bulk in
+> to the Mac on 2026-11-05: `records-20261105/` in git, the bulk in
 > `<HOME>/workspace/backups/box-b-20261105/`. What the box serves stands in its box file.
 
 ## Identity
@@ -39,7 +39,7 @@ box-a"), to take box-c's traffic share before box-c is shut down. The bring-up r
 | image | `lmsysorg/sglang:dev-dsv41@sha256:4a5d132a…` (box-a's digest) |
 | ssh | `root@<BOX_IP> -p <SSH_PORT>` (the direct mapping of container port 22). The provider's listed `ssh_port` is the proxy |
 | front door | `https://box-b.<DOMAIN>:<APP_PORT_EXT>` (container 8001 → external <APP_PORT_EXT>), Caddy with a Let's Encrypt cert (notAfter 2027-01-28) behind the router allowlist; engine on loopback `:8002` |
-| box file | [`../../boxes/box-b.env`](../../boxes/box-b.env) |
+| box file | [`boxes/box-b.env`](boxes/box-b.env) |
 | engine | `max_total_num_tokens` 49,879,296 (box-a: 49,879,552); `/root/onstart.sh` = `build-onstart.sh` render for this box |
 | watch | `watchdog.sh` (`/workspace/box-b-watchdog.log`), `hangwatch.py --service --on-hang kill` (`/workspace/mk29/watch/serving`), TP probe every 100 steps with assert |
 | router rows | prod `box-b` in pool `box-c-prod` (config v262, live v264; KV and load feeds via the `box-b-kv` tunnel in sbr-prod), dev `box-b-dev` in `box-c-dev` (config v232, live v234); joined 2026-10-30 17:56Z (prod), 17:47Z (dev) |
