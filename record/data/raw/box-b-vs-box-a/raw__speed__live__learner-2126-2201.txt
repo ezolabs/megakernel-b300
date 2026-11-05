@@ -1,0 +1,20 @@
+# learned prefill line 1-8 jobs (sbr_learn_prefill_tput_tokens_per_second_jobs_1_8), avg/min/max over 21:26:28-22:01:00Z by backend, instance
+['sbr_learn_prefill_image_expansion_ms_per_1k_tokens_jobs_17_32', 'sbr_learn_prefill_image_expansion_ms_per_1k_tokens_jobs_1_8', 'sbr_learn_prefill_image_expansion_ms_per_1k_tokens_jobs_33_plus', 'sbr_learn_prefill_image_expansion_ms_per_1k_tokens_jobs_9_16', 'sbr_learn_prefill_image_expansion_ref_tokens_jobs_17_32', 'sbr_learn_prefill_image_expansion_ref_tokens_jobs_1_8', 'sbr_learn_prefill_image_expansion_ref_tokens_jobs_33_plus', 'sbr_learn_prefill_image_expansion_ref_tokens_jobs_9_16', 'sbr_learn_prefill_line_source_jobs_17_32', 'sbr_learn_prefill_line_source_jobs_1_8', 'sbr_learn_prefill_line_source_jobs_33_plus', 'sbr_learn_prefill_line_source_jobs_9_16', 'sbr_learn_prefill_position_growth_per_token_jobs_17_32', 'sbr_learn_prefill_position_growth_per_token_jobs_1_8', 'sbr_learn_prefill_position_growth_per_token_jobs_33_plus', 'sbr_learn_prefill_position_growth_per_token_jobs_9_16', 'sbr_learn_prefill_preprocess_ms_per_1k_tokens_jobs_17_32', 'sbr_learn_prefill_preprocess_ms_per_1k_tokens_jobs_1_8', 'sbr_learn_prefill_preprocess_ms_per_1k_tokens_jobs_33_plus', 'sbr_learn_prefill_preprocess_ms_per_1k_tokens_jobs_9_16', 'sbr_learn_prefill_preprocess_ref_tokens_jobs_17_32', 'sbr_learn_prefill_preprocess_ref_tokens_jobs_1_8', 'sbr_learn_prefill_preprocess_ref_tokens_jobs_33_plus', 'sbr_learn_prefill_preprocess_ref_tokens_jobs_9_16', 'sbr_learn_prefill_preprocess_refusal_jobs_17_32', 'sbr_learn_prefill_preprocess_refusal_jobs_1_8', 'sbr_learn_prefill_preprocess_refusal_jobs_33_plus', 'sbr_learn_prefill_preprocess_refusal_jobs_9_16', 'sbr_learn_prefill_slowdown', 'sbr_learn_prefill_tput_tokens_per_second_jobs_17_32', 'sbr_learn_prefill_tput_tokens_per_second_jobs_1_8', 'sbr_learn_prefill_tput_tokens_per_second_jobs_33_plus', 'sbr_learn_prefill_tput_tokens_per_second_jobs_9_16']
+avg box-a <router-pod> 73943
+avg box-b <router-pod> 88657
+avg box-a <router-pod> 74671
+avg box-b <router-pod> 84609
+avg box-a <router-pod> 70642
+avg box-b <router-pod> 84896
+min box-a <router-pod> 61584
+min box-b <router-pod> 82274
+min box-a <router-pod> 59584
+min box-b <router-pod> 65181
+min box-a <router-pod> 49220
+min box-b <router-pod> 75489
+max box-a <router-pod> 84050
+max box-b <router-pod> 110078
+max box-a <router-pod> 83236
+max box-b <router-pod> 106527
+max box-a <router-pod> 84202
+max box-b <router-pod> 95533

@@ -1,0 +1,9 @@
+# Plugin apply-check, recorded 2026-11-05
+#
+#   git clone https://github.com/sgl-project/sgl-nvidia-mega.git
+#   cd sgl-nvidia-mega && git checkout 54b428921749fef89fcbd043000f839ac9cc4638
+#   git apply --check setup/patches/sgl-nvidia-mega-b300-spec.patch
+#
+HEAD at check time: 54b428921749fef89fcbd043000f839ac9cc4638
+patch sha256: 99a32016740dd00ed6eb541d68573a3e933ea5e3c1d7cf52a6d8a14e68eba185
+exit status: 0 (clean; the patch applies with no fuzz and no rejects)

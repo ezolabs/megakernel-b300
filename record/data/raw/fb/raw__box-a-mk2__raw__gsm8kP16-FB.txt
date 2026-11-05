@@ -1,0 +1,2 @@
+base_url=http://127.0.0.1:8002
+GSM8K sampled: 97/100 = 0.970  (T=1.0 top-p=0.95 reasoning_effort=high max_tokens=4096 seed=none prefix_tokens=~16000, wall 17s, mean completion tokens 395, errors 0/100)  PASS (need >=95%)

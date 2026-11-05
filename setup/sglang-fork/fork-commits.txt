@@ -1,0 +1,152 @@
+9a9ede7ae0 2026-10-30 cuda-graph: Keep attention metadata and SP workspaces alive across graph variants of a batch size (#46720)
+07afa404e2 2026-10-30 scheduler: Abort retracted requests whose KV the recompute cannot rebuild (#47521)
+5b1bbc65ca 2026-10-31 hicache: Resolve derived sidecars over every source transfer (#43110)
+c62420f2e8 2026-10-31 Stage DSv4.1 long-context target verify metadata beside the draft
+60ba30cf99 2026-10-30 Tag fork runner images per run attempt; fix Guard README text
+b1c16075dd 2026-10-30 Rebuild the fork runner image weekly on fresh toolchains
+4943d6ed90 2026-10-29 [Perf] dsv4: Fix amax8_varlen and mega MoE pre-dispatch grids for 1024-thread SMs (#47149)
+e979b99da5 2026-10-30 [Fix] sampling: deterministic top-p / top-k renorm when tp_size > 1 (#38565)
+b44803b0e4 2026-10-30 [Fix] grammar: mask every scheduler stop token until the grammar can end (#46645)
+4ade445fe2 2026-10-30 sbr: Fit the 0039 phase-timing stand-ins to upstream's streamer
+6964eabe2f 2026-10-30 sbr: Redact the deferred-response and custom-labels error logs
+359789bf53 2026-10-30 sbr: Build the SWA branch-rebuild test tree from tree slots
+224e0a6dcf 2026-10-30 sbr: Build the short-prefill head-match tree from tree slots
+d7c18d9586 2026-10-30 sbr: Give the num_token_non_padded tail fake a plain flag
+9ec65dacaf 2026-10-29 Import ChainAllocator in swa_branch_rebuild.startup_refusal (upstream #46976 deleted unified_hybrid_swa)
+4606743619 2026-10-29 Redact request content from error-path asserts, raises and logs
+a5c32f373c 2026-10-29 [box-a-MK] probe: rolling decode crcs, CUDA RNG, DSpark counters; EVERY 10
+41bb61ec53 2026-10-29 Keep prod's trailing tool-call refusal and fix merge-only test reds
+fbf4d51dc5 2026-10-29 [box-a-MK] scheduler: env-gated TP-consistency probe (SGLANG_MK_TP_PROBE)
+a84f5742e5 2026-10-29 Let the load feed bind loopback; gate runtime request logging
+9b2622650c 2026-10-29 Log request content as lengths and digests on error paths
+77aba9d7e0 2026-10-28 [Spec] DSPARK: test the sampling-accept graph under block verification
+5538b7421f 2026-10-29 [Fix] dsv41: warn once when an SM100+ box falls back to the torch indexer
+38f8f253af 2026-10-29 [Fix] dsv4: dequantize index K through the packed fp4 gather, in chunks
+9a5a246112 2026-10-28 [Spec] DSPARK: keep min_p batches off the sampling-accept graph
+3b4be36270 2026-10-28 [Fix] dsv4: Capture the replay tail thread-locally while serving (#47146)
+bdc3f67fcb 2026-10-28 mm_cached_refs: tolerate request stand-ins without multimodal_inputs; flag-off tests pin the flag
+96599d8ba2 2026-10-28 mm_cached_refs: gate every new attribute read on the flag
+7780a42e11 2026-10-28 mm_cached_refs: unit tests; DSv4.1 processor loads given images without the prompt scan when refs are present
+3153b69aa1 2026-10-28 mm_cached_refs: pixel-less image refs for images inside the cached prefix (SGLANG_MM_CACHED_REFS, default off)
+5f117c8957 2026-10-28 [Spec] DFLASH/DSPARK: reject min_p > 0 at request validation
+bed13faab7 2026-10-27 [Perf] dsv4: Skip the copy when the page-index table is already aligned (#46835)
+6d60bdd50a 2026-10-27 [Perf] hicache: Parallel THP-backed host pool allocation (opt-in) (#43978)
+2c79f4a150 2026-10-26 [Fix] hicache: Skip empty auxiliary transfers (#45673)
+601f5614aa 2026-10-28 function_call: an unset tool strict is not strict again
+070154aff5 2026-10-28 dsv4: Run the prefill graph tail plain at replay when eager would skip it
+3953ff8298 2026-10-27 mem_cache: Clamp SWA tombstone recovery to the request's protected prefix (#46700)
+819756d463 2026-10-27 [Fix] mem_cache: Clamp SWA tombstone recovery to the request's protected prefix (#46700)
+d2cfddf91e 2026-10-27 Read DeepSeek-V4.1 image order from the render, without tokenizing
+f9af0ec232 2026-10-27 Give the fork runner image PyYAML, requests and rustup like hosted Ubuntu
+649cb758ff 2026-10-27 Harden fork schedule stripping for every on: trigger form
+3f641390b2 2026-10-27 Run fork CI on demand on our self-hosted runners
+35e6d667b7 2026-10-27 Read DeepSeek-V4.1 image order from the render, without tokenizing
+9e29588208 2026-10-27 swa: evict interior SWA tails before leaf tails (opt-in)
+a0a5a184ab 2026-10-27 bounded replay: make the decoder tail deterministic for short prompts
+452f24387f 2026-10-27 Give the fork runner image PyYAML, requests and rustup like hosted Ubuntu
+c091331f03 2026-10-27 Harden fork schedule stripping for every on: trigger form
+63d845fa5c 2026-10-27 Run fork CI on demand on our self-hosted runners
+fccb4f539f 2026-10-26 exact trim guards: restore env overrides on raise; refuse streaming sessions
+91a52740a7 2026-10-26 swa branch rebuild under the exact decoder trim: full and early-only spans
+17fdb1254a 2026-10-26 scheduler: ruff-format a pre-existing long line in the short-prefill swap
+d53ff9990b 2026-10-26 dsv4 exact trim: far-chunk skip + per-request P/G plumbing
+f8f69444b9 2026-10-26 DSV4 exact decoder trim: late-aware match cap + Req.late_exact_from
+cc5a0410d3 2026-10-26 dsv4: page-anchored exact decoder tail and late-exact-from recurrence
+23070f50d2 2026-10-26 mem_cache: track late_exact_from per node in the Python TreeCore (box-e step 3)
+5a0f5ba031 2026-10-26 tests: register the DSv4.1 exact-trim test for CPU CI and give the tail-reader fake batch encoder_swa_replay
+84ff3babeb 2026-10-26 tests: keep the DSv4.1 exact-trim far-skip row replay simulator
+cdb7ea8212 2026-10-26 DSV4: exact decoder trim behind SGLANG_DSV4_EXACT_DECODER_TRIM
+fd3545a46b 2026-10-26 dspark: build the draft block metadata without reading seq_lens back
+9dbaa3e4df 2026-10-26 dsv41: write DSML parameter names in the recipe output parser
+9d908424c5 2026-10-26 tests: serve the remaining DSv4.1 chat tests through recipe's adapter
+2e5eaf738a 2026-10-26 dsv41: accept thinking.type off, parse a continued text-parts turn as content
+3231aa7e19 2026-10-06 [DeepGEMM] Pre-compile FP8 einsum at startup to avoid cold-start JIT stalls
+bb09960edb 2026-10-19 deepseek-v4: FP8 quantize-dequantize of the attention output before wo_a (V4.1-Flash-1017)
+a191e20911 2026-10-26 test: a spec window whose EOS lands mid-window publishes through the EOS
+45e9226869 2026-10-24 [Spec] DSPARK: write the in-graph accept into the buffers, not into read_accept's copies
+2bdb34b571 2026-10-06 [Spec] DSPARK read_accept: return copies, not views of buffers the next verify replay rewrites
+d7e26e4b1f 2026-10-26 tests: port fork DSv4.1 tests to the recipe adapter after the upstream merge
+0d28b9cce5 2026-10-26 dsv41 recipe render: the serving router parity, thinking types, Responses prefill flag
+eafc8fc760 2026-10-26 function_call: an unset-strict tool's items-less arrays take any items
+a4b3092b60 2026-10-21 [Fix] dspark: clamp FlashInfer softmax output to <= 1.0 for spec accept (#45517)
+8a2bfd85a2 2026-10-21 [Fix] dspark: clamp FlashInfer softmax output to <= 1.0 for spec accept
+38ef7e2bd8 2026-10-04 [DSpark] Resolve the same relayed confidence on every TP rank
+cc31e16a55 2026-10-24 Tighten the priming disconnect-check comment in _stream_one_response
+946f07f07c 2026-10-24 Move the disconnect test to sbr b4 and test the real timeout path (#318 #319)
+b9dbc0a303 2026-10-24 Prime the disconnect poll before the first stream wait
+ff4638c0c0 2026-10-22 Exempt the router's messages-path forced calls from ids parity
+0ec6db5cf3 2026-10-22 Re-record the C7 input_ids fixture under the recipe-parity render
+c51cdc5032 2026-10-22 Apply the top-level DeepSeek thinking toggle on DeepSeek-V4.1 only
+d2ccab7e1c 2026-10-22 Parse forced dsv41 tool calls on /v1/responses as chat does
+1500577c31 2026-10-22 Render dsv41 forced tool calls and JSON numbers as deepseek-recipe does
+1557669313 2026-10-22 Render dsv41 tool payloads exactly as deepseek-recipe does
+2ff31b3a27 2026-10-21 Match deepseek-recipe's DeepSeek-V4.1 render and add a parity golden set
+b94800f193 2026-10-21 Scope DeepSeek effort ladder to V4.1 and report cache hits per chunk
+c28bea9b98 2026-10-20 sbr: the detokenizer never re-sends streamed text
+1402ef5be8 2026-10-20 sbr: constrain DSML parameter names to each tool's declared names
+d5a4c71524 2026-10-20 sbr: never send a DSML argument fragment that restates the arguments sent
+3fee61eec3 2026-10-20 sbr: stream DSML tool-call headers and arguments before the invoke closes
+7b0a2e8d93 2026-10-18 sbr: the phase-timing cache line reads get_parallel().attn_tp_rank, not the retired Scheduler.ps
+2bf4e54fee 2026-10-18 kv_events: keep the three-frame replay wire the serving router decodes
+fdbefde991 2026-10-18 test: give #42700's load-back fixture the request-slot reserve upstream #37771 added
+991d1a8588 2026-10-17 [Perf] function_call: Stop re-scanning the open DSML invoke on every delta
+ef8225ce2f 2026-10-18 Fix DeepSeek DSML streaming unknown tool filtering and tag prefix guards
+3012373221 2026-10-10 fix(spec): clear stale grammar masks before verification
+973133697c 2026-10-17 [Fix] scheduler: Cap aborted speculative output at max_new_tokens
+06f6905fd8 2026-10-12 [HiCache] Port the load-back SWA admission test to TreeLock and extend_end
+0c02331b1b 2026-10-06 [HiCache] Re-check SWA admission under the load-back window pin
+0790c6490c 2026-10-18 test: report MPS unavailable in the sbr conftest, so plain pytest passes on Apple Silicon
+9265669c94 2026-10-18 test: re-mint the chat input_ids fixture at router f6391bfce, every body in parity again
+ecae10569e 2026-10-18 test: bind _waiting_uncached_tokens_for_req onto the load-inquirer stub
+1633e4a931 2026-09-29 mem_cache: rebuild a missing SWA window at a radix branch point by an R-token replay
+34f0ff17c7 2026-10-18 sbr: SGLANG_DEFAULT_THINKING forces the reasoning parser on the DeepSeek encoders
+49133c693f 2026-10-15 sbr: 0044b SGLANG_SBR_TOOL_STRICT_GATE_FILE gates the tool strict level; sbr-dsml audit counts DSML written as text
+9b00ec1acd 2026-10-13 sbr: the GC hook only records the pause; the lag monitor's tick exports it
+5ea45ec150 2026-10-12 sbr: UnifiedRadixCache.cache_unfinished_req's insert walks the key by offset behind SGLANG_SBR_UNFINISHED_REUSE (default off)
+cec927b8e1 2026-10-12 sbr: SWARadixCache.cache_unfinished_req reuses its insert's walk behind SGLANG_SBR_UNFINISHED_REUSE (default off)
+a0bb943287 2026-10-11 sbr: memoise tool-schema check_schema behind SGLANG_SBR_SCHEMA_MEMO (default off)
+9c060da408 2026-10-11 sbr: phase timing detail (return hop, API step) behind SGLANG_SBR_PHASE_TIMING_DETAIL (default off)
+524d86afb9 2026-10-09 sbr: per-request phase timing behind SGLANG_SBR_PHASE_TIMING (default off)
+401576c352 2026-10-18 test: the chat input_ids series on upstream, with 40f3cf998d's test half
+ea6fcd6de8 2026-10-08 openai: carry the engine's per-request TTFT on the chat sglext, when the request asks
+46d5c41e2b 2026-10-08 openai: pair each image with its placeholder in render (call) order for a full conversation
+fcc4964017 2026-10-08 openai: carry the router's mm_hashes on the chat door, so its hashes set the pad value
+651222cf38 2026-10-08 openai: keep the images on the chat input_ids branch, so ids and images reach the DSv4.1 processor
+cab8548c86 2026-10-08 test: the chat input_ids path is the same with the router's placeholder messages
+4a76c91d3c 2026-10-03 test: the chat input_ids parity fixture carries tool-member nulls
+9537947e79 2026-10-03 test: the chat input_ids path, fed the router's DSv4.1 ids, builds the messages path's request
+06de630d2a 2026-10-02 hicache: run the event poll's TP reduction only when TP rank 0 has a ready ack
+646fc1f686 2026-10-02 scheduler: the abort echo carries the prompt and its cache hit
+986ecf8343 2026-10-02 scheduler: render the KV snapshot off the loop, in bounded frames
+524b538b32 2026-10-01 mem_cache: the KV snapshot announces the HiCache host tier too
+38d6958cac 2026-09-30 openai: convert chat requests on a small and a giant preprocess lane, and measure the wait
+d915e02e97 2026-09-28 scheduler: short-prefill chunk swap for a cold mid-size queue head
+ae126cd86c 2026-09-28 scheduler: short-prefill lookahead past an ineligible queue head
+05f4517aa0 2026-09-28 openai: convert chat requests on one worker thread, off the event loop
+9eaaccb506 2026-09-26 scheduler: short-prefill chunk budget that sees a warm queue head (port of #39717)
+7fe0862748 2026-09-25 kv_events: answer a replay range longer than 512 batches with a snapshot
+bbc3493a10 2026-09-25 unified_radix_cache: publish a full KV placement snapshot from the unified tree
+b2ac1b2c49 2026-09-25 kv_events: publish KV events as tagged maps with a flat cache_salt (Python half of #37482)
+3e0d2323a5 2026-09-20 test: stub mlx so the a2 /generate test collects on hosts without the MLX wheel
+bb4d3fab03 2026-09-20 scheduler: serve a pending KV snapshot request before take_events
+ac64cb032b 2026-09-20 kv_events: SnapshotBegin/End events, gap detection, snapshot served on replay
+a0aabe49e1 2026-09-20 metrics: --metric-label-denylist drops named Prometheus labels
+e2a081c871 2026-09-20 /v1/loads: aggregate object and priority rows in Prometheus format
+b5357e1f05 2026-09-20 openai: echo the rid on post-conversion error responses
+fded538187 2026-09-20 openai: abort the completions stream as soon as the client is gone
+dc1e5721f8 2026-09-20 /v1/loads: per-priority waiting-queue section
+77c2e6e037 2026-09-20 mem_cache: publish a full KV placement snapshot from the radix cache
+2e76f2f5d5 2026-09-20 Reject unknown --kv-events-config keys at startup
+f130085da0 2026-09-20 anthropic: answer aborted generations with api_error, not end_turn
+e7ee52f24d 2026-09-20 http_server: echo rid as x-request-id on /generate
+11c3cf969e 2026-09-20 feat(openai): echo the internal rid as an x-request-id header
+12b83e1750 2026-09-20 openai: abort the chat stream as soon as the client is gone
+a7fb410257 2026-09-20 abort: drop the 2 s sleep in create_abort_task
+f572db860e 2026-09-20 test: CPU-only scaffolding for the sbr patch series
+ec6ddb3afb 2026-09-16 [DeepSeek-V4.1] Gather fp4 index keys through page-major views, not a broadcast int64 index pair
+9e0d176f89 2026-09-13 [DeepSeek-V4.1] Escape every fullwidth-bar control token in user-supplied text, not only the image placeholder
+b514211ce6 2026-09-13 [DeepSeek-V4.1] Escape the image placeholder in user text instead of rejecting it
+ee43a83aea 2026-09-12 [Speculative] DSpark verify: reuse the pre-planned attention metadata on the graph path
+ef8b0663f1 2026-09-12 [Speculative] DSpark decode: build per-step metadata on device instead of copying it from the host
+7596c5bfc8 2026-09-12 fix(server): preserve SIGQUIT cleanup with multiple tokenizer workers
+2769a62a1a 2026-09-11 [Spec] Fix DSpark overlap tensor lifetime

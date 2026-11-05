@@ -1,0 +1,9 @@
+order,step,dates,bench,before_tok_s,after_low_tok_s,after_high_tok_s,average_tok_s,note
+1,first boot,2026-10-26,ramp bench,,439,439,,one stream on the first working setup
+2,engine tuning,2026-10-27,older command-line bench,443,516,516,,a different bench from the ramp bench
+3,fast host cores,2026-10-28/29,ramp bench,514,614,639,,scheduler pinned to the 16 fastest host cores
+4,megakernel with our B300 patch,2026-10-28/30,speed gate,638.4,849.0,885.8,,two megakernel boots against one boot of our tuned stack without it
+5,megakernel build as served (14 boots),2026-10-30/31,decode test,,840.9,906.7,870.2,range of 14 boot averages; 208 requests
+5,fastest bench request,2026-10-31,decode test,,1063.8,1063.8,,the fastest of the 208 requests; 5 of 208 passed 1000
+6,live traffic node 2,2026-10-30,engine live,,873.4,873.4,,engine mean gap between tokens 1.145 ms over 34.5 minutes; node 2 carried light load
+6,live traffic node 1,2026-10-30,engine live,,702.2,702.2,,engine mean gap between tokens 1.424 ms over the same 34.5 minutes; not drawn

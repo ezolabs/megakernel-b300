@@ -1,0 +1,67 @@
+id,date,box,config,tree,area,measurement,condition,value,unit,comparator,comparator_value,change,verdict,n,source
+S01,2026-10-30/31,box-a+box-b,X',4943d6ed90+9a9ede7ae0,speed,decode per stream mean of boot means,C1 think-ramp 300 tok idle (each boot weighted once),870.2,tok/s,,,,boot means 840.9-906.7,14 boots (208 requests; 128 from the 4 C1-settle boots),record/data/decode-c1-by-tree.csv
+S01a,2026-10-30/31,box-a+box-b,X',4943d6ed90,speed,decode per stream mean of boot means,C1 think-ramp,875.6,tok/s,,,,,8 boots / 112 requests,record/data/decode-c1-by-tree.csv
+S01b,2026-10-31,box-a,X',9a9ede7ae0,speed,decode per stream mean of boot means,C1 think-ramp,863.0,tok/s,,,,,6 boots / 96 requests,record/data/decode-c1-by-tree.csv
+S02,2026-10-30/31,box-a+box-b,X',4943d6ed90+9a9ede7ae0,speed,decode per stream p90 (pooled requests),C1 think-ramp 300 tok idle,954.0,tok/s,,,,,208 requests / 14 boots (128 from the 4 C1-settle boots),record/data/decode-distribution.csv
+S03,2026-10-30/31,box-a+box-b,X',4943d6ed90+9a9ede7ae0,speed,decode per stream max (pooled requests),C1 think-ramp 300 tok idle,1063.8,tok/s,,,,,208 requests / 14 boots,record/data/decode-distribution.csv
+S04,2026-10-30/31,box-a+box-b,X',4943d6ed90+9a9ede7ae0,speed,decode per stream mean,C2 think-ramp,694.3,tok/s,,,,,80 reps / 10 boots,record/data/decode-distribution.csv
+S05,2026-10-30/31,box-a+box-b,X',4943d6ed90+9a9ede7ae0,speed,decode per stream mean,C4 think-ramp,554.4,tok/s,,,,,80 reps / 10 boots,record/data/decode-distribution.csv
+S06,2026-10-30/31,box-a+box-b,X',4943d6ed90+9a9ede7ae0,speed,decode per stream mean,C8 think-ramp,396.2,tok/s,,,,,72 reps / 9 boots,record/data/decode-distribution.csv
+S07,2026-10-31,box-a,X',4943d6ed90,speed,best single-boot decode mean,C1 think-ramp (CTL1),907,tok/s,,,,,8 reps,box-c/qa/sglang-takes-20261031/NOTES.md
+S08,2026-10-31,box-a,X',4943d6ed90,speed,aggregate decode,C8 think-ramp (K3),2900,tok/s,,,,,8 reps,box-c/qa/sglang-takes-20261031/NOTES.md
+S09,2026-10-30,box-b,X',4943d6ed90,speed,TTFT,C1 warm idle,26.8,ms,box-a same tree,42.1,-37.1%,box-b faster (band 17.5%),8 reps per box,box-c/qa/box-b-bringup-20261030/SPEED.md
+S10,2026-10-30,box-b,X',4943d6ed90,speed,cold fill TTFT,60k-token prompt + 4 bg streams,0.869,s,box-a same tree,1.043,-14.5%,box-b faster (band 6.7%),8 reps per box,box-c/qa/box-b-bringup-20261030/SPEED.md
+S11,2026-10-30,box-b,X',4943d6ed90,speed,cold prefill rate,60k-token prompt,69494,tok/s,box-a same tree,57919,+20%,,8 reps per box,box-c/qa/box-b-bringup-20261030/SPEED.md
+S12,2026-10-30,box-b,X',4943d6ed90,speed,decode per stream,C1 think-ramp,860.1,tok/s,box-a same tree,846.5,-1.8% (box-b vs box-a base),same (band 7.4%),8 reps per box,box-c/qa/box-b-bringup-20261030/SPEED.md
+S13,2026-10-30,box-a,X',4943d6ed90,speed,cold fill TTFT,60k-token prompt,0.989,s,config X (MKL1+MKL2),1.435,-31.0%,GAIN,8 reps,box-c/qa/prod-merge-20261030/raw/gate/NOTES.md
+S14,2026-10-30,box-a,X',4943d6ed90,speed,cold prefill rate,100208-token prompt,62666,tok/s,,,,,3,box-c/qa/prod-merge-20261030/raw/gate/arm/coldfill-summary.txt
+S15,2026-10-30,box-b,X',4943d6ed90,speed,1M-token cold prompt,979971 prompt tokens,15.4,s,,,,PASS,1,box-c/qa/box-b-bringup-20261030/NOTES.md
+S16,2026-10-30,box-a+box-b,X',4943d6ed90,speed,live ITL p50 -> tok/s,real traffic 34.5 min both serving,869 / 920,tok/s (box-a / box-b),,,,,"1,127 / 522 requests",box-c/qa/box-b-bringup-20261030/SPEED.md
+S17,2026-10-30,box-a+box-b,X',4943d6ed90,speed,live MTP accept length mean,real traffic,4.00 / 4.05,tokens per verify (box-a / box-b),,,,,,box-c/qa/box-b-bringup-20261030/SPEED.md
+S18,2026-10-31,box-a,X',9a9ede7ae0 vs 4943d6ed90,speed,C1 settle pooled difference,32 reps x 4 interleaved boots,+0.12,%,4943d6ed90,,"[-2.43, +2.66]",no cost confirmed,128 reps,box-c/qa/sglang-takes-20261031/c1-settle/analysis.txt
+S19,2026-10-26,box-a,first boot,9d908424,speed,decode per stream,C1 think-ramp (bring-up bench),439,tok/s,,,,,,box-c/qa/box-a-bringup-20261026/README.md
+S20,2026-10-27,box-a,final,819756d4,speed,decode per stream,C1 think tool,516,tok/s,A0,443,+16%,,,box-c/qa/box-a-ship1-20261027/README.md
+S21,2026-10-28/29,box-a,final + fast-core pin,,speed,decode per stream,C1,614-639,tok/s,unpinned,514,+20-24%,,,box-c/SPEED-REGISTER.md SR-051
+S22,2026-10-26/27,box-a,tuning FIN,,speed,cold fill TTFT,60k-token prompt,2.20,s,first-boot stack,3.55,+38% [+26 +51] faster,ADOPT,,box-c/qa/box-a-tuning-20261026/README.md
+S23,2026-10-28/29,box-a,MK2/MK3 vs final,,speed,cost per output token (final stack = 100),C1 full utilisation,72,% of final,final stack,100,-28%,,,fleet-history/box-a/README.md
+M01,2026-10-29,box-a,X (MKL1 S4),box-a-mk-latest,megakernel,decode per stream,C1 MK speed gate,885.8,tok/s,final FB,638.4,+38.8%,GAIN,2 boots vs 1,box-c/qa/box-a-megakernel-20261029/raw/s4-mk-b1/gates-MKL1-vs-FB.txt
+M02,2026-10-30,box-a,X (MKL2 S7),box-a-mk-latest,megakernel,decode per stream,C1 MK speed gate,849.0,tok/s,final FB,638.4,+33.0%,GAIN,,box-c/qa/box-a-megakernel-20261029/raw/s7-mk-b2/gates-MKL1+MKL2-vs-FB.txt
+M03,2026-10-29,box-a,X (MKL1),box-a-mk-latest,megakernel,decode per stream,C2,687.9,tok/s,final FB,530.6,+29.6%,GAIN,,box-c/qa/box-a-megakernel-20261029/README.md
+M04,2026-10-29,box-a,X (MKL1),box-a-mk-latest,megakernel,decode per stream,C4,556.6,tok/s,final FB,450.0,+23.7%,GAIN,,box-c/qa/box-a-megakernel-20261029/README.md
+M05,2026-10-29,box-a,X (MKL1),box-a-mk-latest,megakernel,decode per stream,C8,392.0,tok/s,final FB,350.9,+11.7%,GAIN,,box-c/qa/box-a-megakernel-20261029/README.md
+M06,2026-10-29,box-a,X (MKL1),box-a-mk-latest,megakernel,decode per stream,C16,297.9,tok/s,final FB,294.6,+1.1%,NEUTRAL,,box-c/qa/box-a-megakernel-20261029/README.md
+M07,2026-10-29/30,box-a,X,box-a-mk-latest,megakernel,gate sub-gates,MKL1+MKL2 vs final,0,regressions of 38,,,,OVERALL PASS,,box-c/qa/box-a-megakernel-20261029/raw/s7-mk-b2/gates-MKL1+MKL2-vs-FB.txt
+M08,2026-10-30,box-a,X,box-a-mk-latest,megakernel,accept length matched,c4-identical,3.083,tokens per verify,final,3.163,-2.5% (t -2.9),cost,8 reps vs 4,box-c/qa/box-a-megakernel-20261029/raw/s7-mk-b2/acc-vs-final.txt
+M09,2026-10-29,box-a,X,box-a-mk-latest,megakernel,KV pool,,49879552,tokens,final EP4,66653184,-25.2%,cost,,box-c/qa/box-a-megakernel-20261029/README.md
+M10,2026-10-29,box-a,X (MKL1),box-a-mk-latest,megakernel,teacher-forced top-1 short,vs final,94.298,%,A/A floor (EP1 plain),94.353,,EP1 cost not MK,32 prompts,box-c/qa/box-a-megakernel-20261029/raw/s4-mk-b1/tfcmp-FB-vs-MKL1.txt
+M11,2026-10-29,box-a,X (MKL1),box-a-mk-latest,megakernel,NVIDIA KL short / long,mean of 3,0.0042 / 0.0087,k3 KL,bound,0.03 / 0.06,,PASS (7.1x / 6.9x margin),3 repeats,box-c/qa/box-a-megakernel-20261029/raw/s4-mk-b1/kl-MKL1.json
+M12,2026-10-29,box-a,X (MKL1 vs FB),box-a-mk-latest,megakernel,LF1 (new tree no MK) vs final,all sub-gates,0,regressions of 19,,,,NEUTRAL (gain is the MK's),,box-c/qa/box-a-megakernel-20261029/raw/s3-latest-nomk/NOTES.md
+T01,2026-10-29,box-a,X,9ec65dacaf,stability,hang soak,2 x 1 h synthmix probe every 10,0,hangs,,,,<=2.07 per loaded h (95%),"13,410 requests; 1.445 loaded h",box-c/qa/box-a-megakernel-20261029/raw/s5-soak/NOTES.md
+T02,2026-10-29,box-a,X,9ec65dacaf,stability,TP probe mismatches,soak,0,mismatches,,,,,"852,300 checks per rank",box-c/qa/box-a-megakernel-20261029/raw/s5-soak/soak-stats.txt
+T03,2026-10-30,box-a,X,9ec65dacaf,stability,production serving,07:24-12:01Z,0,hangs,,,,,"5,462 requests; 4.61 h wall / 0.650 h loaded; 283,044 probe ok",fleet-history/box-a/RETRY-MEGAKERNEL.md
+T04,2026-10-30,box-a,X',4943d6ed90,stability,production serving,12:51-14:48Z,0,hangs,,,,,"1,946 requests; 1.96 h wall / 0.342 loaded; 114,256 probe ok",fleet-history/box-a/RETRY-MEGAKERNEL.md
+T05,2026-10-30/31,box-a,X',4943d6ed90,stability,uninterrupted engine process in production,10-30 12:34:32Z to 10-31 01:39:56Z,13.09,h,,,,0 hang episodes 0 relaunches,"568,072 probe ok",box-c/qa/box-a-outage-20261031/NOTES.md
+T06,2026-10-29/30,box-a,X,9ec65dacaf,stability,hang-rate bound (config X = the soak build),soak + serving 2.095 loaded h,1.43,hangs per loaded h (95% upper),community B200 port,~0.17 (1 per 6 h),,bounded not excluded,,fleet-history/box-a/RETRY-MEGAKERNEL.md
+T07,2026-10-30/31,box-a+box-b,X',,stability,stop->start to back in rotation,3 autopool cycles,14.1-14.4,min,,,,PASS 0 pages,3,box-c/qa/autopool-20261030/SMOKE.md
+T08,2026-10-30,box-b,X',4943d6ed90,stability,rent to production,fresh the provider instance,72,min,,,,,1,box-c/qa/box-b-bringup-20261030/NOTES.md
+T09,2026-10-30,box-a,MK router test,,stability,frozen TP rank detection,kill -STOP 9.9 s,5.6,s to DOWN on every dev pod (max),,,,streams finished normally,1,box-c/qa/box-a-megakernel-20261029/raw/box-a-return/NOTES.md
+T10,2026-10-30/31,box-a+box-b,X',4943d6ed90,stability,production serving loaded hours,in pool 10-30 12:51Z to 10-31 17:49Z (box-a 6.250 + box-b 9.179),15.429,loaded h,,,,0 hangs,15 s vmsingle samples,record/data/raw/x-prime-serving/summary.txt
+T11,2026-10-30/31,box-a+box-b,X',4943d6ed90,stability,hang-rate bound,production serving 15.429 loaded h,0.194,hangs per loaded h (95% upper),community B200 port,~0.17 (1 per 6 h),,bounded not excluded,,record/data/raw/x-prime-serving/summary.txt
+T12,2026-10-31/11-01,box-a+box-b,X',9a9ede7ae0,stability,hang-rate bound,production serving 8.758 loaded h (box-a 3.287 + box-b 5.471; read 11-01 04:41Z),0.342,hangs per loaded h (95% upper),community B200 port,~0.17 (1 per 6 h),,bounded not excluded,,record/data/raw/x-prime-serving/summary.txt
+Q01,2026-10-29,box-a,X vs final,box-a-mk-latest,quality,gsm8k full T0,1319 items,1282/1319,correct,final,1279/1319,+0.23 pp [-1.08 +1.54],non-inferior (3 pp),1319,box-c/qa/box-a-megakernel-20261029/raw/s2-final-ref/quality-compare-final-vs-mk.md
+Q02,2026-10-29,box-a,X vs final,box-a-mk-latest,quality,agent sessions prod sampling,100 sessions,95/100,success,final,90/100,+5.00 pp [-2.63 +12.96],non-inferior,100,box-c/qa/box-a-megakernel-20261029/raw/s2-final-ref/quality-compare-final-vs-mk.md
+Q03,2026-10-30,box-a,X (S7),box-a-mk-latest,quality,L3a sign-off slice,c16,21/21,rows PASS,bars,,,PASS,,box-c/qa/box-a-megakernel-20261029/README.md
+Q04,2026-10-30,box-a,X (S7),box-a-mk-latest,quality,images,80 items,80/80,exact,,,,95% CI 95.4-100%,80,box-c/qa/box-a-megakernel-20261029/README.md
+Q05,2026-10-31,box-b,X',4943d6ed90,quality,gpqa_diamond accuracy,2 reps pooled c4 T1,0.914,accuracy,box-c 8xB200 ref,0.907,+0.8 pp [-3.3 +4.8],SAME,396,box-c/qa/l3a-regression-20261031/raw/compare-slice-pooled.md
+Q06,2026-10-31,box-b,X',4943d6ed90,quality,gsm8k accuracy,2 reps pooled,0.978,accuracy,box-c ref,0.975,+0.3 pp [-1.5 +2.2],SAME,600,box-c/qa/l3a-regression-20261031/raw/compare-slice-pooled.md
+Q07,2026-10-31,box-b,X',4943d6ed90,quality,math500_w4 accuracy,2 reps pooled,0.900,accuracy,box-c ref,0.890,+1.0 pp [-5.1 +7.1],SAME,200,box-c/qa/l3a-regression-20261031/raw/compare-slice-pooled.md
+Q08,2026-10-31,box-b,X',4943d6ed90,quality,humaneval_plus accuracy,2 reps pooled,0.951,accuracy,box-c ref,0.945,+0.6 pp [-2.9 +4.2],SAME,326,box-c/qa/l3a-regression-20261031/raw/compare-slice-pooled.md
+Q09,2026-10-31,box-b,X',4943d6ed90,quality,mmlu_pro@max,12028 scored,0.6296,accuracy,campaign L3a,0.6321,-0.25 pp [-1.46 +0.97],SAME,12028,box-c/qa/l3a-regression-20261031/raw/compare-t1.md
+Q10,2026-10-31,box-b,X',4943d6ed90,quality,MultiChallenge macro,judge a model judge,0.6767,score,campaign L3a,0.6619,+1.48 pp [-6.95 +9.88],SAME,266,box-c/qa/l3a-regression-20261031/raw/release-gate/compare.md
+Q11,2026-10-31,box-b,X',4943d6ed90,quality,falsereject refusal (local judge),285 items,5.3,%,campaign L3a (STOCK 48.2%),5.8,-0.5 pp [-4.4 +3.3],SAME,285,box-c/qa/l3a-regression-20261031/raw/compare-stage2.md
+Q12,2026-10-31,box-b,X',4943d6ed90,quality,DSML self-parse,1916 sends,13/1881,defective raw,box-a S7,6/1881,Fisher p 0.11,PASS,1916,box-c/qa/l3a-regression-20261031/NOTES.md
+Q13,2026-10-30,box-b,X',4943d6ed90,quality,greedy byte-equal vs box-a,32 prompts T0,32/32,equal,,,,PASS,32,box-c/qa/box-b-bringup-20261030/raw/gate/greedycmp-box-b.txt
+Q14,2026-10-30,box-b,X',4943d6ed90,quality,NVIDIA KL short / long,x1,0.005950 / 0.010813,k3 KL,bound,0.03 / 0.06,,PASS,,box-c/qa/box-b-bringup-20261030/raw/gate/kl-box-b.json
+Q15,2026-10-30,box-a,X' (MKP1),4943d6ed90,quality,NVIDIA KL long - worst run on the record,x1; run overlapped prewarm (not idle),0.020538,k3 KL,bound,0.06,,PASS (2.9x margin),every KL run: 15 boots (8 study x 3 repeats + 7 gate x1),box-c/qa/prod-merge-20261030/raw/gate/box/kl-MKP1.json
+Q16,2026-10-31,box-a,X' (CANDB2),CANDB series (9a9ede7ae0's runtime code),quality,NVIDIA KL long - worst idle run,x1,0.016239,k3 KL,bound,0.06,,PASS (3.7x margin),,box-c/qa/sglang-takes-20261031/raw/gate/box/kl-CANDB2.json
+Q17,2026-10-31,box-a,X' (CTL2),4943d6ed90,quality,NVIDIA KL short - worst run on the record,x1,0.007618,k3 KL,bound,0.03,,PASS (3.9x margin),,box-c/qa/sglang-takes-20261031/raw/gate/box/kl-CTL2.json

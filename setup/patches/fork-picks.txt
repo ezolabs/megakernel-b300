@@ -1,0 +1,83 @@
+# fork-picks.txt — the redundancy scan's map of upstream PR picks, read by
+# tools/fork-sync.sh's `sync`/`plan` redundancy scan alongside the branch's own
+# `Cherry-picked-from-upstream-PR:` trailers. A trailer only exists on the commit that
+# carries it, so a hand cherry-pick made without one, or one of several commits from a
+# multi-commit PR that a hand-resolve forgot to tag (04-engine.md's PR #39154, second
+# commit), is invisible to a trailer-only scan. This file's PR numbers are unioned with the
+# trailer scan's before the `gh pr view` DROP check runs, so every pick gets checked whether
+# or not its trailer survived.
+#
+# One line per picked commit, in the order picked:
+#   <sha-prefix> #<PR> <subject-prefix>
+# <sha-prefix> is the commit's short sha AT THE TIME IT WAS PICKED — it goes stale across a
+# rebase (rebasing rewrites shas) and is kept only as an audit trail for a human reading this
+# file, never re-resolved by the scan itself, which keys on the PR number alone.
+# <subject-prefix> is the commit's own subject line (or its PR's title when the field wasn't
+# available), for the same human-audit purpose.
+#
+# `fork-sync.sh pick <PR_NUMBER>` appends one line here per commit it applies, automatically,
+# in the same run that adds the trailer.
+73013ae6 #39187 Bound the dense prefill indexer transient: row-chunk logits, tail-only candidate masks
+# dropped at the rebase onto bf5199cf07: acba5e0c #39158 (upstream restructured hc_combine_norm)
+524a009 #39154 Build DSpark decode per-step metadata on device
+a6b0c69 #39154 [Speculative] DSpark verify: reuse the pre-planned attention metadata on the graph path
+455de172 #39204 fix(server): preserve SIGQUIT cleanup with multiple tokenizer workers
+b575993 #39276 escape every fullwidth-bar DeepSeek control token in caller text (DS task tokens exempt)
+7024499 #39276 escape a user-supplied image placeholder token instead of rejecting the request
+# ed23b3d2 is #39007 by its own Cherry-picked-from-upstream-PR trailer (carried on prod as 2769a62a1a); this line
+# read "#39094 Fuse the draft block's attention-metadata prologue to graph mode" until the box-e record
+ed23b3d2 #39007 [Spec] Fix DSpark overlap tensor lifetime
+07f4970da87c #39717 Add opt-in chunk budgets for short queued prefills
+# dropped, merged upstream (box-d's rebuild onto b234b5c3 already dropped them, NOTES.md): dea5b240 #39026 + #39632
+# (upstream ae7a516ba7 + 19ee4b566b) and 40f3cf998d #39929 (upstream 6bbd689ab4)
+# prod (FORK_BRANCH=prod, the box-d line): upstream's correctness set, hand-picked with -x + trailer onto
+# 0790c6490c (#1649). All five PRs were OPEN at the pick, so each line is the PR head's own commit.
+0c02331b1bf8 #42700 [HiCache] Re-check SWA admission under the load-back window pin
+06f6905fd8ba #42700 [HiCache] Port the load-back SWA admission test to TreeLock and extend_e
+973133697c4b #44874 [Fix] scheduler: Cap aborted speculative output at max_new_tokens
+3012373221c5 #43518 fix(spec): clear stale grammar masks before verification
+ef8225ce2ff0 #44956 Fix DeepSeek DSML streaming unknown tool filtering and tag prefix guards
+991d1a858879 #44940 [Perf] function_call: Stop re-scanning the open DSML invoke on every del
+# prod-20261026, the box-e line (FORK_TREE fd3545a46b53, now prod's tip too): merge 580f435c84 of upstream main
+# d72664d903cb (FORK_BASE) into cc31e16a55, then these upstream picks with -x. Every PR was OPEN at the pick, so
+# each line is the fork commit of the PR head's own commit. The prod picks above survive the merge as carried;
+# #39007 (2769a62a1a) and #39154 (ef8b0663f1, ee43a83aea; ef8b0663f1 re-applied in the merge, #46176 does not
+# cover it) are those carries, not re-picked. #45207 was NOT taken: it snapshots only the folded return, so the
+# sampled accept path stays uncovered; #42812 at 155fa07c replaces it.
+38ef7e2bd8 #42717 [DSpark] Resolve the same relayed confidence on every TP rank
+8a2bfd85a2 #45518 [Fix] dspark: clamp FlashInfer softmax output to <= 1.0 for spec accept
+a4b3092b60 #45518 [Fix] dspark: clamp FlashInfer softmax output to <= 1.0 for spec accept (#45517)
+2bdb34b571 #42812 [Spec] DSPARK read_accept: return copies, not views of buffers the next verify replay rewrites
+45e9226869 #42812 [Spec] DSPARK: write the in-graph accept into the buffers, not into read_accept's copies
+bb09960edb #45185 deepseek-v4: FP8 quantize-dequantize of the attention output before wo_a (V4.1-Flash-1017)
+3231aa7e19 #42821 [DeepGEMM] Pre-compile FP8 einsum at startup to avoid cold-start JIT stalls
+# #42812 is taken at PR head 155fa07c (3540a8041a + 155fa07cb9): read_accept returns copies, the DSPARK + HiCache
+# write_through deadlock fix. #45185 is env-gated, SGLANG_DSV4_O_FP8_QDQ_BLOCK, off by default (env-box-e.txt leaves
+# it unset). #42821 is adapted: only MQALayer's wo_a einsum goes through the pre-compiled entrypoint.
+# Fork commits on top, no upstream PR (so no scan line): 9dbaa3e4df dsv41: write DSML parameter names in the
+# recipe output parser (the deepseek_recipe parameter-name parse fix); fd3545a46b dspark: build the draft block
+# metadata without reading seq_lens back (the draft glue graph captures instead of falling back to eager).
+# prod-20261030 and its follow-ups (prod 4943d6ed90): the merge of box-a-mk-latest (upstream 3a3a8611a4) into
+# 460674361992 as 0ab213b25a, then five sbr: commits and three upstream picks. #46645 and #38565 were OPEN at the
+# pick, taken as their PR diffs (heads 4628f7449a, b8d4668008); #47149 is merged upstream as 4201b8fa99 (after
+# 3a3a8611a4) and was picked with -x, so the next sync's scan drops it. #43518 (3012373221) and #42812
+# (2bdb34b571, 45e9226869) were already on prod (lines above), not re-picked.
+b44803b0e4 #46645 [Fix] grammar: mask every scheduler stop token until the grammar can end
+# drops at the next sync, merged upstream: e979b99da5 #38565 (upstream a2cafa5676, the same patch-id 61352fcfb5). It keeps
+# its own Cherry-picked-from-upstream-PR trailer, so the next sync's scan still lists it; that sync's base carries
+# upstream's copy, so the commit goes with it (and fork-sync.sh's FORK_KEEP sampling_renorm lines, upstream files now).
+# Until then every branch off prod (base 3a3a8611a4, before a2cafa5676) carries it as the only copy.
+4943d6ed90 #47149 [Perf] dsv4: Fix amax8_varlen and mega MoE pre-dispatch grids for 1024-thread SMs
+# sweep b's adoptions (prod 9a9ede7ae0, fast-forward from 60ba30cf99; qa/sglang-takes-20261031/NOTES.md): validated
+# on box-a as CANDB (#293). #47627 was OPEN at the pick, taken as its PR diff (head 37b4f59676) and carried INERT
+# (gated by SGLANG_OPT_DSV41_TARGET_METADATA_EARLY, default off on config X'). #43110, #47521 and #46720 are merged
+# upstream (1f834c1964, c105a91b43, 8ecabd3c1e), so the next sync's scan drops them; #47521 taken in part (its
+# decode.py hunks left out, the fork's PD replay kept). #47641 (route_warp) was rejected on numerics, not picked.
+c62420f2e8 #47627 Stage DSv4.1 long-context target verify metadata beside the draft
+5b1bbc65ca #43110 [Fix] hicache: Resolve derived sidecars over every source transfer
+07afa404e2 #47521 [Fix] scheduler: Abort retracted requests whose KV the recompute cannot rebuild
+9a9ede7ae0 #46720 [Fix] cuda-graph: Keep attention metadata and SP workspaces alive across graph variants of a batch size
+# sweep c's takes (qa/sglang-takes-20261104/NOTES.md): sweep-c-20261104 off prod 9a9ede7ae0, seven upstream commits
+# merged after sweep b's cut, each with -x and its trailer: #46606, #45466 (re-cut), #46654, #47684, #48229, #48243,
+# #42968 (env-gated, SGLANG_OPT_DSV4_INDEXER_TP_SHARD, off by default). They join this list with their fork shas
+# when #801 adopts the branch into prod; until then the branch's trailers carry them.

@@ -1,0 +1,2 @@
+short: positions 3595 top1-agree 100.000% KL mean 0.00e+00 p99 0.00e+00 max 0.00e+00 max|dlp(forced tok)| 0.00e+00
+long: positions 4080 top1-agree 95.196% KL mean 2.62e-02 p99 2.91e-01 max 2.77e+00 max|dlp(forced tok)| 3.55e+00

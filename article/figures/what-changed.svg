@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 494" width="720" height="494" role="img" aria-labelledby="title desc">
+  <title id="title">What kept the megakernel off plain B300, and what we added</title>
+  <desc id="desc">Diagram in two parts. Left, the plugin as shipped: a startup check needs 152 streaming multiprocessors (SMs) on every GPU. GB300, with a Grace host, has 152 and starts. Plain B300, with an x86 host, has 148 and is refused, on purpose: the plugin promises no silent fallback. Right, our changes. The patch lowers the check from 152 to 148 SMs to match B300 and turns on host cache offload; the kernels stay NVIDIA's. The safety layer adds four guards: a GPU-agreement probe every 100 steps that stops the engine on a mismatch, matched random draws on all four GPUs, a hang watchdog that kills a stalled engine so it restarts, and router health checks that mark a stalled node down within 5.6 seconds. With both, plain B300 serves with the megakernel.</desc>
+  <text x="0" y="24" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="500" letter-spacing="-0.01em" fill="currentColor">What kept the megakernel off plain B300, and what we added</text>
+  <text x="0" y="46" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor" fill-opacity="0.62">The kernels stay NVIDIA's: we changed two settings and added four guards</text>
+  <g font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" letter-spacing="0.06em" fill="currentColor" fill-opacity="0.62">
+    <text x="0" y="86">THE PLUGIN AS SHIPPED</text>
+    <text x="380" y="86">OUR CHANGES</text>
+  </g>
+  <g fill="none" stroke="currentColor" stroke-opacity="0.44" stroke-width="1.5">
+    <rect x="0.75" y="100.75" width="328.5" height="58.5" rx="8"/>
+    <path d="M165 160V176M79 176H251M79 176V192M251 176V192"/>
+    <rect x="0.75" y="192.75" width="156.5" height="110.5" rx="8"/>
+    <rect x="172.75" y="192.75" width="156.5" height="110.5" rx="8"/>
+  </g>
+  <g fill="none" stroke="#3b6ef6" stroke-width="1.5">
+    <rect x="380.75" y="100.75" width="338.5" height="78.5" rx="8"/>
+    <rect x="380.75" y="196.75" width="338.5" height="220.5" rx="8"/>
+    <path d="M330 248H354V140H373"/>
+  </g>
+  <path d="M380 140L372 135V145Z" fill="#3b6ef6"/>
+  <g font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="500" fill="currentColor">
+    <text x="16" y="125">Startup check</text>
+    <text x="16" y="217">GB300</text>
+    <text x="188" y="217">Plain B300</text>
+    <text x="396" y="125">The patch</text>
+    <text x="396" y="221">Safety layer</text>
+  </g>
+  <g font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor" fill-opacity="0.62">
+    <text x="16" y="146">Needs 152 SMs on every GPU</text>
+    <text x="16" y="239">152 SMs</text>
+    <text x="16" y="259">Grace host</text>
+    <text x="188" y="239">148 SMs</text>
+    <text x="188" y="259">x86 host</text>
+    <text x="0" y="334">Refusing B300 is on purpose: the plugin</text>
+    <text x="0" y="354">promises no silent fallback.</text>
+    <text x="396" y="265">Every 100 steps; a mismatch stops the engine</text>
+    <text x="396" y="311">All four GPUs draw the same random numbers</text>
+    <text x="396" y="357">Kills a stalled engine so it restarts</text>
+    <text x="396" y="403">Marks a stalled node down within 5.6 seconds</text>
+  </g>
+  <g font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor">
+    <text x="396" y="146">SM check: 152 → 148, to match B300</text>
+    <text x="396" y="166">Host cache offload: turned on</text>
+    <text x="396" y="246">GPU-agreement probe</text>
+    <text x="396" y="292">Matched random draws</text>
+    <text x="396" y="338">Hang watchdog</text>
+    <text x="396" y="384">Router health checks</text>
+  </g>
+  <g fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M17 282l4 4 7-8" stroke="currentColor"/>
+    <path d="M189 279l8 8M197 279l-8 8" stroke="currentColor"/>
+    <path d="M381 442l4 4 7-8" stroke="#3b6ef6"/>
+  </g>
+  <g font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" letter-spacing="0.06em" fill="currentColor">
+    <text x="36" y="287">STARTS</text>
+    <text x="206" y="287">REFUSED</text>
+  </g>
+  <text x="400" y="447" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="500" fill="currentColor">Plain B300 serves with the megakernel</text>
+  <text x="0" y="482" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" letter-spacing="0.06em" fill="currentColor" fill-opacity="0.62">SOURCE: EZO LABS RESEARCH</text>
+</svg>

@@ -1,0 +1,59 @@
+arm=FB date=2026-10-28T19:49:00Z bootline=1006498 modes=,std,pl, tree=819756d4632e9a1f07234e97c11137a591a79193 dirty=0
+--tp-size 4 --ep-size 4 --mem-fraction-static 0.75 --speculative-algorithm DSPARK --speculative-dspark-block-size 5 --cuda-graph-max-bs-decode 64 --max-running-requests 64 --context-length 1048576 --chunked-prefill-size 8192 --reasoning-parser auto --tool-call-parser auto --enable-metrics --trust-remote-code --prefill-decode-interval 4 --enable-cache-report --swa-prefix-tails 2048 --enable-priority-scheduling --disable-priority-preemption --default-priority-value 1 --max-queued-requests 512 --kv-events-config '{"publisher":"zmq","endpoint":"tcp://*:5557","replay_endpoint":"tcp://*:5558"}' --load-publish-endpoint auto --metric-label-denylist priority model_name --short-prefill-token-threshold 3072 --short-prefill-chunk-size 1024 --short-prefill-max-tokens 4096 --short-prefill-lookahead 8 --short-prefill-swap-limit 16384 --enable-hierarchical-cache --hicache-ratio 2 --hicache-write-policy write_through --hicache-io-backend kernel --hicache-mem-layout page_first --hicache-host-memory-mode cache --no-enable-decoder-swa-bounded-replay --speculative-use-block-verification --cuda-graph-backend-prefill breakable --cuda-graph-max-bs-prefill 2048 --cuda-graph-prefill-max-context 131072 --flashinfer-allreduce-fusion-backend trtllm
+
+SGLANG_ENABLE_REQUEST_DECOMPRESSION=1
+SGLANG_SWA_BRANCH_REBUILD=true
+PYTHONFAULTHANDLER=1
+SGLANG_SBR_PHASE_TIMING=1
+SGLANG_SBR_PHASE_TIMING_DETAIL=1
+SGLANG_SBR_PHASE_TIMING_GATE_FILE=/workspace/tools/sbr-phase-timing.gate
+SGLANG_SBR_SCHEMA_MEMO=1
+SGLANG_SBR_SCHEMA_MEMO_GATE_FILE=/workspace/tools/sbr-schema-memo.gate
+SGLANG_EVENT_LOOP_LAG_INTERVAL_S=0
+SGLANG_SBR_UNFINISHED_REUSE=1
+SGLANG_SBR_UNFINISHED_REUSE_GATE_FILE=/workspace/tools/sbr-unfinished-reuse.gate
+SGLANG_TOOL_STRICT_LEVEL=1
+SGLANG_SBR_TOOL_STRICT_GATE_FILE=/workspace/tools/tool-strict.on
+SGLANG_DEFAULT_THINKING=1
+SGLANG_DSV41_REASONING_EFFORT=high
+SGLANG_UNIFIED_RADIX_TREE_CORE_BACKEND=python
+SGLANG_FORWARD_UNKNOWN_TOOLS=1
+SGLANG_OPT_DSV41_BF16_INDEX_LOGITS=0
+SGLANG_ENABLE_DSV41_ENGRAM_HOST_TABLE=1
+SGLANG_DSV41_ENGRAM_HOST_TABLE_LAYOUT=shared
+TRITON_PRINT_AUTOTUNING=1
+[2026-10-28 18:15:56 TP0 EP0] Load weight end. elapsed=210.29 s, type=DeepseekV4ForCausalLM, quant=fp8, avail mem=191.91 GB, mem usage=73.70 GB.
+[2026-10-28 18:16:22 TP0 EP0] Load weight end. elapsed=23.29 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, avail mem=189.89 GB, mem usage=2.02 GB.
+[2026-10-28 18:16:24 TP0 EP0] DSV4 SWA sizing: mode=cap, swa_tokens=877568, request_cap+headroom=877568, prefix_tails=2048
+[2026-10-28 18:16:24 TP0 EP0] Memory pool end. avail mem=68.62 GB
+[2026-10-28 18:16:24 TP0 EP0] Memory pool end. avail mem=67.18 GB
+[2026-10-28 18:18:29 TP0 EP0] max_total_num_tokens=66653184, chunked_prefill_size=8192, max_prefill_tokens=16384, max_running_requests=64, context_len=1048576, available_gpu_mem=54.65 GB
+[2026-10-28 18:18:30 TP0 EP0] HiCache memory headroom: host 2709.2 GiB, cgroup 1833.0 GiB
+[2026-10-28 18:18:54 TP0 EP0] Allocating 44.15 GB host memory for V4 paged pool 'swa' (layers=43, pages=6856, item_bytes=149760, layout=page_first).
+[2026-10-28 18:18:54 TP0 EP0] HiCache memory headroom: host 2542.4 GiB, cgroup 1667.6 GiB
+[2026-10-28 18:19:34 TP0 EP0] Allocating 77.98 GB host memory for V4 paged pool 'deepseek_v4_c1' (layers=1, pages=520728, item_bytes=149760, layout=page_first).
+[2026-10-28 18:19:35 TP0 EP0] HiCache memory headroom: host 2244.4 GiB, cgroup 1372.6 GiB
+[2026-10-28 18:19:39 TP0 EP0] Allocating 9.06 GB host memory for V4 paged pool 'deepseek_v4_c1_indexer' (layers=1, pages=520728, item_bytes=17408, layout=page_first).
+[2026-10-28 18:19:40 TP0 EP0] HiCache memory headroom: host 2202.3 GiB, cgroup 1330.8 GiB
+[2026-10-28 18:21:13 TP0 EP0] Allocating 116.98 GB host memory for V4 paged pool 'deepseek_v4_c2' (layers=3, pages=520728, item_bytes=74880, layout=page_first).
+[2026-10-28 18:21:14 TP0 EP0] HiCache memory headroom: host 1741.9 GiB, cgroup 876.3 GiB
+[2026-10-28 18:21:33 TP0 EP0] Allocating 13.60 GB host memory for V4 paged pool 'deepseek_v4_c2_indexer' (layers=3, pages=520728, item_bytes=8704, layout=page_first).
+[2026-10-28 18:12:02] server_args={'model_path': '<MODEL_PATH>', 'tokenizer_path': '<MODEL_PATH>', 'tokenizer_mode': 'auto', 'tokenizer_backend': 'huggingface', 'tokenizer_worker_num': 1, 'detokenizer_worker_num': 1, 'skip_tokenizer_init': False,
+[2026-10-28 18:15:48 TP2 EP2] engram host table layer 1: layout=shared, 96681 MiB resident, 0 MiB in huge pages (0%). No huge pages: expect ~10x slower lookups (one TLB miss per row); transparent_hugepage/shmem_enabled is 'never'
+[2026-10-28 18:15:48 TP1 EP1] engram host table layer 1: layout=shared, 96681 MiB resident, 0 MiB in huge pages (0%). No huge pages: expect ~10x slower lookups (one TLB miss per row); transparent_hugepage/shmem_enabled is 'never'
+[2026-10-28 18:15:49 TP0 EP0] engram host table layer 1: layout=shared, 96681 MiB resident, 0 MiB in huge pages (0%). No huge pages: expect ~10x slower lookups (one TLB miss per row); transparent_hugepage/shmem_enabled is 'never'
+[2026-10-28 18:15:49 TP3 EP3] engram host table layer 1: layout=shared, 96681 MiB resident, 0 MiB in huge pages (0%). No huge pages: expect ~10x slower lookups (one TLB miss per row); transparent_hugepage/shmem_enabled is 'never'
+[2026-10-28 18:15:50 TP0 EP0] engram host table layer 14: layout=shared, 96684 MiB resident, 0 MiB in huge pages (0%). No huge pages: expect ~10x slower lookups (one TLB miss per row); transparent_hugepage/shmem_enabled is 'never'
+[2026-10-28 18:15:50 TP2 EP2] engram host table layer 14: layout=shared, 96684 MiB resident, 0 MiB in huge pages (0%). No huge pages: expect ~10x slower lookups (one TLB miss per row); transparent_hugepage/shmem_enabled is 'never'
+[2026-10-28 18:15:50 TP1 EP1] engram host table layer 14: layout=shared, 96684 MiB resident, 0 MiB in huge pages (0%). No huge pages: expect ~10x slower lookups (one TLB miss per row); transparent_hugepage/shmem_enabled is 'never'
+[2026-10-28 18:15:50 TP3 EP3] engram host table layer 14: layout=shared, 96684 MiB resident, 0 MiB in huge pages (0%). No huge pages: expect ~10x slower lookups (one TLB miss per row); transparent_hugepage/shmem_enabled is 'never'
+0, 230665 MiB, 275040 MiB, 2032 MHz
+1, 230725 MiB, 275040 MiB, 2032 MHz
+2, 230727 MiB, 275040 MiB, 2032 MHz
+3, 230409 MiB, 275040 MiB, 2032 MHz
+               total        used        free      shared  buff/cache   available
+Mem:            3023        1325         245        1164        2630        1697
+--- post
+               total        used        free      shared  buff/cache   available
+Mem:            3023        1325         245        1164        2630        1697
+log since boot: retract=1 oom=0 err=0

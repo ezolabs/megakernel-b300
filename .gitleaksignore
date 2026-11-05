@@ -1,0 +1,12 @@
+# gitleaks fingerprints for confirmed false positives in this repository.
+# Each was read and checked by hand on 2026-11-05; none is a credential.
+# Scanning from the repo root: gitleaks detect --no-git --source . -v
+# If a file gains or loses a line above one of these, the fingerprint moves and
+# gitleaks will report it again. Re-check the line, do not just re-pin the number.
+
+# An arm label handed to the TTFT probe: "e_warm_plus800new". Not a key.
+setup/box/ttft-probe.py:generic-api-key:325
+
+# The tokenizer's SHA-256 from the model's public generate.py recipe metadata.
+# A checksum, not a secret.
+setup/sglang-fork/fork-vs-upstream-3a3a8611a4.diff:generic-api-key:24554

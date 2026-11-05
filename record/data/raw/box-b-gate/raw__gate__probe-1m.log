@@ -1,0 +1,52 @@
+base_url=http://127.0.0.1:8002
+attempt 1 (pass 1, nonce 191523d0-f614-42d9-97ac-2a2bb7c9f0ba): num_words=753846 est_prompt_tokens=979999
+pass 1: wall=10.95s prompt_tokens=753939 cached_tokens=0
+calibrating: 753939 prompt tokens from 753846 words = 1.000 tok/word; rebuilding for 980000 tokens (first pass wall 11.0s)
+attempt 1 (pass 2, nonce abfac4dd-c8b4-4ea7-a12b-aa0ce20ce41c): num_words=979879 est_prompt_tokens=1273842
+pass 2: wall=15.35s prompt_tokens=979971 cached_tokens=0
+wall=15.35s prompt_tokens=979971 cached_tokens=0 completion_tokens=28 finish_reason=stop
+timed pass 2: cold: cached 0
+needles found: 4/4 ['NEEDLE-A7361', 'NEEDLE-A2984', 'NEEDLE-A5027', 'NEEDLE-A9418']
+content: 'NEEDLE-A7361\nNEEDLE-A2984\nNEEDLE-A5027\nNEEDLE-A9418'
+--- /workspace/sglang-serve.log tail (40 lines) ---
+[2026-10-30 17:55:53 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 200707, cuda graph: False, input throughput (token/s): 58303.98
+[2026-10-30 17:55:53 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 192515, cuda graph: False, input throughput (token/s): 57216.45
+[2026-10-30 17:55:53] INFO:     <lan-host>:0 - "GET /v1/loads HTTP/1.1" 200 OK
+[2026-10-30 17:55:54 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 184323, cuda graph: False, input throughput (token/s): 55289.19
+[2026-10-30 17:55:54] INFO:     <lan-host>:0 - "GET /v1/loads HTTP/1.1" 200 OK
+[2026-10-30 17:55:54 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 176131, cuda graph: False, input throughput (token/s): 56611.17
+[2026-10-30 17:55:54 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 167939, cuda graph: False, input throughput (token/s): 56397.62
+[2026-10-30 17:55:54] INFO:     <lan-host>:0 - "GET /metrics HTTP/1.1" 200 OK
+[2026-10-30 17:55:54 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 159747, cuda graph: False, input throughput (token/s): 55993.72
+[2026-10-30 17:55:54 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 151555, cuda graph: False, input throughput (token/s): 55714.04
+[2026-10-30 17:55:54 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 143363, cuda graph: False, input throughput (token/s): 54264.80
+[2026-10-30 17:55:54] INFO:     <lan-host>:0 - "GET /v1/loads HTTP/1.1" 200 OK
+[2026-10-30 17:55:54 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 135171, cuda graph: False, input throughput (token/s): 53856.48
+[2026-10-30 17:55:54] INFO:     127.0.0.1:60000 - "GET /metrics HTTP/1.1" 200 OK
+[2026-10-30 17:55:55 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 126979, cuda graph: False, input throughput (token/s): 53701.67
+[2026-10-30 17:55:55] INFO:     <lan-host>:0 - "GET /v1/loads HTTP/1.1" 200 OK
+[2026-10-30 17:55:55 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 118787, cuda graph: False, input throughput (token/s): 53572.39
+[2026-10-30 17:55:55 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 110595, cuda graph: False, input throughput (token/s): 53250.98
+[2026-10-30 17:55:55 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 102403, cuda graph: False, input throughput (token/s): 53111.33
+[2026-10-30 17:55:55] INFO:     <lan-host>:0 - "GET /metrics HTTP/1.1" 200 OK
+[2026-10-30 17:55:55 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 94211, cuda graph: False, input throughput (token/s): 51053.71
+[2026-10-30 17:55:55 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 86019, cuda graph: False, input throughput (token/s): 52637.65
+[2026-10-30 17:55:55] INFO:     <lan-host>:0 - "GET /v1/loads HTTP/1.1" 200 OK
+[2026-10-30 17:55:55] INFO:     127.0.0.1:60006 - "GET /health HTTP/1.1" 200 OK
+[2026-10-30 17:55:55 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 77827, cuda graph: False, input throughput (token/s): 52261.37
+[2026-10-30 17:55:56] INFO:     <lan-host>:0 - "GET /v1/loads HTTP/1.1" 200 OK
+[2026-10-30 17:55:56 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 69635, cuda graph: False, input throughput (token/s): 59273.06
+[2026-10-30 17:55:56 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 61443, cuda graph: False, input throughput (token/s): 57905.94
+[2026-10-30 17:55:56 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 53251, cuda graph: False, input throughput (token/s): 56346.76
+[2026-10-30 17:55:56 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 45059, cuda graph: False, input throughput (token/s): 57382.47
+[2026-10-30 17:55:56 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 36867, cuda graph: False, input throughput (token/s): 54492.19
+[2026-10-30 17:55:56 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 28675, cuda graph: False, input throughput (token/s): 56922.68
+[2026-10-30 17:55:56] INFO:     <lan-host>:0 - "GET /v1/loads HTTP/1.1" 200 OK
+[2026-10-30 17:55:57 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 20483, cuda graph: False, input throughput (token/s): 54914.00
+[2026-10-30 17:55:57] INFO:     <lan-host>:0 - "GET /v1/loads HTTP/1.1" 200 OK
+[2026-10-30 17:55:57 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 12291, cuda graph: False, input throughput (token/s): 56411.79
+[2026-10-30 17:55:57 TP0] Prefill batch, #new-seq: 1, #new-token: 8192, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 4099, cuda graph: False, input throughput (token/s): 56043.96
+[2026-10-30 17:55:57] INFO:     <lan-host>:0 - "GET /metrics HTTP/1.1" 200 OK
+[2026-10-30 17:55:57 TP0] Prefill batch, #new-seq: 1, #new-token: 4099, #cached-token: 0, full token usage: 0.02, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 28699.98
+[2026-10-30 17:55:57] INFO:     127.0.0.1:43908 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+1M-PROBE PASS

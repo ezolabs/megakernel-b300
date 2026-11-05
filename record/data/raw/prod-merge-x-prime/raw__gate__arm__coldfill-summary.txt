@@ -1,0 +1,5 @@
+coldfill-MKP1.jsonl n=8 fill_pt 60000.0 cached 0.0 ttft_s 0.982 prefill_tok_s 61114.0 bg_pre 546.2 bg_during 180.9 dip 66.9% max_gap_s 0.141
+coldfill70-MKP1.jsonl n=3 fill_pt 70051 cached 0 ttft_s 1.12 prefill_tok_s 62565.0 bg_pre 541.6 bg_during 202.3 dip 62.6% max_gap_s 0.135
+coldfill100-MKP1.jsonl n=3 fill_pt 100208 cached 0 ttft_s 1.599 prefill_tok_s 62666.0 bg_pre 533.2 bg_during 191.4 dip 64.1% max_gap_s 0.095
+coldfill-MKL2.jsonl n=8 fill_pt 60000.0 cached 0.0 ttft_s 1.456 prefill_tok_s 41267.5 bg_pre 550.4 bg_during 131.8 dip 76.1% max_gap_s 0.15
+coldfill-MKL1.jsonl n=8 fill_pt 60000.0 cached 0.0 ttft_s 1.423 prefill_tok_s 42231.0 bg_pre 543.4 bg_during 121.1 dip 77.7% max_gap_s 0.155

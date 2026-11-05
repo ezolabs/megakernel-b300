@@ -1,0 +1,39 @@
+# env-box-a-mk.txt — box-a's SERVED env since its return to the router on 2026-10-30 (#39), paired with
+# stack-b300-box-a-mk.args (boxes/box-a.env's ENV_SEED). Below this header it is
+# qa/box-a-megakernel-20261029/args/mk-latest.env's KEY=VALUE lines byte for byte (env-box-a-w1.txt's with the
+# megakernel's required deltas: SGLANG_DSV41_ENGRAM_HOST_TABLE_LAYOUT shared -> per_rank,
+# SGLANG_SPEC_TP_SYNC=rng,-dspark-accept-sample, PATH with /opt/sglang-mk29/bin first (the venv's
+# editable sglang IS /workspace/mk29/sglang; no PYTHONPATH overlay), XDG_CACHE_HOME=/workspace/cache-mk29),
+# then the branch's TP-consistency probe, on while box-a serves so real traffic accrues checked hours:
+#   SGLANG_MK_TP_PROBE=1 SGLANG_MK_TP_PROBE_EVERY=100 SGLANG_MK_TP_PROBE_ASSERT=1
+#   (every 100th scheduler iteration compares the TP ranks' state, an `MK_TP_PROBE ok` log line every
+#   1000; ASSERT turns a `MK_TP_PROBE MISMATCH` into an AssertionError that kills the scheduler, which the
+#   watchdog relaunches, instead of a silently wrong stream; qa/box-a-megakernel-20261029/merge-latest.md).
+# WAY BACK: env-box-a-w1.txt with stack-b300-box-a.args on 819756d4.
+SGLANG_ENABLE_REQUEST_DECOMPRESSION=1
+SGLANG_SWA_BRANCH_REBUILD=true
+PYTHONFAULTHANDLER=1
+SGLANG_SBR_PHASE_TIMING=1
+SGLANG_SBR_PHASE_TIMING_DETAIL=1
+SGLANG_SBR_PHASE_TIMING_GATE_FILE=/workspace/tools/sbr-phase-timing.gate
+SGLANG_SBR_SCHEMA_MEMO=1
+SGLANG_SBR_SCHEMA_MEMO_GATE_FILE=/workspace/tools/sbr-schema-memo.gate
+SGLANG_EVENT_LOOP_LAG_INTERVAL_S=0
+SGLANG_SBR_UNFINISHED_REUSE=1
+SGLANG_SBR_UNFINISHED_REUSE_GATE_FILE=/workspace/tools/sbr-unfinished-reuse.gate
+SGLANG_TOOL_STRICT_LEVEL=1
+SGLANG_SBR_TOOL_STRICT_GATE_FILE=/workspace/tools/tool-strict.on
+SGLANG_DEFAULT_THINKING=1
+SGLANG_DSV41_REASONING_EFFORT=high
+SGLANG_UNIFIED_RADIX_TREE_CORE_BACKEND=python
+SGLANG_FORWARD_UNKNOWN_TOOLS=1
+SGLANG_OPT_DSV41_BF16_INDEX_LOGITS=0
+SGLANG_ENABLE_DSV41_ENGRAM_HOST_TABLE=1
+SGLANG_DSV41_ENGRAM_HOST_TABLE_LAYOUT=per_rank
+TRITON_PRINT_AUTOTUNING=1
+SGLANG_SPEC_TP_SYNC=rng,-dspark-accept-sample
+PATH=/opt/sglang-mk29/bin:/root/.cargo/bin:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+XDG_CACHE_HOME=/workspace/cache-mk29
+SGLANG_MK_TP_PROBE=1
+SGLANG_MK_TP_PROBE_EVERY=100
+SGLANG_MK_TP_PROBE_ASSERT=1

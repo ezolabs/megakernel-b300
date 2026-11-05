@@ -1,0 +1,19 @@
+# DeepSeek-V4.1-Flash boot line, stack-b300-box-a-mk2 — config X' (#84, 2026-10-30): config X
+# (stack-b300-box-a-mk.args, kept as the rollback) on our SGLang fork prod's tip 4943d6ed90 (the merge of
+# box-a-mk-latest into prod + follow-up patches + upstream picks #46645, #38565, #47149) in /opt/sglang-mk29, with
+# box-c's wins. Paired with env-box-a-mk2.txt (boxes/box-a.env's ENV_SEED), the NVIDIA megakernel plugin
+# /workspace/mk29/sgl-nvidia-mega 54b4289 + its B300 patch unchanged.
+# The flag line is stack-b300-box-a-mk.args' flag line with two values changed:
+#   --hicache-write-policy write_through -> write_through_selective   box-c's host-cache write policy
+#   --no-enable-decoder-swa-bounded-replay -> --enable-decoder-swa-bounded-replay
+#       the bounded replay SGLANG_DSV4_EXACT_DECODER_TRIM=1 (env-box-a-mk2.txt) needs: the exact decoder trim
+#       takes both together
+# Record and gates: qa/prod-merge-20261030/raw/gate/NOTES.md. Not byte-exact vs the final; hangwatch.py
+# (--service --on-hang kill) and the TP probe (env-box-a-mk2.txt) watch it in serving.
+# WAY BACK: stack-b300-box-a-mk.args + env-box-a-mk.txt on 9ec65dacaf (box-a-mk-latest), same venv and plugin;
+# further back stack-b300-box-a.args + env-box-a-w1.txt on 819756d4 (the box file's rollback comment).
+# The TREE line pins the file to the megakernel tree (check-import.sh: the basename of
+# SGLANG_TREE=/workspace/mk29/sglang).
+# TREE: sglang
+# Tuning flags only, per args/README.md's composition rule. Not a rung, not a -b200 mirror.
+--tp-size 4 --ep-size 1 --mem-fraction-static 0.75 --speculative-algorithm DSPARK --speculative-dspark-block-size 5 --cuda-graph-max-bs-decode 64 --max-running-requests 64 --context-length 1048576 --chunked-prefill-size 8192 --reasoning-parser auto --tool-call-parser auto --enable-metrics --trust-remote-code --prefill-decode-interval 4 --enable-cache-report --swa-prefix-tails 2048 --enable-priority-scheduling --disable-priority-preemption --default-priority-value 1 --max-queued-requests 512 --kv-events-config '{"publisher":"zmq","endpoint":"tcp://127.0.0.1:5557","bind":true,"replay_endpoint":"tcp://127.0.0.1:5558"}' --load-publish-endpoint tcp://127.0.0.1:5559 --metric-label-denylist priority model_name --short-prefill-token-threshold 3072 --short-prefill-chunk-size 1024 --short-prefill-max-tokens 4096 --short-prefill-lookahead 8 --short-prefill-swap-limit 16384 --enable-hierarchical-cache --hicache-ratio 2 --hicache-write-policy write_through_selective --hicache-io-backend direct --hicache-mem-layout page_first_direct --hicache-host-memory-mode cache --enable-decoder-swa-bounded-replay --speculative-use-block-verification --cuda-graph-backend-prefill breakable --cuda-graph-max-bs-prefill 2048 --cuda-graph-prefill-max-context 131072 --flashinfer-allreduce-fusion-backend trtllm --enable-nvidia-megakernel

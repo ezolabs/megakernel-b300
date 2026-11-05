@@ -1,0 +1,31 @@
+band: 2.5 x sigma-hat x sqrt(1 + 1/2) over 2 base run(s); sigma-hat = one boot mean's noise, the base runs' pooled within-boot SE (rep sd / sqrt(n)) x sqrt(1 + BOOT_EXCESS^2), BOOT_EXCESS decode 0.25, aggregate 0.25, ttft 1.2, fill 2, dip 0.7, gap 1.3 (else 0)
+A/A model check (printed, not in the band; a group's run means more than 3 sigma-hat apart):
+  no --base-aa group given
+outlier policy: a rep > 2x above or below its run's median; base side dropped; arm side FAILed if worse than the base median, else reported and dropped (whatever the base's rate)
+  dropped (base side, band): none
+  arm outlier: MKP1 ttft C=2: rep 5 = 0.134 (run median 0.061, > 2x off)
+metric     box unit                    arm       base   delta     band sigma^        95% CI arm-base  verdict
+decode       1 p1                    904.4      867.4   +4.3%     4.9%  1.59%           [-3.9, 78.9]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+decode       2 p1                    689.8      688.2   +0.2%     5.9%  1.91%          [-24.8, 34.9]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+decode       4 p1                    561.9      557.1   +0.9%     3.5%  1.16%          [-16.6, 24.7]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+aggregate    1 p1                    904.4      867.5   +4.3%     4.8%  1.58%           [-3.2, 82.1]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+aggregate    2 p1                   1266.0     1272.2   -0.5%     5.2%  1.68%          [-47.7, 37.4]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+aggregate    4 p1                   2017.5     2002.2   +0.8%     4.4%  1.42%          [-59.2, 89.5]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+ttft         1 p1                   42.9ms     42.9ms   +0.0%    39.3% 12.85%        [-6.1ms, 5.3ms]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+ttft         2 p1                   67.4ms     61.0ms  +10.5%    11.2%  3.67%       [-7.5ms, 27.1ms]  UNCONFIRMED (inside band; arm outliers 1/8 arm vs 0/16 base, 1 worse than base median 59.5ms, kept in the mean; one arm boot: a second boot confirms or clears it; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+ttft         4 p1                   87.5ms     84.2ms   +3.9%    17.3%  5.65%       [-8.4ms, 13.6ms]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+fill         - p1                   0.989s     1.435s  -31.0%     4.8%  1.58%     [-0.470s, -0.419s]  GAIN (better beyond band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+dip          - p1                    67.0%      76.4%  -12.3%     3.4%  1.12%          [-12.4, -6.7]  GAIN (better beyond band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+gap          - p1                  142.0ms    152.2ms   -6.7%     7.5%  2.45%      [-13.5ms, -6.8ms]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+gate decode    NEUTRAL     (gain 0, neutral 3, regression 0, unconfirmed 0 of 3 sub-gates)
+gate aggregate NEUTRAL     (gain 0, neutral 3, regression 0, unconfirmed 0 of 3 sub-gates)
+gate ttft      UNCONFIRMED (gain 0, neutral 2, regression 0, unconfirmed 1 of 3 sub-gates)
+gate fill      GAIN        (gain 1, neutral 0, regression 0, unconfirmed 0 of 1 sub-gates)
+gate dip       GAIN        (gain 1, neutral 0, regression 0, unconfirmed 0 of 1 sub-gates)
+gate gap       NEUTRAL     (gain 0, neutral 1, regression 0, unconfirmed 0 of 1 sub-gates)
+proven gain: fill (1/1), dip (1/1)
+gain on every boot: 0 of 12 sub-gates
+neutral (no proven gain, no regression): decode, aggregate, gap
+unconfirmed (a regression not on every boot or on the only one, not a FAIL): ttft (1/3)
+null check: a null arm (the base config again) on 2 boots would FAIL this design's 12 sub-gates ~2% of the time (2 base run(s); Gaussian model with the real A/A boot effects, BOOT_EXCESS)
+OVERALL: ONE BOOT (0 regression(s) in 12 metric sub-gates, 1 unconfirmed (worse on some boots only), 0 quality miss(es) in 0 arm runs) -> no verdict: a regression must replicate on both boots and a gain must beat the band on both, so run a second arm boot (exit 3)

@@ -1,0 +1,2909 @@
+{
+ "labels": [
+  "final",
+  "mk"
+ ],
+ "margin": 0.03,
+ "gate": "pass",
+ "results": [
+  {
+   "a_file": "raw/s2-final-ref/quality-FREF/agent-prod.summary.json",
+   "b_file": "raw/s4-mk-b1/quality-MKL1/agent-prod.summary.json",
+   "suite": "agent",
+   "cell_a": "prod",
+   "cell_b": "prod",
+   "primary": "session_success",
+   "metrics": {
+    "answered": {
+     "a": {
+      "k": 100,
+      "n": 100,
+      "p": 1.0,
+      "lo": 0.9630065017930143,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 100,
+      "n": 100,
+      "p": 1.0,
+      "lo": 0.9630065017930143,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.03699349820698572,
+     "hi": 0.03699349820698572,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -3.70 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "session_success": {
+     "a": {
+      "k": 90,
+      "n": 100,
+      "p": 0.9,
+      "lo": 0.8256343384950865,
+      "hi": 0.9447708629393249,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 95,
+      "n": 100,
+      "p": 0.95,
+      "lo": 0.8882495307680808,
+      "hi": 0.9784563208456319,
+      "method": "wilson95"
+     },
+     "diff": 0.04999999999999993,
+     "lo": -0.026272869479874825,
+     "hi": 0.12962420365148347,
+     "fisher_p": 0.28276383037775005,
+     "z": 1.3423121104280473,
+     "z_p": 0.179494818373031,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -2.63 pp)",
+     "class": "noninferior",
+     "lower_better": false,
+     "fisher_p_worse": 0.9477023133194966,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "call_valid": {
+     "a": {
+      "k": 433,
+      "n": 433,
+      "p": 1.0,
+      "lo": 0.9912062860721493,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 437,
+      "n": 437,
+      "p": 1.0,
+      "lo": 0.9912860763346294,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.008713923665370604,
+     "hi": 0.008793713927850666,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -0.87 pp)",
+     "class": "noninferior",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "step_tools": {
+     "a": {
+      "k": 232,
+      "n": 240,
+      "p": 0.9666666666666667,
+      "lo": 0.9356151389791189,
+      "hi": 0.9830145357420931,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 236,
+      "n": 240,
+      "p": 0.9833333333333333,
+      "lo": 0.9579378181116581,
+      "hi": 0.9935000592781683,
+      "method": "wilson95"
+     },
+     "diff": 0.016666666666666607,
+     "lo": -0.013535734176339523,
+     "hi": 0.049340198587289004,
+     "fisher_p": 0.3815697730601924,
+     "z": 1.1694106924093677,
+     "z_p": 0.2422382039406528,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -1.35 pp)",
+     "class": "noninferior",
+     "lower_better": false,
+     "fisher_p_worse": 0.9295326846794487,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "step_answer": {
+     "a": {
+      "k": 236,
+      "n": 240,
+      "p": 0.9833333333333333,
+      "lo": 0.9579378181116581,
+      "hi": 0.9935000592781683,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 239,
+      "n": 240,
+      "p": 0.9958333333333333,
+      "lo": 0.9767799274163702,
+      "hi": 0.9992641019749173,
+      "method": "wilson95"
+     },
+     "diff": 0.012500000000000067,
+     "lo": -0.009096170805815203,
+     "hi": 0.03812620469063677,
+     "fisher_p": 0.3723821903600424,
+     "z": 1.348683568677649,
+     "z_p": 0.1774386254694045,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -0.91 pp)",
+     "class": "noninferior",
+     "lower_better": false,
+     "fisher_p_worse": 0.96940034926012,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "answer_line": {
+     "a": {
+      "k": 231,
+      "n": 240,
+      "p": 0.9625,
+      "lo": 0.9302797673678065,
+      "hi": 0.9801478566862516,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 237,
+      "n": 240,
+      "p": 0.9875,
+      "lo": 0.9638999953789512,
+      "hi": 0.9957399326780291,
+      "method": "wilson95"
+     },
+     "diff": 0.025000000000000022,
+     "lo": -0.0044687472372342135,
+     "hi": 0.05825717789306725,
+     "fisher_p": 0.14093463064118095,
+     "z": 1.7541160386140593,
+     "z_p": 0.0794106259989421,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -0.45 pp)",
+     "class": "noninferior",
+     "lower_better": false,
+     "fisher_p_worse": 0.9818790072684652,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "all_calls_valid": {
+     "a": {
+      "k": 100,
+      "n": 100,
+      "p": 1.0,
+      "lo": 0.9630065017930143,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 100,
+      "n": 100,
+      "p": 1.0,
+      "lo": 0.9630065017930143,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.03699349820698572,
+     "hi": 0.03699349820698572,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -3.70 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "turns_4_to_8": {
+     "a": {
+      "k": 88,
+      "n": 100,
+      "p": 0.88,
+      "lo": 0.8018790057328857,
+      "hi": 0.9300059356298052,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 92,
+      "n": 100,
+      "p": 0.92,
+      "lo": 0.8500189229905127,
+      "hi": 0.9589065385156194,
+      "method": "wilson95"
+     },
+     "diff": 0.040000000000000036,
+     "lo": -0.046011305870914454,
+     "hi": 0.12727318307790703,
+     "fisher_p": 0.4803677503316278,
+     "z": 0.9428090415820644,
+     "z_p": 0.34577858615115986,
+     "verdict": "inconclusive: CI bad end -4.60 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 0.8809565071464638,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "session_success@orders": {
+     "a": {
+      "k": 11,
+      "n": 20,
+      "p": 0.55,
+      "lo": 0.34208534245034233,
+      "hi": 0.7418021417443759,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 16,
+      "n": 20,
+      "p": 0.8,
+      "lo": 0.5839825677481064,
+      "hi": 0.919342337420202,
+      "method": "wilson95"
+     },
+     "diff": 0.25,
+     "lo": -0.03887989306012818,
+     "hi": 0.4897313044325016,
+     "fisher_p": 0.1759956365073182,
+     "z": 1.6878989451394446,
+     "z_p": 0.09143062918196605,
+     "verdict": "inconclusive: CI bad end -3.89 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 0.9796288024875344,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "session_success@currency": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.16112515805281935,
+     "hi": 0.16112515805281935,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -16.11 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "session_success@files": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.16112515805281935,
+     "hi": 0.16112515805281935,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -16.11 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "session_success@weather": {
+     "a": {
+      "k": 19,
+      "n": 20,
+      "p": 0.95,
+      "lo": 0.763868806553258,
+      "hi": 0.9911185511992047,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 19,
+      "n": 20,
+      "p": 0.95,
+      "lo": 0.763868806553258,
+      "hi": 0.9911185511992047,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.19061887741414835,
+     "hi": 0.19061887741414835,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -19.06 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 0.7564102564102564,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "session_success@calendar": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.16112515805281935,
+     "hi": 0.16112515805281935,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -16.11 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    }
+   },
+   "notes": [
+    "same 100 items, but metric n differs (final/mk: items lost to errors or not scored): call_valid 433/437"
+   ],
+   "n_a": 100,
+   "n_b": 100,
+   "paired": {
+    "n_pairs": 100,
+    "shared_ids": 100,
+    "both": 89,
+    "a_only": 1,
+    "b_only": 6,
+    "neither": 4,
+    "diff": 0.05,
+    "lo": 0.0,
+    "hi": 0.1,
+    "mcnemar_p": 0.12500000000000006
+   },
+   "means": {
+    "turns": {
+     "a": {
+      "n": 100,
+      "mean": 5.51,
+      "lo": 5.17,
+      "hi": 5.84,
+      "method": "bootstrap95-percentile-5000"
+     },
+     "b": {
+      "n": 100,
+      "mean": 5.55,
+      "lo": 5.23,
+      "hi": 5.88,
+      "method": "bootstrap95-percentile-5000"
+     }
+    },
+    "calls": {
+     "a": {
+      "n": 100,
+      "mean": 4.33,
+      "lo": 3.88,
+      "hi": 4.78,
+      "method": "bootstrap95-percentile-5000"
+     },
+     "b": {
+      "n": 100,
+      "mean": 4.37,
+      "lo": 3.94,
+      "hi": 4.81,
+      "method": "bootstrap95-percentile-5000"
+     }
+    },
+    "step_answer_per_session": {
+     "a": {
+      "n": 100,
+      "mean": 0.9816666666666667,
+      "lo": 0.9616666666666667,
+      "hi": 0.9966666666666667,
+      "method": "bootstrap95-percentile-5000"
+     },
+     "b": {
+      "n": 100,
+      "mean": 0.9966666666666667,
+      "lo": 0.99,
+      "hi": 1.0,
+      "method": "bootstrap95-percentile-5000"
+     }
+    }
+   },
+   "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -2.63 pp)",
+   "class": "noninferior",
+   "gate_why": [],
+   "gate": "pass"
+  },
+  {
+   "a_file": "raw/s2-final-ref/quality-FREF/gsm8k-prod-load16.summary.json",
+   "b_file": "raw/s4-mk-b1/quality-MKL1/gsm8k-prod-load16.summary.json",
+   "suite": "gsm8k",
+   "cell_a": "prod-load16",
+   "cell_b": "prod-load16",
+   "primary": "exact",
+   "metrics": {
+    "answered": {
+     "a": {
+      "k": 500,
+      "n": 500,
+      "p": 1.0,
+      "lo": 0.9923756595384479,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 500,
+      "n": 500,
+      "p": 1.0,
+      "lo": 0.9923756595384479,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.007624340461552137,
+     "hi": 0.007624340461552137,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -0.76 pp)",
+     "class": "noninferior",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "exact": {
+     "a": {
+      "k": 483,
+      "n": 500,
+      "p": 0.966,
+      "lo": 0.9462286344983655,
+      "hi": 0.9786654801914678,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 485,
+      "n": 500,
+      "p": 0.97,
+      "lo": 0.9510963331640543,
+      "hi": 0.9817367868020865,
+      "method": "wilson95"
+     },
+     "diff": 0.0040000000000000036,
+     "lo": -0.01875440634964791,
+     "hi": 0.026992587027928287,
+     "fisher_p": 0.8577568273520867,
+     "z": 0.35934973411004323,
+     "z_p": 0.7193334730776579,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -1.88 pp)",
+     "class": "noninferior",
+     "lower_better": false,
+     "fisher_p_worse": 0.70472148068291,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "format": {
+     "a": {
+      "k": 499,
+      "n": 500,
+      "p": 0.998,
+      "lo": 0.9887592932948532,
+      "hi": 0.9996468636054407,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 500,
+      "n": 500,
+      "p": 1.0,
+      "lo": 0.9923756595384479,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0020000000000000018,
+     "lo": -0.005800174819104142,
+     "hi": 0.011240706705146764,
+     "fisher_p": 0.9999999999998276,
+     "z": 1.0005003753127741,
+     "z_p": 0.31706841609251457,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -0.58 pp)",
+     "class": "noninferior",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "truncated": {
+     "a": {
+      "k": 1,
+      "n": 500,
+      "p": 0.002,
+      "lo": 0.00035313639455927456,
+      "hi": 0.011240706705146758,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 0,
+      "n": 500,
+      "p": 0.0,
+      "lo": 4.336808689942018e-19,
+      "hi": 0.007624340461552241,
+      "method": "wilson95"
+     },
+     "diff": -0.002,
+     "lo": -0.011240706705146758,
+     "hi": 0.00580017481910424,
+     "fisher_p": 0.9999999999998276,
+     "z": -1.0005003753127737,
+     "z_p": 0.31706841609251485,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -0.58 pp)",
+     "class": "noninferior",
+     "lower_better": true,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    }
+   },
+   "notes": [],
+   "n_a": 500,
+   "n_b": 500,
+   "paired": {
+    "n_pairs": 500,
+    "shared_ids": 500,
+    "both": 481,
+    "a_only": 2,
+    "b_only": 4,
+    "neither": 13,
+    "diff": 0.004,
+    "lo": -0.006,
+    "hi": 0.014,
+    "mcnemar_p": 0.6875000000000008
+   },
+   "means": {
+    "completion_tokens": {
+     "a": {
+      "n": 500,
+      "mean": 412.138,
+      "lo": 358.41,
+      "hi": 475.434,
+      "method": "bootstrap95-percentile-5000"
+     },
+     "b": {
+      "n": 500,
+      "mean": 408.38,
+      "lo": 360.2,
+      "hi": 462.518,
+      "method": "bootstrap95-percentile-5000"
+     }
+    },
+    "wall_s": {
+     "a": {
+      "n": 500,
+      "mean": 3.076182,
+      "lo": 2.65724,
+      "hi": 3.577932,
+      "method": "bootstrap95-percentile-5000"
+     },
+     "b": {
+      "n": 500,
+      "mean": 3.151612,
+      "lo": 2.75875,
+      "hi": 3.596446,
+      "method": "bootstrap95-percentile-5000"
+     }
+    }
+   },
+   "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -1.88 pp)",
+   "class": "noninferior",
+   "gate_why": [],
+   "gate": "pass"
+  },
+  {
+   "a_file": "raw/s2-final-ref/quality-FREF/gsm8k-prod.summary.json",
+   "b_file": "raw/s4-mk-b1/quality-MKL1/gsm8k-prod.summary.json",
+   "suite": "gsm8k",
+   "cell_a": "prod",
+   "cell_b": "prod",
+   "primary": "exact",
+   "metrics": {
+    "answered": {
+     "a": {
+      "k": 1319,
+      "n": 1319,
+      "p": 1.0,
+      "lo": 0.9970960550146962,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 1319,
+      "n": 1319,
+      "p": 1.0,
+      "lo": 0.9970960550146962,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.0029039449853037747,
+     "hi": 0.0029039449853037747,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -0.29 pp)",
+     "class": "noninferior",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "exact": {
+     "a": {
+      "k": 1288,
+      "n": 1319,
+      "p": 0.976497346474602,
+      "lo": 0.9668334653483497,
+      "hi": 0.9833937834412434,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 1280,
+      "n": 1319,
+      "p": 0.9704321455648218,
+      "lo": 0.9598361459524565,
+      "hi": 0.9782959270371099,
+      "method": "wilson95"
+     },
+     "diff": -0.006065200909780133,
+     "lo": -0.018707829221175875,
+     "hi": 0.006393918540094155,
+     "fisher_p": 0.39660640412600084,
+     "z": -0.9691273562673666,
+     "z_p": 0.3324816501166133,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -1.87 pp)",
+     "class": "noninferior",
+     "lower_better": false,
+     "fisher_p_worse": 0.19830320206366558,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "format": {
+     "a": {
+      "k": 1317,
+      "n": 1319,
+      "p": 0.9984836997725549,
+      "lo": 0.9944881838111146,
+      "hi": 0.9995840772535749,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 1317,
+      "n": 1319,
+      "p": 0.9984836997725549,
+      "lo": 0.9944881838111146,
+      "hi": 0.9995840772535749,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.004144270550876266,
+     "hi": 0.004144270550876266,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -0.41 pp)",
+     "class": "noninferior",
+     "lower_better": false,
+     "fisher_p_worse": 0.6876422880062517,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "truncated": {
+     "a": {
+      "k": 1,
+      "n": 1319,
+      "p": 0.000758150113722517,
+      "lo": 0.00013384465011300741,
+      "hi": 0.004281997310193977,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 2,
+      "n": 1319,
+      "p": 0.001516300227445034,
+      "lo": 0.00041592274642501034,
+      "hi": 0.005511816188885304,
+      "method": "wilson95"
+     },
+     "diff": 0.000758150113722517,
+     "lo": -0.002933506650498087,
+     "hi": 0.004802146294484395,
+     "fisher_p": 1.0,
+     "z": 0.5776788380879981,
+     "z_p": 0.5634809690095623,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -0.48 pp)",
+     "class": "noninferior",
+     "lower_better": true,
+     "fisher_p_worse": 0.5,
+     "gate_why": [],
+     "gate": "pass"
+    }
+   },
+   "notes": [],
+   "n_a": 1319,
+   "n_b": 1319,
+   "paired": {
+    "n_pairs": 1319,
+    "shared_ids": 1319,
+    "both": 1278,
+    "a_only": 10,
+    "b_only": 2,
+    "neither": 29,
+    "diff": -0.006065200909780136,
+    "lo": -0.011372251705837756,
+    "hi": -0.001516300227445034,
+    "mcnemar_p": 0.03857421875000006
+   },
+   "means": {
+    "completion_tokens": {
+     "a": {
+      "n": 1319,
+      "mean": 409.63229719484457,
+      "lo": 376.63381349507205,
+      "hi": 444.4609552691433,
+      "method": "bootstrap95-percentile-5000"
+     },
+     "b": {
+      "n": 1319,
+      "mean": 416.9021986353298,
+      "lo": 379.79150871872633,
+      "hi": 456.4715693707354,
+      "method": "bootstrap95-percentile-5000"
+     }
+    },
+    "wall_s": {
+     "a": {
+      "n": 1319,
+      "mean": 1.5739006823351023,
+      "lo": 1.4422562547384383,
+      "hi": 1.7166201667930252,
+      "method": "bootstrap95-percentile-5000"
+     },
+     "b": {
+      "n": 1319,
+      "mean": 1.6223290371493555,
+      "lo": 1.4728756633813496,
+      "hi": 1.7822009097801363,
+      "method": "bootstrap95-percentile-5000"
+     }
+    }
+   },
+   "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -1.87 pp)",
+   "class": "noninferior",
+   "gate_why": [],
+   "gate": "pass"
+  },
+  {
+   "a_file": "raw/s2-final-ref/quality-FREF/gsm8k-t0-load16.summary.json",
+   "b_file": "raw/s4-mk-b1/quality-MKL1/gsm8k-t0-load16.summary.json",
+   "suite": "gsm8k",
+   "cell_a": "t0-load16",
+   "cell_b": "t0-load16",
+   "primary": "exact",
+   "metrics": {
+    "answered": {
+     "a": {
+      "k": 500,
+      "n": 500,
+      "p": 1.0,
+      "lo": 0.9923756595384479,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 500,
+      "n": 500,
+      "p": 1.0,
+      "lo": 0.9923756595384479,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.007624340461552137,
+     "hi": 0.007624340461552137,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -0.76 pp)",
+     "class": "noninferior",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "exact": {
+     "a": {
+      "k": 485,
+      "n": 500,
+      "p": 0.97,
+      "lo": 0.9510963331640543,
+      "hi": 0.9817367868020865,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 485,
+      "n": 500,
+      "p": 0.97,
+      "lo": 0.9510963331640543,
+      "hi": 0.9817367868020865,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.02225086030431332,
+     "hi": 0.02225086030431332,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -2.23 pp)",
+     "class": "noninferior",
+     "lower_better": false,
+     "fisher_p_worse": 0.5733401446205069,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "format": {
+     "a": {
+      "k": 499,
+      "n": 500,
+      "p": 0.998,
+      "lo": 0.9887592932948532,
+      "hi": 0.9996468636054407,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 500,
+      "n": 500,
+      "p": 1.0,
+      "lo": 0.9923756595384479,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0020000000000000018,
+     "lo": -0.005800174819104142,
+     "hi": 0.011240706705146764,
+     "fisher_p": 0.9999999999998276,
+     "z": 1.0005003753127741,
+     "z_p": 0.31706841609251457,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -0.58 pp)",
+     "class": "noninferior",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "truncated": {
+     "a": {
+      "k": 1,
+      "n": 500,
+      "p": 0.002,
+      "lo": 0.00035313639455927456,
+      "hi": 0.011240706705146758,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 0,
+      "n": 500,
+      "p": 0.0,
+      "lo": 4.336808689942018e-19,
+      "hi": 0.007624340461552241,
+      "method": "wilson95"
+     },
+     "diff": -0.002,
+     "lo": -0.011240706705146758,
+     "hi": 0.00580017481910424,
+     "fisher_p": 0.9999999999998276,
+     "z": -1.0005003753127737,
+     "z_p": 0.31706841609251485,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -0.58 pp)",
+     "class": "noninferior",
+     "lower_better": true,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    }
+   },
+   "notes": [],
+   "n_a": 500,
+   "n_b": 500,
+   "paired": {
+    "n_pairs": 500,
+    "shared_ids": 500,
+    "both": 484,
+    "a_only": 1,
+    "b_only": 1,
+    "neither": 14,
+    "diff": 0.0,
+    "lo": -0.006,
+    "hi": 0.006,
+    "mcnemar_p": 1.0
+   },
+   "means": {
+    "completion_tokens": {
+     "a": {
+      "n": 500,
+      "mean": 393.966,
+      "lo": 344.018,
+      "hi": 452.512,
+      "method": "bootstrap95-percentile-5000"
+     },
+     "b": {
+      "n": 500,
+      "mean": 379.542,
+      "lo": 334.2,
+      "hi": 429.972,
+      "method": "bootstrap95-percentile-5000"
+     }
+    },
+    "wall_s": {
+     "a": {
+      "n": 500,
+      "mean": 2.792096,
+      "lo": 2.4189499999999997,
+      "hi": 3.219014,
+      "method": "bootstrap95-percentile-5000"
+     },
+     "b": {
+      "n": 500,
+      "mean": 2.716852,
+      "lo": 2.3866080000000003,
+      "hi": 3.080172,
+      "method": "bootstrap95-percentile-5000"
+     }
+    }
+   },
+   "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -2.23 pp)",
+   "class": "noninferior",
+   "gate_why": [],
+   "gate": "pass"
+  },
+  {
+   "a_file": "raw/s2-final-ref/quality-FREF/gsm8k-t0.summary.json",
+   "b_file": "raw/s4-mk-b1/quality-MKL1/gsm8k-t0.summary.json",
+   "suite": "gsm8k",
+   "cell_a": "t0",
+   "cell_b": "t0",
+   "primary": "exact",
+   "metrics": {
+    "answered": {
+     "a": {
+      "k": 1319,
+      "n": 1319,
+      "p": 1.0,
+      "lo": 0.9970960550146962,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 1319,
+      "n": 1319,
+      "p": 1.0,
+      "lo": 0.9970960550146962,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.0029039449853037747,
+     "hi": 0.0029039449853037747,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -0.29 pp)",
+     "class": "noninferior",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "exact": {
+     "a": {
+      "k": 1279,
+      "n": 1319,
+      "p": 0.9696739954510993,
+      "lo": 0.9589690692578177,
+      "hi": 0.9776511067567455,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 1282,
+      "n": 1319,
+      "p": 0.9719484457922669,
+      "lo": 0.9615749678573757,
+      "hi": 0.9795808990821975,
+      "method": "wilson95"
+     },
+     "diff": 0.0022744503411675776,
+     "lo": -0.010811547872508825,
+     "hi": 0.015421685336655408,
+     "fisher_p": 0.8172415624823027,
+     "z": 0.3469832404141971,
+     "z_p": 0.7286039097104506,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -1.08 pp)",
+     "class": "noninferior",
+     "lower_better": false,
+     "fisher_p_worse": 0.6780540471603331,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "format": {
+     "a": {
+      "k": 1315,
+      "n": 1319,
+      "p": 0.9969673995451099,
+      "lo": 0.9922283988617076,
+      "hi": 0.9988200682529753,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 1316,
+      "n": 1319,
+      "p": 0.9977255496588324,
+      "lo": 0.9933341773378548,
+      "hi": 0.9992261867518315,
+      "method": "wilson95"
+     },
+     "diff": 0.0007581501137224889,
+     "lo": -0.0040080362236495715,
+     "hi": 0.005729069461506457,
+     "fisher_p": 0.9999999999976646,
+     "z": 0.3784669423814061,
+     "z_p": 0.7050837468128189,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -0.40 pp)",
+     "class": "noninferior",
+     "lower_better": false,
+     "fisher_p_worse": 0.7737489323220715,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "truncated": {
+     "a": {
+      "k": 4,
+      "n": 1319,
+      "p": 0.003032600454890068,
+      "lo": 0.0011799317470246513,
+      "hi": 0.007771601138292323,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 3,
+      "n": 1319,
+      "p": 0.002274450341167551,
+      "lo": 0.0007738132481685061,
+      "hi": 0.006665822662145139,
+      "method": "wilson95"
+     },
+     "diff": -0.000758150113722517,
+     "lo": -0.005729069461506352,
+     "hi": 0.004008036223649512,
+     "fisher_p": 0.999999999999334,
+     "z": -0.3784669423814171,
+     "z_p": 0.7050837468128108,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -0.40 pp)",
+     "class": "noninferior",
+     "lower_better": true,
+     "fisher_p_worse": 0.7737489323220715,
+     "gate_why": [],
+     "gate": "pass"
+    }
+   },
+   "notes": [],
+   "n_a": 1319,
+   "n_b": 1319,
+   "paired": {
+    "n_pairs": 1319,
+    "shared_ids": 1319,
+    "both": 1275,
+    "a_only": 4,
+    "b_only": 7,
+    "neither": 33,
+    "diff": 0.002274450341167551,
+    "lo": -0.002274450341167551,
+    "hi": 0.0075815011372251705,
+    "mcnemar_p": 0.5488281250000006
+   },
+   "means": {
+    "completion_tokens": {
+     "a": {
+      "n": 1319,
+      "mean": 413.9954510993177,
+      "lo": 373.43896891584535,
+      "hi": 457.1281273692191,
+      "method": "bootstrap95-percentile-5000"
+     },
+     "b": {
+      "n": 1319,
+      "mean": 404.3639120545868,
+      "lo": 365.9401061410159,
+      "hi": 445.841546626232,
+      "method": "bootstrap95-percentile-5000"
+     }
+    },
+    "wall_s": {
+     "a": {
+      "n": 1319,
+      "mean": 1.5951076573161487,
+      "lo": 1.4400750568612586,
+      "hi": 1.762341925701289,
+      "method": "bootstrap95-percentile-5000"
+     },
+     "b": {
+      "n": 1319,
+      "mean": 1.5777012888551931,
+      "lo": 1.4322661106899166,
+      "hi": 1.7333237300985593,
+      "method": "bootstrap95-percentile-5000"
+     }
+    }
+   },
+   "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -1.08 pp)",
+   "class": "noninferior",
+   "gate_why": [],
+   "gate": "pass"
+  },
+  {
+   "a_file": "raw/s2-final-ref/quality-FREF/json-object.summary.json",
+   "b_file": "raw/s4-mk-b1/quality-MKL1/json-object.summary.json",
+   "suite": "json",
+   "cell_a": "object",
+   "cell_b": "object",
+   "primary": "valid",
+   "metrics": {
+    "answered": {
+     "a": {
+      "k": 100,
+      "n": 100,
+      "p": 1.0,
+      "lo": 0.9630065017930143,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 100,
+      "n": 100,
+      "p": 1.0,
+      "lo": 0.9630065017930143,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.03699349820698572,
+     "hi": 0.03699349820698572,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -3.70 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "valid": {
+     "a": {
+      "k": 99,
+      "n": 100,
+      "p": 0.99,
+      "lo": 0.9455138038212946,
+      "hi": 0.9982325679358593,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 100,
+      "n": 100,
+      "p": 1.0,
+      "lo": 0.9630065017930143,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.010000000000000009,
+     "lo": -0.027898470739711842,
+     "hi": 0.054486196178705426,
+     "fisher_p": 0.9999999999999413,
+     "z": 1.0025094142341715,
+     "z_p": 0.3160976220289124,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -2.79 pp)",
+     "class": "noninferior",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "parse": {
+     "a": {
+      "k": 100,
+      "n": 100,
+      "p": 1.0,
+      "lo": 0.9630065017930143,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 100,
+      "n": 100,
+      "p": 1.0,
+      "lo": 0.9630065017930143,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.03699349820698572,
+     "hi": 0.03699349820698572,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -3.70 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "fields": {
+     "a": {
+      "k": 99,
+      "n": 100,
+      "p": 0.99,
+      "lo": 0.9455138038212946,
+      "hi": 0.9982325679358593,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 100,
+      "n": 100,
+      "p": 1.0,
+      "lo": 0.9630065017930143,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.010000000000000009,
+     "lo": -0.027898470739711842,
+     "hi": 0.054486196178705426,
+     "fisher_p": 0.9999999999999413,
+     "z": 1.0025094142341715,
+     "z_p": 0.3160976220289124,
+     "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -2.79 pp)",
+     "class": "noninferior",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "parse_lenient": {
+     "a": {
+      "k": 100,
+      "n": 100,
+      "p": 1.0,
+      "lo": 0.9630065017930143,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 100,
+      "n": 100,
+      "p": 1.0,
+      "lo": 0.9630065017930143,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.03699349820698572,
+     "hi": 0.03699349820698572,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -3.70 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "valid@config": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.16112515805281935,
+     "hi": 0.16112515805281935,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -16.11 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "valid@event": {
+     "a": {
+      "k": 19,
+      "n": 20,
+      "p": 0.95,
+      "lo": 0.763868806553258,
+      "hi": 0.9911185511992047,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.050000000000000044,
+     "lo": -0.11628906100603137,
+     "hi": 0.23613119344674205,
+     "fisher_p": 1.0,
+     "z": 1.012739367083667,
+     "z_p": 0.3111846688226178,
+     "verdict": "inconclusive: CI bad end -11.63 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "valid@invoice": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.16112515805281935,
+     "hi": 0.16112515805281935,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -16.11 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "valid@person": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.16112515805281935,
+     "hi": 0.16112515805281935,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -16.11 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "valid@sentiment": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.16112515805281935,
+     "hi": 0.16112515805281935,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -16.11 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    }
+   },
+   "notes": [],
+   "n_a": 100,
+   "n_b": 100,
+   "paired": {
+    "n_pairs": 100,
+    "shared_ids": 100,
+    "both": 99,
+    "a_only": 0,
+    "b_only": 1,
+    "neither": 0,
+    "diff": 0.01,
+    "lo": 0.0,
+    "hi": 0.03,
+    "mcnemar_p": 1.0
+   },
+   "means": {
+    "completion_tokens": {
+     "a": {
+      "n": 100,
+      "mean": 127.14,
+      "lo": 116.67,
+      "hi": 138.72,
+      "method": "bootstrap95-percentile-5000"
+     },
+     "b": {
+      "n": 100,
+      "mean": 134.22,
+      "lo": 123.66,
+      "hi": 145.54,
+      "method": "bootstrap95-percentile-5000"
+     }
+    }
+   },
+   "verdict": "mk non-inferior to final within 3.0 pp (CI bad end -2.79 pp)",
+   "class": "noninferior",
+   "gate_why": [],
+   "gate": "pass"
+  },
+  {
+   "a_file": "raw/s2-final-ref/quality-FREF/json-schema.summary.json",
+   "b_file": "raw/s4-mk-b1/quality-MKL1/json-schema.summary.json",
+   "suite": "json",
+   "cell_a": "schema",
+   "cell_b": "schema",
+   "primary": "valid",
+   "metrics": {
+    "answered": {
+     "a": {
+      "k": 80,
+      "n": 100,
+      "p": 0.8,
+      "lo": 0.7111708344068411,
+      "hi": 0.8666330666689676,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 80,
+      "n": 100,
+      "p": 0.8,
+      "lo": 0.7111708344068411,
+      "hi": 0.8666330666689676,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.11104317283691022,
+     "hi": 0.11104317283691022,
+     "fisher_p": 0.9999999999999017,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -11.10 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 0.5700624473875244,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "valid": {
+     "a": {
+      "k": 80,
+      "n": 80,
+      "p": 1.0,
+      "lo": 0.9541818704644728,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 80,
+      "n": 80,
+      "p": 1.0,
+      "lo": 0.9541818704644728,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.04581812953552722,
+     "hi": 0.04581812953552722,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -4.58 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "parse": {
+     "a": {
+      "k": 80,
+      "n": 80,
+      "p": 1.0,
+      "lo": 0.9541818704644728,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 80,
+      "n": 80,
+      "p": 1.0,
+      "lo": 0.9541818704644728,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.04581812953552722,
+     "hi": 0.04581812953552722,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -4.58 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "fields": {
+     "a": {
+      "k": 80,
+      "n": 80,
+      "p": 1.0,
+      "lo": 0.9541818704644728,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 80,
+      "n": 80,
+      "p": 1.0,
+      "lo": 0.9541818704644728,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.04581812953552722,
+     "hi": 0.04581812953552722,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -4.58 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "parse_lenient": {
+     "a": {
+      "k": 80,
+      "n": 80,
+      "p": 1.0,
+      "lo": 0.9541818704644728,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 80,
+      "n": 80,
+      "p": 1.0,
+      "lo": 0.9541818704644728,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.04581812953552722,
+     "hi": 0.04581812953552722,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -4.58 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "valid@event": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.16112515805281935,
+     "hi": 0.16112515805281935,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -16.11 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "valid@invoice": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.16112515805281935,
+     "hi": 0.16112515805281935,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -16.11 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "valid@person": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.16112515805281935,
+     "hi": 0.16112515805281935,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -16.11 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "valid@sentiment": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.16112515805281935,
+     "hi": 0.16112515805281935,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -16.11 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    }
+   },
+   "notes": [],
+   "n_a": 100,
+   "n_b": 100,
+   "paired": {
+    "n_pairs": 80,
+    "shared_ids": 100,
+    "both": 80,
+    "a_only": 0,
+    "b_only": 0,
+    "neither": 0,
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "mcnemar_p": 1.0
+   },
+   "means": {
+    "completion_tokens": {
+     "a": {
+      "n": 80,
+      "mean": 104.525,
+      "lo": 94.7625,
+      "hi": 114.925,
+      "method": "bootstrap95-percentile-5000"
+     },
+     "b": {
+      "n": 80,
+      "mean": 103.8125,
+      "lo": 93.825,
+      "hi": 114.325,
+      "method": "bootstrap95-percentile-5000"
+     }
+    }
+   },
+   "verdict": "inconclusive: CI bad end -4.58 pp reaches past the 3.0 pp margin (more items needed to call it)",
+   "class": "inconclusive",
+   "gate_why": [],
+   "gate": "pass"
+  },
+  {
+   "a_file": "raw/s2-final-ref/quality-FREF/mgsm-t0.summary.json",
+   "b_file": "raw/s4-mk-b1/quality-MKL1/mgsm-t0.summary.json",
+   "suite": "mgsm",
+   "cell_a": "t0",
+   "cell_b": "t0",
+   "primary": "exact",
+   "metrics": {
+    "answered": {
+     "a": {
+      "k": 120,
+      "n": 120,
+      "p": 1.0,
+      "lo": 0.9689808335812966,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 120,
+      "n": 120,
+      "p": 1.0,
+      "lo": 0.9689808335812966,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.031019166418703392,
+     "hi": 0.031019166418703392,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -3.10 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "exact": {
+     "a": {
+      "k": 114,
+      "n": 120,
+      "p": 0.95,
+      "lo": 0.8951971146376326,
+      "hi": 0.9768856355855343,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 112,
+      "n": 120,
+      "p": 0.9333333333333333,
+      "lo": 0.8739486959646967,
+      "hi": 0.9658346931390938,
+      "method": "wilson95"
+     },
+     "diff": -0.016666666666666607,
+     "lo": -0.08185387826712262,
+     "hi": 0.04704906634539466,
+     "fisher_p": 0.784150663876672,
+     "z": -0.550829738447854,
+     "z_p": 0.5817503960761219,
+     "verdict": "inconclusive: CI bad end -8.19 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 0.39207533193836225,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "format": {
+     "a": {
+      "k": 120,
+      "n": 120,
+      "p": 1.0,
+      "lo": 0.9689808335812966,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 117,
+      "n": 120,
+      "p": 0.975,
+      "lo": 0.9290699666721339,
+      "hi": 0.9914618252300978,
+      "method": "wilson95"
+     },
+     "diff": -0.025000000000000022,
+     "lo": -0.07093003332786607,
+     "hi": 0.010116668054038123,
+     "fisher_p": 0.24686192468612905,
+     "z": -1.7429786813223849,
+     "z_p": 0.08133733877339286,
+     "verdict": "inconclusive: CI bad end -7.09 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 0.12343096234309624,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "exact@zh": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.16112515805281935,
+     "hi": 0.16112515805281935,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -16.11 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "script@zh": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.16112515805281935,
+     "hi": 0.16112515805281935,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -16.11 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "exact@es": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.16112515805281935,
+     "hi": 0.16112515805281935,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -16.11 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "exact@fr": {
+     "a": {
+      "k": 16,
+      "n": 20,
+      "p": 0.8,
+      "lo": 0.5839825677481064,
+      "hi": 0.919342337420202,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 16,
+      "n": 20,
+      "p": 0.8,
+      "lo": 0.5839825677481064,
+      "hi": 0.919342337420202,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.24679166221252044,
+     "hi": 0.24679166221252044,
+     "fisher_p": 0.9999999999999959,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -24.68 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 0.6526176526176526,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "exact@de": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 19,
+      "n": 20,
+      "p": 0.95,
+      "lo": 0.763868806553258,
+      "hi": 0.9911185511992047,
+      "method": "wilson95"
+     },
+     "diff": -0.050000000000000044,
+     "lo": -0.23613119344674205,
+     "hi": 0.11628906100603137,
+     "fisher_p": 1.0,
+     "z": -1.012739367083667,
+     "z_p": 0.3111846688226178,
+     "verdict": "inconclusive: CI bad end -23.61 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 0.5,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "exact@ja": {
+     "a": {
+      "k": 18,
+      "n": 20,
+      "p": 0.9,
+      "lo": 0.6989663547715128,
+      "hi": 0.9721335187862319,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 18,
+      "n": 20,
+      "p": 0.9,
+      "lo": 0.6989663547715128,
+      "hi": 0.9721335187862319,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.2135831712620096,
+     "hi": 0.2135831712620096,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -21.36 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 0.6975051975051975,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "script@ja": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.16112515805281935,
+     "hi": 0.16112515805281935,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -16.11 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "exact@ru": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 19,
+      "n": 20,
+      "p": 0.95,
+      "lo": 0.763868806553258,
+      "hi": 0.9911185511992047,
+      "method": "wilson95"
+     },
+     "diff": -0.050000000000000044,
+     "lo": -0.23613119344674205,
+     "hi": 0.11628906100603137,
+     "fisher_p": 1.0,
+     "z": -1.012739367083667,
+     "z_p": 0.3111846688226178,
+     "verdict": "inconclusive: CI bad end -23.61 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 0.5,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "script@ru": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 19,
+      "n": 20,
+      "p": 0.95,
+      "lo": 0.763868806553258,
+      "hi": 0.9911185511992047,
+      "method": "wilson95"
+     },
+     "diff": -0.050000000000000044,
+     "lo": -0.23613119344674205,
+     "hi": 0.11628906100603137,
+     "fisher_p": 1.0,
+     "z": -1.012739367083667,
+     "z_p": 0.3111846688226178,
+     "verdict": "inconclusive: CI bad end -23.61 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 0.5,
+     "gate_why": [],
+     "gate": "pass"
+    }
+   },
+   "notes": [],
+   "n_a": 120,
+   "n_b": 120,
+   "paired": {
+    "n_pairs": 120,
+    "shared_ids": 120,
+    "both": 112,
+    "a_only": 2,
+    "b_only": 0,
+    "neither": 6,
+    "diff": -0.016666666666666666,
+    "lo": -0.041666666666666664,
+    "hi": 0.0,
+    "mcnemar_p": 0.5
+   },
+   "means": {
+    "completion_tokens": {
+     "a": {
+      "n": 120,
+      "mean": 485.5416666666667,
+      "lo": 377.51666666666665,
+      "hi": 623.6083333333333,
+      "method": "bootstrap95-percentile-5000"
+     },
+     "b": {
+      "n": 120,
+      "mean": 661.7666666666667,
+      "lo": 442.85833333333335,
+      "hi": 929.4083333333333,
+      "method": "bootstrap95-percentile-5000"
+     }
+    }
+   },
+   "verdict": "inconclusive: CI bad end -8.19 pp reaches past the 3.0 pp margin (more items needed to call it)",
+   "class": "inconclusive",
+   "gate_why": [],
+   "gate": "pass"
+  },
+  {
+   "a_file": "raw/s2-final-ref/quality-FREF/needles-t0.summary.json",
+   "b_file": "raw/s4-mk-b1/quality-MKL1/needles-t0.summary.json",
+   "suite": "needles",
+   "cell_a": "t0",
+   "cell_b": "t0",
+   "primary": "all3",
+   "metrics": {
+    "answered": {
+     "a": {
+      "k": 80,
+      "n": 80,
+      "p": 1.0,
+      "lo": 0.9541818704644728,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 80,
+      "n": 80,
+      "p": 1.0,
+      "lo": 0.9541818704644728,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.04581812953552722,
+     "hi": 0.04581812953552722,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -4.58 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "all3": {
+     "a": {
+      "k": 80,
+      "n": 80,
+      "p": 1.0,
+      "lo": 0.9541818704644728,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 79,
+      "n": 80,
+      "p": 0.9875,
+      "lo": 0.9325372992233133,
+      "hi": 0.9977900244795476,
+      "method": "wilson95"
+     },
+     "diff": -0.012499999999999956,
+     "lo": -0.0674627007766867,
+     "hi": 0.034459403721981426,
+     "fisher_p": 0.9999999999999981,
+     "z": -1.0031397251510366,
+     "z_p": 0.31579345003674275,
+     "verdict": "inconclusive: CI bad end -6.75 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 0.5,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "key": {
+     "a": {
+      "k": 240,
+      "n": 240,
+      "p": 1.0,
+      "lo": 0.9842460800584412,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 237,
+      "n": 240,
+      "p": 0.9875,
+      "lo": 0.9638999953789512,
+      "hi": 0.9957399326780291,
+      "method": "wilson95"
+     },
+     "diff": -0.012499999999999956,
+     "lo": -0.03610000462104879,
+     "hi": 0.005278708728799663,
+     "fisher_p": 0.24843423799585101,
+     "z": -1.7374889710522743,
+     "z_p": 0.0823008990717619,
+     "verdict": "inconclusive: CI bad end -3.61 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 0.12421711899791232,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "all3@100k": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.16112515805281935,
+     "hi": 0.16112515805281935,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -16.11 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "key@100k": {
+     "a": {
+      "k": 60,
+      "n": 60,
+      "p": 1.0,
+      "lo": 0.93982814785791,
+      "hi": 0.9999999999999998,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 60,
+      "n": 60,
+      "p": 1.0,
+      "lo": 0.93982814785791,
+      "hi": 0.9999999999999998,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.06017185214208998,
+     "hi": 0.06017185214208998,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -6.02 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "all3@250k": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.16112515805281935,
+     "hi": 0.16112515805281935,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -16.11 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "key@250k": {
+     "a": {
+      "k": 60,
+      "n": 60,
+      "p": 1.0,
+      "lo": 0.93982814785791,
+      "hi": 0.9999999999999998,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 60,
+      "n": 60,
+      "p": 1.0,
+      "lo": 0.93982814785791,
+      "hi": 0.9999999999999998,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.06017185214208998,
+     "hi": 0.06017185214208998,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -6.02 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "all3@500k": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.16112515805281935,
+     "hi": 0.16112515805281935,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -16.11 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "key@500k": {
+     "a": {
+      "k": 60,
+      "n": 60,
+      "p": 1.0,
+      "lo": 0.93982814785791,
+      "hi": 0.9999999999999998,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 60,
+      "n": 60,
+      "p": 1.0,
+      "lo": 0.93982814785791,
+      "hi": 0.9999999999999998,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.06017185214208998,
+     "hi": 0.06017185214208998,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -6.02 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "all3@900k": {
+     "a": {
+      "k": 20,
+      "n": 20,
+      "p": 1.0,
+      "lo": 0.8388748419471806,
+      "hi": 1.0,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 19,
+      "n": 20,
+      "p": 0.95,
+      "lo": 0.763868806553258,
+      "hi": 0.9911185511992047,
+      "method": "wilson95"
+     },
+     "diff": -0.050000000000000044,
+     "lo": -0.23613119344674205,
+     "hi": 0.11628906100603137,
+     "fisher_p": 1.0,
+     "z": -1.012739367083667,
+     "z_p": 0.3111846688226178,
+     "verdict": "inconclusive: CI bad end -23.61 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 0.5,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "key@900k": {
+     "a": {
+      "k": 60,
+      "n": 60,
+      "p": 1.0,
+      "lo": 0.93982814785791,
+      "hi": 0.9999999999999998,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 57,
+      "n": 60,
+      "p": 0.95,
+      "lo": 0.8629948352365147,
+      "hi": 0.9828504978356043,
+      "method": "wilson95"
+     },
+     "diff": -0.050000000000000044,
+     "lo": -0.13700516476348534,
+     "hi": 0.018555138379676372,
+     "fisher_p": 0.2436974789916177,
+     "z": -1.7541160386140593,
+     "z_p": 0.0794106259989421,
+     "verdict": "inconclusive: CI bad end -13.70 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 0.12184873949579832,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "key@d0.05": {
+     "a": {
+      "k": 48,
+      "n": 48,
+      "p": 1.0,
+      "lo": 0.9258998703338824,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 48,
+      "n": 48,
+      "p": 1.0,
+      "lo": 0.9258998703338824,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.07410012966611756,
+     "hi": 0.07410012966611756,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -7.41 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "key@d0.25": {
+     "a": {
+      "k": 48,
+      "n": 48,
+      "p": 1.0,
+      "lo": 0.9258998703338824,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 48,
+      "n": 48,
+      "p": 1.0,
+      "lo": 0.9258998703338824,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.07410012966611756,
+     "hi": 0.07410012966611756,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -7.41 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "key@d0.50": {
+     "a": {
+      "k": 48,
+      "n": 48,
+      "p": 1.0,
+      "lo": 0.9258998703338824,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 45,
+      "n": 48,
+      "p": 0.9375,
+      "lo": 0.8316456194505365,
+      "hi": 0.9785167670916107,
+      "method": "wilson95"
+     },
+     "diff": -0.0625,
+     "lo": -0.1683543805494635,
+     "hi": 0.022194771970782692,
+     "fisher_p": 0.24210526315788977,
+     "z": -1.7597653802562396,
+     "z_p": 0.07844759520534349,
+     "verdict": "inconclusive: CI bad end -16.84 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 0.12105263157894737,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "key@d0.75": {
+     "a": {
+      "k": 48,
+      "n": 48,
+      "p": 1.0,
+      "lo": 0.9258998703338824,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 48,
+      "n": 48,
+      "p": 1.0,
+      "lo": 0.9258998703338824,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.07410012966611756,
+     "hi": 0.07410012966611756,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -7.41 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    },
+    "key@d0.95": {
+     "a": {
+      "k": 48,
+      "n": 48,
+      "p": 1.0,
+      "lo": 0.9258998703338824,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "b": {
+      "k": 48,
+      "n": 48,
+      "p": 1.0,
+      "lo": 0.9258998703338824,
+      "hi": 0.9999999999999999,
+      "method": "wilson95"
+     },
+     "diff": 0.0,
+     "lo": -0.07410012966611756,
+     "hi": 0.07410012966611756,
+     "fisher_p": 1.0,
+     "z": 0.0,
+     "z_p": 1.0,
+     "verdict": "inconclusive: CI bad end -7.41 pp reaches past the 3.0 pp margin (more items needed to call it)",
+     "class": "inconclusive",
+     "lower_better": false,
+     "fisher_p_worse": 1.0,
+     "gate_why": [],
+     "gate": "pass"
+    }
+   },
+   "notes": [
+    "conditions differ in: nonce"
+   ],
+   "n_a": 80,
+   "n_b": 80,
+   "paired": {
+    "n_pairs": 80,
+    "shared_ids": 80,
+    "both": 79,
+    "a_only": 1,
+    "b_only": 0,
+    "neither": 0,
+    "diff": -0.0125,
+    "lo": -0.0375,
+    "hi": 0.0,
+    "mcnemar_p": 1.0
+   },
+   "means": {
+    "key_fraction_per_item": {
+     "a": {
+      "n": 80,
+      "mean": 1.0,
+      "lo": 1.0,
+      "hi": 1.0,
+      "method": "bootstrap95-percentile-5000"
+     },
+     "b": {
+      "n": 80,
+      "mean": 0.9875,
+      "lo": 0.9625,
+      "hi": 1.0,
+      "method": "bootstrap95-percentile-5000"
+     }
+    },
+    "prompt_tokens": {
+     "a": {
+      "n": 80,
+      "mean": 437527.8,
+      "lo": 372527.6125,
+      "hi": 504402.3625,
+      "method": "bootstrap95-percentile-5000"
+     },
+     "b": {
+      "n": 80,
+      "mean": 437528.0,
+      "lo": 372527.95,
+      "hi": 504402.475,
+      "method": "bootstrap95-percentile-5000"
+     }
+    },
+    "completion_tokens": {
+     "a": {
+      "n": 80,
+      "mean": 425.2125,
+      "lo": 385.85,
+      "hi": 465.9625,
+      "method": "bootstrap95-percentile-5000"
+     },
+     "b": {
+      "n": 80,
+      "mean": 472.3625,
+      "lo": 397.8375,
+      "hi": 587.4125,
+      "method": "bootstrap95-percentile-5000"
+     }
+    },
+    "wall_s@100k": {
+     "a": {
+      "n": 20,
+      "mean": 4.2097,
+      "lo": 3.8440999999999996,
+      "hi": 4.539199999999999,
+      "method": "bootstrap95-percentile-5000"
+     },
+     "b": {
+      "n": 20,
+      "mean": 4.24685,
+      "lo": 3.8484499999999997,
+      "hi": 4.6532,
+      "method": "bootstrap95-percentile-5000"
+     }
+    },
+    "wall_s@250k": {
+     "a": {
+      "n": 20,
+      "mean": 10.343399999999999,
+      "lo": 9.32875,
+      "hi": 11.359649999999998,
+      "method": "bootstrap95-percentile-5000"
+     },
+     "b": {
+      "n": 20,
+      "mean": 10.097100000000001,
+      "lo": 8.9974,
+      "hi": 11.24175,
+      "method": "bootstrap95-percentile-5000"
+     }
+    },
+    "wall_s@500k": {
+     "a": {
+      "n": 20,
+      "mean": 21.3891,
+      "lo": 19.6723,
+      "hi": 23.056350000000002,
+      "method": "bootstrap95-percentile-5000"
+     },
+     "b": {
+      "n": 20,
+      "mean": 21.73065,
+      "lo": 19.8418,
+      "hi": 23.5957,
+      "method": "bootstrap95-percentile-5000"
+     }
+    },
+    "wall_s@900k": {
+     "a": {
+      "n": 20,
+      "mean": 44.6295,
+      "lo": 41.14375,
+      "hi": 47.8306,
+      "method": "bootstrap95-percentile-5000"
+     },
+     "b": {
+      "n": 20,
+      "mean": 45.19925,
+      "lo": 40.828500000000005,
+      "hi": 49.44515,
+      "method": "bootstrap95-percentile-5000"
+     }
+    }
+   },
+   "verdict": "inconclusive: CI bad end -6.75 pp reaches past the 3.0 pp margin (more items needed to call it)",
+   "class": "inconclusive",
+   "gate_why": [],
+   "gate": "pass"
+  }
+ ]
+}

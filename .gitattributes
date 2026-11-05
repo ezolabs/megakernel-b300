@@ -1,0 +1,2 @@
+# record/ is the author's record, kept byte-for-byte: three of its CSVs use CRLF line endings.
+record/** -text

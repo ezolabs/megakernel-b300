@@ -1,0 +1,6 @@
+  box-a  dec C1/C2/C4/C8 847/706/545/396  aggC8 2836  TTFT C1/C8 42.1/98.6 ms  fill60k 1.043 s  gap 152 ms  n 8/8/8/8/8  errs 0
+  CTL1  dec C1/C2/C4/C8 907/694/559/395  aggC8 2849  TTFT C1/C8 40.0/99.4 ms  fill60k 1.018 s  gap 139 ms  n 8/8/8/8/8  errs 0
+  CTL2  dec C1/C2/C4/C8 895/682/552/399  aggC8 2810  TTFT C1/C8 41.8/103.3 ms  fill60k 1.021 s  gap 145 ms  n 8/8/8/8/8  errs 0
+    K3  dec C1/C2/C4/C8 858/692/556/403  aggC8 2900  TTFT C1/C8 40.6/105.4 ms  fill60k 1.020 s  gap 143 ms  n 8/8/8/8/8  errs 0
+    C3  dec C1/C2/C4/C8 873/704/550/400  aggC8 2880  TTFT C1/C8 38.8/109.4 ms  fill60k 0.998 s  gap 147 ms  n 8/8/8/8/8  errs 0
+    C4  dec C1/C2/C4/C8 880/693/559/395  aggC8 2866  TTFT C1/C8 41.0/100.8 ms  fill60k 1.007 s  gap 147 ms  n 8/8/8/8/8  errs 0

@@ -1,0 +1,18 @@
+# resume start 2026-10-28T20:00:18Z base=http://127.0.0.1:8002 model=DeepSeek-V4.1-Flash seed=777 seed_offset=91 conn=keep-alive
+{"seed": 0, "gap_min": 0.1, "pt": 87014, "cached": 0, "ttft": 1.752, "loads": {"run": 0, "wait": 0, "kv": 0.0}, "at": "20:00:20Z", "conn": "keep-alive"}
+{"seed": 1, "gap_min": 3.0, "pt": 86960, "cached": 0, "ttft": 1.826, "loads": {"run": 0, "wait": 0, "kv": 0.0}, "at": "20:00:22Z", "conn": "keep-alive"}
+{"gap_min": 0.1, "conv": 0, "loads": {"run": 0, "wait": 0, "kv": 0.0}, "at": "20:00:26Z", "conn": "keep-alive", "actual_gap_s": 6.0, "pt": 87047, "cached": 86784, "hit": 0.997, "ttft": 0.244}
+{"gap_min": 3.0, "conv": 1, "loads": {"run": 0, "wait": 0, "kv": 0.0}, "at": "20:03:22Z", "conn": "keep-alive", "actual_gap_s": 180.0, "pt": 86991, "cached": 86784, "hit": 0.9976, "ttft": 0.265}
+# resume end 2026-10-28T20:03:22Z
+# resume start 2026-10-28T20:03:25Z base=http://127.0.0.1:8002 model=DeepSeek-V4.1-Flash seed=777 seed_offset=92 conn=keep-alive
+{"seed": 0, "gap_min": 0.1, "pt": 86960, "cached": 0, "ttft": 1.802, "loads": {"run": 0, "wait": 0, "kv": 0.0}, "at": "20:03:27Z", "conn": "keep-alive"}
+{"seed": 1, "gap_min": 3.0, "pt": 87087, "cached": 0, "ttft": 1.833, "loads": {"run": 0, "wait": 0, "kv": 0.0}, "at": "20:03:29Z", "conn": "keep-alive"}
+{"gap_min": 0.1, "conv": 0, "loads": {"run": 0, "wait": 0, "kv": 0.0}, "at": "20:03:33Z", "conn": "keep-alive", "actual_gap_s": 6.0, "pt": 86993, "cached": 86784, "hit": 0.9976, "ttft": 0.182}
+{"gap_min": 3.0, "conv": 1, "loads": {"run": 0, "wait": 0, "kv": 0.0}, "at": "20:06:29Z", "conn": "keep-alive", "actual_gap_s": 180.0, "pt": 87118, "cached": 87040, "hit": 0.9991, "ttft": 0.238}
+# resume end 2026-10-28T20:06:29Z
+# resume start 2026-10-28T20:06:32Z base=http://127.0.0.1:8002 model=DeepSeek-V4.1-Flash seed=777 seed_offset=93 conn=keep-alive
+{"seed": 0, "gap_min": 0.1, "pt": 87087, "cached": 0, "ttft": 1.752, "loads": {"run": 0, "wait": 0, "kv": 0.0}, "at": "20:06:34Z", "conn": "keep-alive"}
+{"seed": 1, "gap_min": 3.0, "pt": 86785, "cached": 0, "ttft": 1.817, "loads": {"run": 0, "wait": 0, "kv": 0.0}, "at": "20:06:36Z", "conn": "keep-alive"}
+{"gap_min": 0.1, "conv": 0, "loads": {"run": 0, "wait": 0, "kv": 0.0}, "at": "20:06:40Z", "conn": "keep-alive", "actual_gap_s": 6.0, "pt": 87120, "cached": 87040, "hit": 0.9991, "ttft": 0.245}
+{"gap_min": 3.0, "conv": 1, "loads": {"run": 0, "wait": 0, "kv": 0.0}, "at": "20:09:36Z", "conn": "keep-alive", "actual_gap_s": 180.0, "pt": 86816, "cached": 86784, "hit": 0.9996, "ttft": 0.198}
+# resume end 2026-10-28T20:09:36Z

@@ -1,0 +1,6 @@
+,GB300,Plain B300
+Chip family,Blackwell Ultra,Blackwell Ultra
+SMs per GPU,152,148
+Host processor,NVIDIA Grace (Arm),x86 server processors
+"Plugin at launch, 18 October",Supported; where it was built and measured,Refused at startup
+Plugin since 30 October,Supported,Supported with the sm148 opt-in; upstream speed measured at one request

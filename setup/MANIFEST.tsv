@@ -1,0 +1,99 @@
+dest_path	source_repo	source_sha	source_path	scrubbed	note
+MANIFEST.tsv	-	-	-	y	this file
+README.md	-	-	-	y	written for this repository: the bring-up runbook
+bench/acc.py	internal	b046a10b	box-c/qa/window2-tp4/harness/acc.py	n	accept-length reader the wrappers call
+bench/bench.py	internal	b046a10b	box-c/qa/speed-20261026/bench.py	y	the bench program the wrappers call; scrubbed of gateway identifiers
+bench/c1-settle__analyze.py	internal	b046a10b	record/data/raw/sglang-takes/c1-settle__analyze.py	n	the C1 settle analyzer
+bench/c1-settle__bench-c1.sh	internal	b046a10b	record/data/raw/sglang-takes/c1-settle__bench-c1.sh	y	the C1 n=32 wrapper
+bench/decode_distribution.py	internal	b046a10b	record/data/scripts/decode_distribution.py	y	the decode-distribution script
+bench/gates.py	internal	b046a10b	box-c/qa/window2-tp4/harness/gates.py	y	the speed gate
+bench/raw__speed__bench178.sh	internal	b046a10b	record/data/raw/box-b-vs-box-a/raw__speed__bench178.sh	y	the #84 speed battery wrapper
+box/RETRY-MEGAKERNEL.md	internal	b046a10b	fleet-history/box-a/RETRY-MEGAKERNEL.md	y	the box-a retry runbook (scrubbed); scrubbed to <BOX_IP> <HOME> <SSH_PORT> <INSTANCE_ID> <MACHINE_ID>
+box/abort-probe.py	internal	b046a10b	box-c/tools/abort-probe.py	y	abort probe
+box/args/env-box-a-mk.txt	internal	b046a10b	box-c/tools/args/env-box-a-mk.txt	y	same bytes as config/env-box-a-mk.txt; here because lib.sh/stage.sh read $TOOLS_DIR/boxes and $TOOLS_DIR/args
+box/args/env-box-a-mk2.txt	internal	b046a10b	box-c/tools/args/env-box-a-mk2.txt	y	same bytes as config/env-box-a-mk2.txt; here because lib.sh/stage.sh read $TOOLS_DIR/boxes and $TOOLS_DIR/args
+box/args/stack-b300-box-a-mk.args	internal	b046a10b	box-c/tools/args/stack-b300-box-a-mk.args	y	same bytes as config/stack-b300-box-a-mk.args; here because lib.sh/stage.sh read $TOOLS_DIR/boxes and $TOOLS_DIR/args
+box/args/stack-b300-box-a-mk2.args	internal	b046a10b	box-c/tools/args/stack-b300-box-a-mk2.args	y	same bytes as config/stack-b300-box-a-mk2.args; here because lib.sh/stage.sh read $TOOLS_DIR/boxes and $TOOLS_DIR/args
+box/autopool/install-onstart.sh	internal	b046a10b	box-c/tools/autopool/install-onstart.sh	y	installs an edited onstart
+box/boxenv.py	internal	b046a10b	box-c/tools/boxenv.py	y	box-file reader; scrubbed to <APP_PORT_EXT> <DOMAIN>
+box/boxes/box-a.env	internal	b046a10b	box-c/tools/boxes/box-a.env	y	same bytes as config/box-a.env; here because lib.sh/stage.sh read $TOOLS_DIR/boxes and $TOOLS_DIR/args
+box/boxes/box-b.env	internal	b046a10b	box-c/tools/boxes/box-b.env	y	same bytes as config/box-b.env; here because lib.sh/stage.sh read $TOOLS_DIR/boxes and $TOOLS_DIR/args
+box/bringup.sh	internal	b046a10b	box-c/tools/bringup.sh	y	the orchestrator for a fresh box; scrubbed to <HOME> <SSH_KEY> <INSTANCE_ID>
+box/build-onstart.sh	internal	b046a10b	box-c/tools/build-onstart.sh	y	renders the onstart for an args file
+box/default-thinking-probe.py	internal	b046a10b	box-c/tools/default-thinking-probe.py	y	default-thinking probe
+box/box-a-README.md	internal	b046a10b	fleet-history/box-a/README.md	y	box-a box sheet (scrubbed); scrubbed to <APP_PORT_EXT> <BOX_IP> <DOMAIN> <HOME> <SSH_PORT> <INSTANCE_ID> <MACHINE_ID> <OFFER_ID>
+box/box-b-README.md	internal	b046a10b	fleet-history/box-b/README.md	y	box-b box sheet (scrubbed); scrubbed to <APP_PORT_EXT> <BOX_IP> <DOMAIN> <HOME> <SSH_PORT> <HOST_ID> <INSTANCE_ID> <MACHINE_ID>
+box/freeze-gc-timer.sh	internal	b046a10b	box-c/tools/freeze-gc-timer.sh	y	the POST /freeze_gc timer
+box/installed/onstart.sh	internal	b046a10b	fleet-history/box-b/records-20261105/installed/onstart.sh	y	box-b's installed onstart (scrubbed)
+box/installed/watchdog.run	internal	b046a10b	fleet-history/box-b/records-20261105/installed/watchdog.run	n	box-b's installed watchdog wrapper (scrubbed)
+box/lib.sh	internal	b046a10b	box-c/tools/lib.sh	y	sourced by every script; scrubbed to <DOMAIN>
+box/onstart.sh.tmpl	internal	b046a10b	box-c/tools/onstart.sh.tmpl	y	the onstart template build-onstart.sh renders
+box/relaunch.sh	internal	b046a10b	box-c/tools/relaunch.sh	y	engine launcher, started by the watchdog
+box/restart.sh	internal	b046a10b	box-c/tools/restart.sh	y	engine restart
+box/smoke.py	internal	b046a10b	box-c/tools/smoke.py	y	post-boot smoke test; scrubbed to <DOMAIN>
+box/stage.sh	internal	b046a10b	box-c/tools/stage.sh	y	stages the tool set onto the box; scrubbed to <ALLOW_CIDR> <DOMAIN> <HOME>
+box/tls.sh	internal	b046a10b	box-c/tools/tls.sh	y	door render (bringup calls it); scrubbed to <DOMAIN> <HOME>
+box/ttft-probe.py	internal	b046a10b	box-c/tools/ttft-probe.py	y	TTFT probe
+box/offer-search.sh	internal	b046a10b	box-c/tools/offer-search.sh	y	offer search + create
+box/warm-short.py	internal	b046a10b	box-c/tools/warm-short.py	y	warm-up probe
+box/watchdog.sh	internal	b046a10b	box-c/tools/watchdog.sh	y	the on-box engine watchdog
+config/args-README.md	internal	b046a10b	box-c/tools/args/README.md	y	args-file composition rules; scrubbed to <DOMAIN> <FORK_HOST>
+config/arms/latest-F.args	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/args/latest-F.args	y	the 10-29 arm's args/env
+config/arms/latest-F.env	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/args/latest-F.env	y	the 10-29 arm's args/env
+config/arms/latest-ep1.args	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/args/latest-ep1.args	y	the 10-29 arm's args/env
+config/arms/latest-ep1.env	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/args/latest-ep1.env	y	the 10-29 arm's args/env
+config/arms/mk-latest.args	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/args/mk-latest.args	y	the 10-29 arm's args/env
+config/arms/mk-latest.env	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/args/mk-latest.env	y	the 10-29 arm's args/env
+config/arms/mk-syncall.args	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/args/mk-syncall.args	y	the 10-29 arm's args/env
+config/arms/mk-syncall.env	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/args/mk-syncall.env	y	the 10-29 arm's args/env
+config/arms/mk-syncsample.args	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/args/mk-syncsample.args	y	the 10-29 arm's args/env
+config/arms/mk-syncsample.env	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/args/mk-syncsample.env	y	the 10-29 arm's args/env
+config/box-b-installed/serve-model.env	internal	b046a10b	fleet-history/box-b/records-20261105/installed/serve-model.env	y	box-b's serve-model.env
+config/box-b-installed/sglang-args.txt	internal	b046a10b	fleet-history/box-b/records-20261105/installed/sglang-args.txt	y	box-b's installed args
+config/box-b-installed/sglang-env.txt	internal	b046a10b	fleet-history/box-b/records-20261105/installed/sglang-env.txt	y	box-b's installed env
+config/box-a.env	internal	b046a10b	box-c/tools/boxes/box-a.env	y	box-a box sheet (scrubbed); scrubbed to <ALLOW_CIDR> <APP_PORT_EXT> <BOX_IP> <DOMAIN> <FORK_DEPLOY_KEY> <FORK_HOST> <HOME> <SSH_KEY> <SSH_PORT> <SSH_PUBKEY> <INSTANCE_ID> <MACHINE_ID> <OFFER_ID>
+config/box-b.env	internal	b046a10b	box-c/tools/boxes/box-b.env	y	box-b box sheet (scrubbed); scrubbed to <ALLOW_CIDR> <APP_PORT_EXT> <BOX_IP> <DOMAIN> <FORK_DEPLOY_KEY> <FORK_HOST> <HOME> <SSH_KEY> <SSH_PORT> <SSH_PUBKEY> <HOST_ID> <INSTANCE_ID> <MACHINE_ID>
+config/env-box-a-mk.txt	internal	b046a10b	box-c/tools/args/env-box-a-mk.txt	y	config X env (X' rollback)
+config/env-box-a-mk2.txt	internal	b046a10b	box-c/tools/args/env-box-a-mk2.txt	y	config X' env (of record)
+config/pip-freeze-sglang-mk29.txt	internal	b046a10b	fleet-history/box-b/records-20261105/snaps/pip-freeze-sglang-mk29.txt	n	the megakernel venv freeze
+config/stack-b300-box-a-mk.args	internal	b046a10b	box-c/tools/args/stack-b300-box-a-mk.args	y	config X boot line (X' rollback)
+config/stack-b300-box-a-mk2.args	internal	b046a10b	box-c/tools/args/stack-b300-box-a-mk2.args	y	config X' boot line (of record)
+patches/build-45207-fix.diff	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/raw/build-45207/fix.diff	n	build-45207 fix
+patches/fix-swa-commit.md	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/raw/build-latest/fix-swa-commit.md	y	SWA fix commit note; scrubbed to <BOX_IP> <SSH_PORT>
+patches/fork-picks.txt	internal	b046a10b	fleet-history/box-b/records-20261105/installed/fork-picks.txt	y	the fork picks installed on box-b
+patches/json-schema-400.diff	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/raw/build-latest/json-schema-400.diff	y	JSON-schema 400 fix
+patches/merge-audit/probe-commit.patch	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/raw/build-latest/merge-audit/probe-commit.patch	y	the TP-probe commit
+patches/plugin-applied.diff	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/raw/build-latest/plugin-applied.diff	n	the plugin checkout's applied B300 delta
+patches/plugin-spec-tp-sync-all.patch	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/patches/plugin-spec-tp-sync-all.patch	n	syncall arm's plugin patch
+patches/plugin-spec-tp-sync-rng.patch	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/patches/plugin-spec-tp-sync-rng.patch	n	syncsample arm's plugin patch
+patches/sgl-nvidia-mega-b300-spec.patch	internal	b046a10b	fleet-history/box-a/sgl-nvidia-mega-b300-spec.patch	n	THE B300 patch: resident_blocks 152->148 + Feature.KV_OFFLOAD
+patches/sgl-nvidia-mega-worktree.diff	internal	b046a10b	fleet-history/box-b/records-20261105/snaps/sgl-nvidia-mega-worktree.diff	n	box-b plugin worktree diff
+quality/README.md	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/harness/README.md	y	harness README; scrubbed to <BOX_IP> <SSH_PORT>
+quality/dsml/analyze.py	internal	b046a10b	box-c/tools/dsml/analyze.py	y	the DSML grader; tests/fixtures left out
+quality/dsml/probe.py	internal	b046a10b	box-c/tools/dsml/probe.py	y	the DSML probe dsml_compare.py grades; tests/fixtures left out
+quality/dsml_compare.py	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/harness/dsml_compare.py	y	DSML two-sample compare
+quality/flips.py	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/raw/s1-ep1-old/flips.py	n	teacher-forced flip counter
+quality/greedycmp.py	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/raw/s1-ep1-old/greedycmp.py	n	greedy comparison
+quality/nvidia_kl.py	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/harness/nvidia_kl.py	n	NVIDIA's KL test
+quality/quality/README.md	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/harness/quality/README.md	y	the quality harness
+quality/quality/agent_sessions.py	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/harness/quality/agent_sessions.py	n	the quality harness
+quality/quality/compare.py	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/harness/quality/compare.py	n	the quality harness
+quality/quality/fake_server.py	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/harness/quality/fake_server.py	n	the quality harness
+quality/quality/gsm8k_full.py	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/harness/quality/gsm8k_full.py	y	the quality harness
+quality/quality/images.py	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/harness/quality/images.py	n	the quality harness
+quality/quality/json_format.py	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/harness/quality/json_format.py	n	the quality harness
+quality/quality/mgsm.py	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/harness/quality/mgsm.py	n	the quality harness
+quality/quality/needles.py	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/harness/quality/needles.py	y	the quality harness
+quality/quality/qlib.py	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/harness/quality/qlib.py	y	the quality harness
+quality/quality/run_all.sh	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/harness/quality/run_all.sh	y	the quality harness
+quality/quality/test_quality.py	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/harness/quality/test_quality.py	n	the quality harness
+quality/quality/under_load.py	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/harness/quality/under_load.py	n	the quality harness
+quality/synthmix.py	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/harness/synthmix.py	y	synthetic mixed load
+quality/test_harness.py	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/harness/test_harness.py	y	harness tests
+safety/README.md	-	-	-	y	written for this repository: the TP-probe material, in one place
+safety/hangwatch.py	internal	b046a10b	box-c/qa/box-a-megakernel-20261029/harness/hangwatch.py	y	the hang watcher
+safety/mk_tp_probe_selftest.py	internal	b046a10b	box-c/qa/prod-merge-20261030/raw/build/mk_tp_probe_selftest.py	y	the TP probe's selftest
+sglang-fork/README.md	-	-	-	y	written for this repository: base sha, apply, and what the delta is
+sglang-fork/fork-commits.txt	internal	3a3a8611a45f5a81fd07ffa6b0ed3ba33e7a4db9..9a9ede7ae0183e7c43956395238e29c406d85fe8	git log --no-merges --format='%h %ad %s' --date=short 3a3a8611a4..9a9ede7ae0	y	152 commits
+sglang-fork/fork-vs-upstream-3a3a8611a4.diff	internal	3a3a8611a45f5a81fd07ffa6b0ed3ba33e7a4db9..9a9ede7ae0183e7c43956395238e29c406d85fe8	git diff 3a3a8611a4 9a9ede7ae0	y	449 files, 64,558 insertions, 1,436 deletions
+sglang-fork/plugin-apply-check.txt	sgl-project/sgl-nvidia-mega	54b428921749fef89fcbd043000f839ac9cc4638	(run: git apply --check patches/sgl-nvidia-mega-b300-spec.patch)	n	recorded for this repository 2026-11-05; exit 0

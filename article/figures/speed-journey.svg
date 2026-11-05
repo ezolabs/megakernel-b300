@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 618" width="720" height="618" role="img" aria-labelledby="title desc">
+  <title id="title">One user's decode speed on 4×B300, step by step from first boot</title>
+  <desc id="desc">Column chart drawn to scale from zero of one user's decode speed, in tokens per second for one stream, on 4×B300 nodes, step by step from 26 to 31 October 2026. Each step was measured on its own bench and is labelled with its own before and after. First boot, 26 October, ramp bench: 439. Engine tuning, 27 October, an older command-line bench: 443 before, 516 after. Fast host cores, 28 to 29 October, ramp bench: 514 before, 614 to 639 after. NVIDIA's megakernel with our B300 patch, 28 to 30 October, speed gate: 638.4 before, 849.0 and 885.8 after, on two boots. The megakernel build as served, 14 boots across two code versions, 30 to 31 October, decode test: boot averages 840.9 to 906.7, average 870.2, about twice the first boot. A dashed line marks 1,000 tokens per second. Above it sits one marker: the fastest of 208 bench requests, 1,063.8. Last, live production traffic on node 2 over 34.5 minutes on 30 October: 873.4 tokens per second from the engine's mean gap between tokens, beside the bench average; the busier node 1 averaged 702.2. Steps on different benches do not compare as numbers.</desc>
+  <text x="0" y="24" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="500" letter-spacing="-0.01em" fill="currentColor">One user's decode speed roughly doubled in five days</text>
+  <text x="0" y="46" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor" fill-opacity="0.62">Tokens per second for one stream on 4×B300, 26–31 October 2026. Each step on its own bench</text>
+  <rect x="0" y="66" width="12" height="12" rx="2" fill="#3b6ef6"/>
+  <text x="18" y="77" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor">After the step</text>
+  <line x1="124" y1="72" x2="144" y2="72" stroke="currentColor" stroke-width="2"/>
+  <text x="150" y="77" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor">Before the step</text>
+  <rect x="262" y="66" width="12" height="12" rx="2" fill="#3b6ef6" fill-opacity="0.35"/>
+  <text x="280" y="77" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor">Spread across boots</text>
+  <rect x="420.75" y="66.75" width="10.5" height="10.5" rx="1.25" fill="#3b6ef6" fill-opacity="0.16" stroke="#3b6ef6" stroke-width="1.5"/>
+  <text x="438" y="77" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor">Live traffic</text>
+  <circle cx="534" cy="72" r="5" fill="currentColor"/>
+  <text x="546" y="77" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor">Fastest bench request</text>
+  <text x="64" y="108" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" letter-spacing="0.06em" fill="currentColor" fill-opacity="0.62">TOKENS PER SECOND, ONE STREAM</text>
+  <g stroke="currentColor" stroke-width="1" fill="none">
+    <line x1="64" y1="373.64" x2="712" y2="373.64" stroke-opacity="0.2" stroke-dasharray="3 4"/>
+    <line x1="64" y1="317.27" x2="712" y2="317.27" stroke-opacity="0.2" stroke-dasharray="3 4"/>
+    <line x1="64" y1="260.91" x2="712" y2="260.91" stroke-opacity="0.2" stroke-dasharray="3 4"/>
+    <line x1="64" y1="204.55" x2="712" y2="204.55" stroke-opacity="0.2" stroke-dasharray="3 4"/>
+    <line x1="64" y1="430" x2="712" y2="430" stroke-opacity="0.6"/>
+  </g>
+  <g font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" text-anchor="end" fill="currentColor" fill-opacity="0.62">
+    <text x="56" y="434">0</text>
+    <text x="56" y="377.64">200</text>
+    <text x="56" y="321.27">400</text>
+    <text x="56" y="264.91">600</text>
+    <text x="56" y="208.55">800</text>
+    <text x="56" y="152.18">1,000</text>
+  </g>
+  <line x1="142" y1="306.28" x2="504" y2="306.28" stroke="currentColor" stroke-width="1" stroke-opacity="0.45" stroke-dasharray="2 3"/>
+  <rect x="94" y="306.28" width="48" height="123.72" fill="#3b6ef6"/>
+  <rect x="202" y="284.58" width="48" height="145.42" fill="#3b6ef6"/>
+  <rect x="310" y="256.96" width="48" height="173.04" fill="#3b6ef6"/>
+  <rect x="310" y="249.92" width="48" height="7.04" fill="#3b6ef6" fill-opacity="0.35"/>
+  <rect x="418" y="190.74" width="48" height="239.26" fill="#3b6ef6"/>
+  <rect x="418" y="180.37" width="48" height="10.37" fill="#3b6ef6" fill-opacity="0.35"/>
+  <rect x="526" y="193.02" width="48" height="236.98" fill="#3b6ef6"/>
+  <rect x="526" y="174.48" width="48" height="18.54" fill="#3b6ef6" fill-opacity="0.35"/>
+  <rect x="634.75" y="184.61" width="46.5" height="245.39" fill="#3b6ef6" fill-opacity="0.16" stroke="#3b6ef6" stroke-width="1.5"/>
+  <line x1="196" y1="305.15" x2="256" y2="305.15" stroke="currentColor" stroke-width="2"/>
+  <line x1="304" y1="285.15" x2="364" y2="285.15" stroke="currentColor" stroke-width="2"/>
+  <line x1="412" y1="250.09" x2="472" y2="250.09" stroke="currentColor" stroke-width="2"/>
+  <line x1="504" y1="184.76" x2="580" y2="184.76" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <circle cx="550" cy="130.2" r="5" fill="currentColor"/>
+  <g stroke="currentColor" stroke-width="1.5" fill="none">
+    <line x1="504" y1="306.28" x2="504" y2="186.76"/>
+    <path d="M500 192.76L504 185.76L508 192.76"/>
+  </g>
+  <text x="498" y="286.64" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600" text-anchor="end" fill="#1551c8">≈2×</text>
+  <line x1="64" y1="148.18" x2="712" y2="148.18" stroke="currentColor" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="70" y="142.18" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" letter-spacing="0.06em" fill="currentColor">1,000 TOKENS PER SECOND</text>
+  <g font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" text-anchor="middle" fill="currentColor">
+    <text x="118" y="298.28">439</text>
+    <text x="226" y="276.58">443 → 516</text>
+    <text x="334" y="241.92">514 → 614–639</text>
+    <text x="442" y="172.37">638 → 849–886</text>
+    <text x="550" y="166.48">841–907</text>
+    <text x="550" y="120.2">1,064 FASTEST</text>
+    <text x="658" y="175.86">873</text>
+  </g>
+  <g font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="500" text-anchor="middle" fill="currentColor">
+    <text x="118" y="450">First boot</text>
+    <text x="226" y="450">Engine tuning</text>
+    <text x="334" y="450">Fast cores</text>
+    <text x="442" y="450">Megakernel</text>
+    <text x="550" y="450">14 boots</text>
+    <text x="658" y="450">Live traffic</text>
+  </g>
+  <g font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" text-anchor="middle" fill="currentColor" fill-opacity="0.62">
+    <text x="118" y="468">26 OCT</text>
+    <text x="118" y="485">RAMP BENCH</text>
+    <text x="226" y="468">27 OCT</text>
+    <text x="226" y="485">OLDER BENCH</text>
+    <text x="334" y="468">28–29 OCT</text>
+    <text x="334" y="485">RAMP BENCH</text>
+    <text x="442" y="468">28–30 OCT</text>
+    <text x="442" y="485">SPEED GATE</text>
+    <text x="442" y="502">2 BOOTS</text>
+    <text x="550" y="468">30–31 OCT</text>
+    <text x="550" y="485">DECODE TEST</text>
+    <text x="550" y="502">AVG 870</text>
+    <text x="658" y="468">30 OCT</text>
+    <text x="658" y="485">ENGINE, LIVE</text>
+    <text x="658" y="502">NODE 2 MEAN</text>
+    <text x="658" y="519">NODE 1: 702</text>
+  </g>
+  <text x="0" y="560" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor">Steps on different benches do not compare as numbers: read each step's own before → after.</text>
+  <text x="0" y="580" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor">The megakernel build averages 870 over 14 boots; 5 of their 208 bench requests passed 1,000.</text>
+  <text x="0" y="606" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" letter-spacing="0.06em" fill="currentColor" fill-opacity="0.62">SOURCE: EZO LABS RESEARCH</text>
+</svg>

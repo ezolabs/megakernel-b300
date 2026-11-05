@@ -1,0 +1,5 @@
+Test,Questions × runs,"4×B300, megakernel",8×B200 reference,"Difference, points (95% interval)"
+"GPQA Diamond, graduate-level science",198 × 2,0.914,0.907,+0.8 (−3.3 to +4.8)
+"GSM8K slice, grade-school math",300 × 2,0.978,0.975,+0.3 (−1.5 to +2.2)
+"MATH-500 slice, competition math",100 × 2,0.900,0.890,+1.0 (−5.1 to +7.1)
+"HumanEval+, code",163 × 2,0.951,0.945,+0.6 (−2.9 to +4.2)

@@ -1,0 +1,16 @@
+base_url=http://127.0.0.1:8002
+[1] models: PASS - health=200 ids=['DeepSeek-V4.1-Flash'] max_model_len=1048576 (expected 1048576 from /workspace/tools/sglang-args.txt)
+    server_info: {'attention_backend': 'dsv4', 'moe_runner_backend': 'flashinfer_mxfp4', 'fp8_gemm_runner_backend': 'flashinfer_cutedsl', 'speculative_algorithm': 'DSPARK', 'speculative_dspark_block_size': 5, 'max_running_requests': 64, 'context_length': 1048576, 'chunked_prefill_size': 8192, 'tp_size': 4, 'ep_size': 1, 'mem_fraction_static': 0.75, 'page_size': 256, 'version': '0.0.0.dev694+gfbf4d51dc'}
+[2] server_info: PASS - matches dsv4/flashinfer_mxfp4/flashinfer_cutedsl/DSPARK/5/tp4/ep1/max_running_requests=64 against /workspace/tools/sglang-args.txt
+[3] hang_probe: PASS - finish=stop tokens=20 wall=0.04s
+    effort='low': finish=stop reasoning_chars=380 content=' 13:05 is 25 minutes.  \nTotal = 180 + 25 = 205 minutes.\n\n205' leak=False tokens=157 wall=0.19s | effort='high': finish=stop reasoning_chars=423 content='3:05 is 5 minutes.  \nTotal: 20 + 180 + 5 = 205 minutes.\n\n205' leak=False tokens=198 wall=0.21s | effort='none': finish=stop reasoning_chars=0 content=' + 5 = 205 minutes.\n\nSo the trip length is 205 minutes.\n\n205' leak=False tokens=103 wall=0.10s
+[4] reasoning: PASS - reasoning_content non-empty at high (allowed, not asserted, at low); empty at reasoning_effort=none; 205 in content at low and high; no <think> leak
+[5] tool_call: PASS - finish=tool_calls calls=1 fn=get_weather args={"city": "Tokyo"} dsml_leak=False wall=0.10s
+[6] json_object: PASS - finish=stop valid=True content='{"city":"Tokyo","country":"Japan"}' wall=0.12s
+[7] needle: PASS - cold: prompt_tokens=110278 found=True finish=stop completion_tokens=53 wall=1.28s | warm: found=True finish=stop completion_tokens=53 wall=0.18s
+[8] image: PASS - finish=stop reply='Red circle' wall=0.30s
+    rep1: 1408.9 tok/s tokens=2048 wall=1.45s finish=length | rep2: 1412.6 tok/s tokens=2048 wall=1.45s finish=length | rep3: 1417.8 tok/s tokens=2048 wall=1.44s finish=length
+[9] greedy: PASS - 3 greedy reps completed
+    rep1: 1086.0 tok/s tokens=2048 wall=1.89s finish=length | rep2: 1060.9 tok/s tokens=2048 wall=1.93s finish=length | rep3: 1085.8 tok/s tokens=2048 wall=1.89s finish=length
+[10] sampled: PASS - 3 sampled reps completed
+SMOKE PASS

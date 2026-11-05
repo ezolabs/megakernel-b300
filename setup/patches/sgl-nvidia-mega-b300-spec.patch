@@ -1,0 +1,22 @@
+diff --git a/sgl_nvidia_mega/deepseek_v41/spec.py b/sgl_nvidia_mega/deepseek_v41/spec.py
+index c3aad62..f9b8be8 100644
+--- a/sgl_nvidia_mega/deepseek_v41/spec.py
++++ b/sgl_nvidia_mega/deepseek_v41/spec.py
+@@ -105,7 +105,7 @@ REQUIREMENTS = Requirements(
+     tp_sizes=frozenset({4}),
+     # the GEMM pair's persistent schedule and the Lamport consumer stay within
+     # GB300's 152 SMs
+-    resident_blocks=152,
++    resident_blocks=148,  # B300 PATCH (unofficial): GB300 floor 152 -> B300 148
+     dtypes=frozenset({"bfloat16"}),
+     decode_graph_backends=decode_graph_backends(),
+     server_args={
+@@ -274,7 +274,7 @@ def _build(model, hf_config, ctx):
+ SPEC = MegakernelSpec(
+     name="DeepSeek-V4.1",
+     requires=REQUIREMENTS,
+-    features=frozenset({Feature.SPECULATIVE_DECODING}),
++    features=frozenset({Feature.SPECULATIVE_DECODING, Feature.KV_OFFLOAD}),
+     numerics=NUMERICS,
+     # the two-shot slot alone covers the widths past the routed-expert pair
+     max_rows=max_rows("two_shot" in SLOTS),

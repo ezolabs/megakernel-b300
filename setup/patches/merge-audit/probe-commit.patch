@@ -1,0 +1,122 @@
+commit fbf4d51dc5b1de80f64a44755f4af1a8438d3eca
+Author: box-a-mk <box-a-mk@localhost>
+Date:   Thu Oct 29 14:45:28 2026 -0500
+
+    [box-a-MK] scheduler: env-gated TP-consistency probe (SGLANG_MK_TP_PROBE)
+    
+    Off unless SGLANG_MK_TP_PROBE=1. Every SGLANG_MK_TP_PROBE_EVERY (default 100)
+    scheduler iterations every rank snapshots (iteration, forward_ct, sum of the
+    running batch's seq lens, KV allocator available_size, crc32 of the sorted
+    running rids, cumulative accepted spec tokens, cumulative verify count) before
+    the request receive. TP rank 0's snapshot rides that iteration's existing
+    request broadcast as one extra list element (no new collective); every rank
+    strips it and compares: MK_TP_PROBE MISMATCH at ERROR (raises with
+    SGLANG_MK_TP_PROBE_ASSERT=1), one MK_TP_PROBE ok line every 10 checks.
+
+diff --git a/python/sglang/srt/managers/scheduler.py b/python/sglang/srt/managers/scheduler.py
+index 07b1c52b33..494e49d023 100644
+--- a/python/sglang/srt/managers/scheduler.py
++++ b/python/sglang/srt/managers/scheduler.py
+@@ -262,6 +262,7 @@ from sglang.srt.managers.scheduler_components.logprob_result_processor import (
+ from sglang.srt.managers.scheduler_components.memory_usage import (
+     combine_graph_memory_usage,
+ )
++from sglang.srt.managers.scheduler_components import mk_tp_probe
+ from sglang.srt.managers.scheduler_components.metrics_reporter import (
+     RECORD_STEP_TIME,
+     PrefillStats,
+@@ -2294,10 +2295,21 @@ class Scheduler(
+             and get_parallel().attn_cp_rank == 0
+         ):
+             local_reqs = self._poll_timeout_aborts()
++        probe = mk_tp_probe.before_recv(self) if mk_tp_probe.ENABLED else None
++        if (
++            probe is not None
++            and get_parallel().pp_rank == 0
++            and get_parallel().attn_tp_rank == 0
++            and get_parallel().attn_cp_rank == 0
++        ):
++            local_reqs = [*local_reqs, probe]
+         recv_start_ns = time.monotonic_ns()
+-        self._deferred_input_requests.extend(
+-            self.request_receiver.recv_requests(local_reqs=local_reqs)
+-        )
++        new_reqs = self.request_receiver.recv_requests(local_reqs=local_reqs)
++        if mk_tp_probe.ENABLED:
++            new_reqs = mk_tp_probe.after_recv(
++                self, new_reqs, probe, get_parallel().tp_rank
++            )
++        self._deferred_input_requests.extend(new_reqs)
+ 
+         num_requests_to_process = len(self._deferred_input_requests)
+         if stop_at_pause:
+diff --git a/python/sglang/srt/managers/scheduler_components/mk_tp_probe.py b/python/sglang/srt/managers/scheduler_components/mk_tp_probe.py
+new file mode 100644
+index 0000000000..5dab0225c9
+--- /dev/null
++++ b/python/sglang/srt/managers/scheduler_components/mk_tp_probe.py
+@@ -0,0 +1,64 @@
++"""SGLANG_MK_TP_PROBE=1 (off by default): every SGLANG_MK_TP_PROBE_EVERY (100)
++scheduler iterations each rank snapshots its state before the request receive;
++TP rank 0's snapshot rides that iteration's request broadcast (no new
++collective) and every rank compares it with its own. SGLANG_MK_TP_PROBE_ASSERT=1
++raises on a mismatch instead of only logging it."""
++
++import logging
++import os
++import zlib
++from dataclasses import dataclass
++
++logger = logging.getLogger(__name__)
++
++ENABLED = os.environ.get("SGLANG_MK_TP_PROBE") == "1"
++EVERY = max(1, int(os.environ.get("SGLANG_MK_TP_PROBE_EVERY", "100")))
++ASSERT = os.environ.get("SGLANG_MK_TP_PROBE_ASSERT") == "1"
++FIELDS = "it,forward_ct,sum_seq_lens,kv_available,rids_crc32,spec_accept,spec_verify_ct"
++_it = 0
++_checks = 0
++
++
++@dataclass(frozen=True)
++class MkTpProbe:
++    state: tuple
++
++
++def _state(scheduler) -> tuple:
++    reqs = scheduler.running_batch.reqs
++    mr = scheduler.metrics_reporter
++    return (
++        _it,
++        scheduler.forward_ct,
++        sum(req.seqlen for req in reqs),
++        scheduler.token_to_kv_pool_allocator.available_size(),
++        zlib.crc32(",".join(sorted(req.rid for req in reqs)).encode()),
++        mr.spec_total_num_accept_tokens + mr.spec_num_accept_tokens,
++        mr.spec_total_num_forward_ct + mr.spec_num_forward_ct,
++    )
++
++
++def before_recv(scheduler):
++    """This rank's snapshot on a probe iteration (rank 0 sends it), else None."""
++    global _it
++    _it += 1
++    return MkTpProbe(_state(scheduler)) if _it % EVERY == 0 else None
++
++
++def after_recv(scheduler, recv_reqs: list, mine, tp_rank: int) -> list:
++    """Strip rank 0's snapshot from the received requests and compare it."""
++    global _checks
++    probes = [req for req in recv_reqs if isinstance(req, MkTpProbe)]
++    if not probes:
++        return recv_reqs
++    rank0 = probes[0].state
++    mine = (mine or MkTpProbe(_state(scheduler))).state
++    if mine != rank0:
++        msg = f"MK_TP_PROBE MISMATCH rank={tp_rank} fields={FIELDS} mine={mine} rank0={rank0}"
++        logger.error(msg)
++        assert not ASSERT, msg
++    else:
++        _checks += 1
++        if _checks % 10 == 0:
++            logger.info(f"MK_TP_PROBE ok it={_it} rank={tp_rank} checks={_checks} state={mine}")
++    return [req for req in recv_reqs if not isinstance(req, MkTpProbe)]

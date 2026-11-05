@@ -1,0 +1,9 @@
+box  tree        window (UTC)                                 in-pool h  0 / 1 / 2-4 / >=5 running h       loaded h  peak
+box-a 4943d6ed90  2026-10-30T12:51:00Z -> 2026-10-31T16:39:37Z   20.608  14.358 / 4.183 / 1.762 / 0.304     6.250  13
+box-a 9a9ede7ae0  2026-10-31T17:42:04Z -> 2026-11-01T03:44:52Z    8.012  4.725 / 2.158 / 1.083 / 0.046     3.287  7
+box-b 4943d6ed90  2026-10-30T17:56:00Z -> 2026-10-31T17:49:24Z   22.558  13.379 / 4.075 / 3.429 / 1.675     9.179  14
+box-b 9a9ede7ae0  2026-10-31T18:06:10Z -> 2026-11-01T04:41:39Z   10.483  5.013 / 3.058 / 2.163 / 0.250     5.471  14
+4943d6ed90: T = 15.429 loaded h, 0 hangs -> 95% bound 0.194 per loaded h
+9a9ede7ae0: T = 8.758 loaded h, 0 hangs -> 95% bound 0.342 per loaded h
+both X' trees counted as one: T = 24.188 loaded h -> 0.124 per loaded h
+read time 2026-11-01T04:41:44Z

@@ -1,0 +1,5 @@
+window 2026-10-28 19:49:45 .. 2026-10-28 19:50:14
+     <8k: n= 11 step_ms_med=  5.36 accept_med= 2.73
+   8-64k: n= 17 step_ms_med=  5.42 accept_med= 3.27
+ 64-150k: n= 11 step_ms_med=  5.41 accept_med= 3.00
+   >150k: n=  9 step_ms_med=  5.47 accept_med= 2.92

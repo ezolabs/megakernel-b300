@@ -1,0 +1,395 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 760" width="720" height="760" role="img" aria-labelledby="title desc">
+  <title id="title">Single-stream decode speed, megakernel vs stock kernels, boot by boot</title>
+  <desc id="desc">Dot plot of single-stream decode speed in tokens per second on 4×B300 nodes, one row per boot, each request a small dot and the boot's average a large one. Speed gate bench, node 1, 8 requests per boot: with stock kernels (megakernel off) the boot averaged 615.3, its requests 567.0 to 657.3; the two megakernel boots averaged 885.8 (+44.0%) and 849.0 (+38.0%), 867.4 together (+41.0%), their requests 783.5 to 957.9, so every megakernel request beat every stock one. Decode test, a separate bench, 14 megakernel boots on two nodes: boot averages 840.9 to 906.7, averaging 870.2; first code version 8 boots averaging 875.6, second 6 boots averaging 863.0. Pooled over its 208 requests, the 10th percentile is 784.6, the median 865.2, the 90th percentile 954.0 and the fastest request 1,063.8; 5 passed 1,000 tokens per second, marked by a reference line.</desc>
+  <text x="0" y="24" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="500" letter-spacing="-0.01em" fill="currentColor">Single-stream decode speed, megakernel vs stock kernels</text>
+  <text x="0" y="46" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor" fill-opacity="0.62">Boot by boot on 4×B300 nodes, tokens per second for one stream</text>
+  <circle cx="4" cy="72" r="2.5" fill="currentColor" fill-opacity="0.5"/>
+  <text x="14" y="77" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor">One request</text>
+  <circle cx="124" cy="72" r="5" fill="#3b6ef6" style="stroke:var(--ground,#f6f7f9)" stroke-width="1.5"/>
+  <text x="136" y="77" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor">Megakernel, boot average</text>
+  <circle cx="332" cy="72" r="5" fill="currentColor" style="stroke:var(--ground,#f6f7f9)" stroke-width="1.5"/>
+  <text x="344" y="77" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor">Stock kernels, boot average</text>
+  <line x1="554" y1="64" x2="554" y2="80" stroke="currentColor" stroke-width="1.5"/>
+  <text x="566" y="77" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor">1,000 tok/s</text>
+  <g font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" letter-spacing="0.06em" fill="currentColor" fill-opacity="0.62" text-anchor="middle">
+    <text x="264" y="116">600</text>
+    <text x="334" y="116">700</text>
+    <text x="404" y="116">800</text>
+    <text x="474" y="116">900</text>
+  </g>
+  <text x="544" y="116" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" letter-spacing="0.06em" font-weight="600" fill="currentColor" text-anchor="middle">1,000</text>
+  <text x="708" y="146" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" letter-spacing="0.06em" fill="currentColor" fill-opacity="0.62" text-anchor="end">BOOT AVERAGE</text>
+  <g stroke="currentColor" stroke-width="1" stroke-opacity="0.2" stroke-dasharray="3 4">
+    <line x1="264" y1="158" x2="264" y2="230"/>
+    <line x1="299" y1="158" x2="299" y2="230"/>
+    <line x1="334" y1="158" x2="334" y2="230"/>
+    <line x1="369" y1="158" x2="369" y2="230"/>
+    <line x1="404" y1="158" x2="404" y2="230"/>
+    <line x1="439" y1="158" x2="439" y2="230"/>
+    <line x1="474" y1="158" x2="474" y2="230"/>
+    <line x1="509" y1="158" x2="509" y2="230"/>
+    <line x1="579" y1="158" x2="579" y2="230"/>
+    <line x1="264" y1="300" x2="264" y2="460"/>
+    <line x1="299" y1="300" x2="299" y2="460"/>
+    <line x1="334" y1="300" x2="334" y2="460"/>
+    <line x1="369" y1="300" x2="369" y2="460"/>
+    <line x1="404" y1="300" x2="404" y2="460"/>
+    <line x1="439" y1="300" x2="439" y2="460"/>
+    <line x1="474" y1="300" x2="474" y2="460"/>
+    <line x1="509" y1="300" x2="509" y2="460"/>
+    <line x1="579" y1="300" x2="579" y2="460"/>
+    <line x1="264" y1="492" x2="264" y2="612"/>
+    <line x1="299" y1="492" x2="299" y2="612"/>
+    <line x1="334" y1="492" x2="334" y2="612"/>
+    <line x1="369" y1="492" x2="369" y2="612"/>
+    <line x1="404" y1="492" x2="404" y2="612"/>
+    <line x1="439" y1="492" x2="439" y2="612"/>
+    <line x1="474" y1="492" x2="474" y2="612"/>
+    <line x1="509" y1="492" x2="509" y2="612"/>
+    <line x1="579" y1="492" x2="579" y2="612"/>
+    <line x1="264" y1="656" x2="264" y2="676"/>
+    <line x1="299" y1="656" x2="299" y2="676"/>
+    <line x1="334" y1="656" x2="334" y2="676"/>
+    <line x1="369" y1="656" x2="369" y2="676"/>
+    <line x1="404" y1="656" x2="404" y2="676"/>
+    <line x1="439" y1="656" x2="439" y2="676"/>
+    <line x1="474" y1="656" x2="474" y2="676"/>
+    <line x1="509" y1="656" x2="509" y2="676"/>
+    <line x1="579" y1="656" x2="579" y2="676"/>
+  </g>
+  <g stroke="currentColor" stroke-width="1.5">
+    <line x1="544" y1="158" x2="544" y2="230"/>
+    <line x1="544" y1="300" x2="544" y2="460"/>
+    <line x1="544" y1="492" x2="544" y2="612"/>
+    <line x1="544" y1="656" x2="544" y2="676"/>
+  </g>
+  <g font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="500" fill="currentColor">
+    <text x="0" y="146">Speed gate bench, node 1: megakernel averaged 867.4, +41.0% over stock</text>
+    <text x="0" y="264">Decode test, its own bench: 14 megakernel boots on two nodes, average 870.2</text>
+    <text x="0" y="642">Decode test, all 208 requests pooled</text>
+  </g>
+  <g font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor">
+    <text x="16" y="290">First code version: 8 boots, average 875.6</text>
+    <text x="16" y="482">Second code version: 6 boots, average 863.0</text>
+  </g>
+  <g font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor" fill-opacity="0.62">
+    <text x="16" y="175">Stock kernels (megakernel off)</text>
+    <text x="16" y="199">Megakernel, boot 1</text>
+    <text x="16" y="223">Megakernel, boot 2</text>
+    <text x="32" y="315">node 1, 8 requests</text>
+    <text x="32" y="335">node 1, 8 requests</text>
+    <text x="32" y="355">node 1, 8 requests</text>
+    <text x="32" y="375">node 1, 32 requests</text>
+    <text x="32" y="395">node 2, 8 requests</text>
+    <text x="32" y="415">node 1, 8 requests</text>
+    <text x="32" y="435">node 1, 32 requests</text>
+    <text x="32" y="455">node 1, 8 requests</text>
+    <text x="32" y="507">node 1, 8 requests</text>
+    <text x="32" y="527">node 1, 8 requests</text>
+    <text x="32" y="547">node 1, 32 requests</text>
+    <text x="32" y="567">node 1, 32 requests</text>
+    <text x="32" y="587">node 1, 8 requests</text>
+    <text x="32" y="607">node 1, 8 requests</text>
+  </g>
+  <g font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" fill="currentColor" text-anchor="end">
+    <text x="708" y="174">615.3</text>
+    <text x="708" y="198">885.8</text>
+    <text x="708" y="222">849.0</text>
+    <text x="708" y="314">906.7</text>
+    <text x="708" y="334">904.4</text>
+    <text x="708" y="354">895.1</text>
+    <text x="708" y="374">878.1</text>
+    <text x="708" y="394">860.1</text>
+    <text x="708" y="414">858.1</text>
+    <text x="708" y="434">855.4</text>
+    <text x="708" y="454">846.5</text>
+    <text x="708" y="506">880.1</text>
+    <text x="708" y="526">873.0</text>
+    <text x="708" y="546">868.5</text>
+    <text x="708" y="566">867.0</text>
+    <text x="708" y="586">848.3</text>
+    <text x="708" y="606">840.9</text>
+  </g>
+  <g stroke="currentColor" stroke-opacity="0.62" stroke-width="1">
+    <line x1="274.69" y1="189" x2="274.69" y2="199"/>
+    <line x1="274.69" y1="194" x2="458.09" y2="194"/>
+    <line x1="274.69" y1="213" x2="274.69" y2="223"/>
+    <line x1="274.69" y1="218" x2="432.31" y2="218"/>
+  </g>
+  <g font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" font-weight="600" fill="currentColor" text-anchor="middle">
+    <text x="348.28" y="190">+44.0%</text>
+    <text x="348.28" y="214">+38.0%</text>
+  </g>
+  <g fill="currentColor" fill-opacity="0.5">
+    <circle cx="286.96" cy="170" r="2.5"/>
+    <circle cx="240.9" cy="170" r="2.5"/>
+    <circle cx="241.46" cy="170" r="2.5"/>
+    <circle cx="290.18" cy="170" r="2.5"/>
+    <circle cx="304.11" cy="170" r="2.5"/>
+    <circle cx="252.52" cy="170" r="2.5"/>
+    <circle cx="289.97" cy="170" r="2.5"/>
+    <circle cx="291.44" cy="170" r="2.5"/>
+    <circle cx="470.99" cy="194" r="2.5"/>
+    <circle cx="431.02" cy="194" r="2.5"/>
+    <circle cx="426.19" cy="194" r="2.5"/>
+    <circle cx="514.53" cy="194" r="2.5"/>
+    <circle cx="481.21" cy="194" r="2.5"/>
+    <circle cx="450.2" cy="194" r="2.5"/>
+    <circle cx="470.78" cy="194" r="2.5"/>
+    <circle cx="467.77" cy="194" r="2.5"/>
+    <circle cx="474" cy="218" r="2.5"/>
+    <circle cx="440.82" cy="218" r="2.5"/>
+    <circle cx="392.45" cy="218" r="2.5"/>
+    <circle cx="441.17" cy="218" r="2.5"/>
+    <circle cx="456.01" cy="218" r="2.5"/>
+    <circle cx="419.05" cy="218" r="2.5"/>
+    <circle cx="447.68" cy="218" r="2.5"/>
+    <circle cx="435.29" cy="218" r="2.5"/>
+    <circle cx="449.36" cy="310" r="2.5"/>
+    <circle cx="428.22" cy="310" r="2.5"/>
+    <circle cx="486.81" cy="310" r="2.5"/>
+    <circle cx="470.36" cy="310" r="2.5"/>
+    <circle cx="538.26" cy="310" r="2.5"/>
+    <circle cx="440.33" cy="310" r="2.5"/>
+    <circle cx="522.3" cy="310" r="2.5"/>
+    <circle cx="493.88" cy="310" r="2.5"/>
+    <circle cx="477.08" cy="330" r="2.5"/>
+    <circle cx="438.02" cy="330" r="2.5"/>
+    <circle cx="478.62" cy="330" r="2.5"/>
+    <circle cx="465.39" cy="330" r="2.5"/>
+    <circle cx="482.33" cy="330" r="2.5"/>
+    <circle cx="511.45" cy="330" r="2.5"/>
+    <circle cx="547.71" cy="330" r="2.5"/>
+    <circle cx="416.11" cy="330" r="2.5"/>
+    <circle cx="541.97" cy="350" r="2.5"/>
+    <circle cx="367.46" cy="350" r="2.5"/>
+    <circle cx="462.59" cy="350" r="2.5"/>
+    <circle cx="527.27" cy="350" r="2.5"/>
+    <circle cx="517.82" cy="350" r="2.5"/>
+    <circle cx="449.15" cy="350" r="2.5"/>
+    <circle cx="501.37" cy="350" r="2.5"/>
+    <circle cx="396.86" cy="350" r="2.5"/>
+    <circle cx="523.21" cy="370" r="2.5"/>
+    <circle cx="437.39" cy="370" r="2.5"/>
+    <circle cx="461.54" cy="370" r="2.5"/>
+    <circle cx="470.43" cy="370" r="2.5"/>
+    <circle cx="555.13" cy="370" r="2.5"/>
+    <circle cx="413.38" cy="370" r="2.5"/>
+    <circle cx="480.16" cy="370" r="2.5"/>
+    <circle cx="403.23" cy="370" r="2.5"/>
+    <circle cx="417.93" cy="370" r="2.5"/>
+    <circle cx="442.92" cy="370" r="2.5"/>
+    <circle cx="428.64" cy="370" r="2.5"/>
+    <circle cx="485.97" cy="370" r="2.5"/>
+    <circle cx="484.22" cy="370" r="2.5"/>
+    <circle cx="506.9" cy="370" r="2.5"/>
+    <circle cx="453.28" cy="370" r="2.5"/>
+    <circle cx="447.19" cy="370" r="2.5"/>
+    <circle cx="540.29" cy="370" r="2.5"/>
+    <circle cx="446.35" cy="370" r="2.5"/>
+    <circle cx="436.55" cy="370" r="2.5"/>
+    <circle cx="426.05" cy="370" r="2.5"/>
+    <circle cx="413.73" cy="370" r="2.5"/>
+    <circle cx="510.75" cy="370" r="2.5"/>
+    <circle cx="447.4" cy="370" r="2.5"/>
+    <circle cx="484.22" cy="370" r="2.5"/>
+    <circle cx="466.44" cy="370" r="2.5"/>
+    <circle cx="397.84" cy="370" r="2.5"/>
+    <circle cx="466.02" cy="370" r="2.5"/>
+    <circle cx="417.51" cy="370" r="2.5"/>
+    <circle cx="463.92" cy="370" r="2.5"/>
+    <circle cx="457.06" cy="370" r="2.5"/>
+    <circle cx="448.1" cy="370" r="2.5"/>
+    <circle cx="443.13" cy="370" r="2.5"/>
+    <circle cx="419.82" cy="390" r="2.5"/>
+    <circle cx="447.82" cy="390" r="2.5"/>
+    <circle cx="393.85" cy="390" r="2.5"/>
+    <circle cx="476.66" cy="390" r="2.5"/>
+    <circle cx="508.23" cy="390" r="2.5"/>
+    <circle cx="417.02" cy="390" r="2.5"/>
+    <circle cx="542.11" cy="390" r="2.5"/>
+    <circle cx="363.12" cy="390" r="2.5"/>
+    <circle cx="521.18" cy="410" r="2.5"/>
+    <circle cx="434.24" cy="410" r="2.5"/>
+    <circle cx="434.94" cy="410" r="2.5"/>
+    <circle cx="463.99" cy="410" r="2.5"/>
+    <circle cx="465.95" cy="410" r="2.5"/>
+    <circle cx="385.52" cy="410" r="2.5"/>
+    <circle cx="451.67" cy="410" r="2.5"/>
+    <circle cx="399.87" cy="410" r="2.5"/>
+    <circle cx="435.99" cy="430" r="2.5"/>
+    <circle cx="408.34" cy="430" r="2.5"/>
+    <circle cx="439.77" cy="430" r="2.5"/>
+    <circle cx="460.28" cy="430" r="2.5"/>
+    <circle cx="504.31" cy="430" r="2.5"/>
+    <circle cx="399.31" cy="430" r="2.5"/>
+    <circle cx="495.56" cy="430" r="2.5"/>
+    <circle cx="387.06" cy="430" r="2.5"/>
+    <circle cx="489.68" cy="430" r="2.5"/>
+    <circle cx="393.71" cy="430" r="2.5"/>
+    <circle cx="458.81" cy="430" r="2.5"/>
+    <circle cx="503.4" cy="430" r="2.5"/>
+    <circle cx="437.81" cy="430" r="2.5"/>
+    <circle cx="487.79" cy="430" r="2.5"/>
+    <circle cx="481.98" cy="430" r="2.5"/>
+    <circle cx="447.54" cy="430" r="2.5"/>
+    <circle cx="489.96" cy="430" r="2.5"/>
+    <circle cx="390.63" cy="430" r="2.5"/>
+    <circle cx="407.5" cy="430" r="2.5"/>
+    <circle cx="438.58" cy="430" r="2.5"/>
+    <circle cx="396.02" cy="430" r="2.5"/>
+    <circle cx="465.04" cy="430" r="2.5"/>
+    <circle cx="383.91" cy="430" r="2.5"/>
+    <circle cx="508.65" cy="430" r="2.5"/>
+    <circle cx="453.98" cy="430" r="2.5"/>
+    <circle cx="472.6" cy="430" r="2.5"/>
+    <circle cx="402.18" cy="430" r="2.5"/>
+    <circle cx="439.35" cy="430" r="2.5"/>
+    <circle cx="436.48" cy="430" r="2.5"/>
+    <circle cx="402.74" cy="430" r="2.5"/>
+    <circle cx="402.46" cy="430" r="2.5"/>
+    <circle cx="447.54" cy="430" r="2.5"/>
+    <circle cx="480.93" cy="450" r="2.5"/>
+    <circle cx="376.77" cy="450" r="2.5"/>
+    <circle cx="398.89" cy="450" r="2.5"/>
+    <circle cx="422.76" cy="450" r="2.5"/>
+    <circle cx="493.39" cy="450" r="2.5"/>
+    <circle cx="456.43" cy="450" r="2.5"/>
+    <circle cx="410.72" cy="450" r="2.5"/>
+    <circle cx="452.79" cy="450" r="2.5"/>
+    <circle cx="337.78" cy="502" r="2.5"/>
+    <circle cx="476.24" cy="502" r="2.5"/>
+    <circle cx="464.9" cy="502" r="2.5"/>
+    <circle cx="442.57" cy="502" r="2.5"/>
+    <circle cx="496.33" cy="502" r="2.5"/>
+    <circle cx="488.7" cy="502" r="2.5"/>
+    <circle cx="549.88" cy="502" r="2.5"/>
+    <circle cx="424.44" cy="502" r="2.5"/>
+    <circle cx="450.97" cy="522" r="2.5"/>
+    <circle cx="416.46" cy="522" r="2.5"/>
+    <circle cx="379.85" cy="522" r="2.5"/>
+    <circle cx="509.21" cy="522" r="2.5"/>
+    <circle cx="507.39" cy="522" r="2.5"/>
+    <circle cx="465.53" cy="522" r="2.5"/>
+    <circle cx="478.13" cy="522" r="2.5"/>
+    <circle cx="433.33" cy="522" r="2.5"/>
+    <circle cx="464.9" cy="542" r="2.5"/>
+    <circle cx="400.5" cy="542" r="2.5"/>
+    <circle cx="389.65" cy="542" r="2.5"/>
+    <circle cx="544.98" cy="542" r="2.5"/>
+    <circle cx="453.49" cy="542" r="2.5"/>
+    <circle cx="388.46" cy="542" r="2.5"/>
+    <circle cx="522.79" cy="542" r="2.5"/>
+    <circle cx="449.92" cy="542" r="2.5"/>
+    <circle cx="409.39" cy="542" r="2.5"/>
+    <circle cx="387.62" cy="542" r="2.5"/>
+    <circle cx="423.18" cy="542" r="2.5"/>
+    <circle cx="452.37" cy="542" r="2.5"/>
+    <circle cx="502" cy="542" r="2.5"/>
+    <circle cx="446.91" cy="542" r="2.5"/>
+    <circle cx="492.76" cy="542" r="2.5"/>
+    <circle cx="425.77" cy="542" r="2.5"/>
+    <circle cx="480.58" cy="542" r="2.5"/>
+    <circle cx="459.51" cy="542" r="2.5"/>
+    <circle cx="430.53" cy="542" r="2.5"/>
+    <circle cx="425.42" cy="542" r="2.5"/>
+    <circle cx="418.84" cy="542" r="2.5"/>
+    <circle cx="483.24" cy="542" r="2.5"/>
+    <circle cx="437.18" cy="542" r="2.5"/>
+    <circle cx="467.7" cy="542" r="2.5"/>
+    <circle cx="439.56" cy="542" r="2.5"/>
+    <circle cx="539.45" cy="542" r="2.5"/>
+    <circle cx="464.27" cy="542" r="2.5"/>
+    <circle cx="400.78" cy="542" r="2.5"/>
+    <circle cx="526.99" cy="542" r="2.5"/>
+    <circle cx="422.76" cy="542" r="2.5"/>
+    <circle cx="524.26" cy="542" r="2.5"/>
+    <circle cx="385.66" cy="542" r="2.5"/>
+    <circle cx="502.14" cy="562" r="2.5"/>
+    <circle cx="459.37" cy="562" r="2.5"/>
+    <circle cx="369.35" cy="562" r="2.5"/>
+    <circle cx="396.09" cy="562" r="2.5"/>
+    <circle cx="588.66" cy="562" r="2.5"/>
+    <circle cx="443.27" cy="562" r="2.5"/>
+    <circle cx="512.57" cy="562" r="2.5"/>
+    <circle cx="430.32" cy="562" r="2.5"/>
+    <circle cx="392.17" cy="562" r="2.5"/>
+    <circle cx="423.95" cy="562" r="2.5"/>
+    <circle cx="436.34" cy="562" r="2.5"/>
+    <circle cx="414.36" cy="562" r="2.5"/>
+    <circle cx="466.72" cy="562" r="2.5"/>
+    <circle cx="414.57" cy="562" r="2.5"/>
+    <circle cx="383.63" cy="562" r="2.5"/>
+    <circle cx="457.34" cy="562" r="2.5"/>
+    <circle cx="446.21" cy="562" r="2.5"/>
+    <circle cx="447.47" cy="562" r="2.5"/>
+    <circle cx="509.77" cy="562" r="2.5"/>
+    <circle cx="438.37" cy="562" r="2.5"/>
+    <circle cx="455.73" cy="562" r="2.5"/>
+    <circle cx="494.79" cy="562" r="2.5"/>
+    <circle cx="360.46" cy="562" r="2.5"/>
+    <circle cx="531.12" cy="562" r="2.5"/>
+    <circle cx="456.15" cy="562" r="2.5"/>
+    <circle cx="405.96" cy="562" r="2.5"/>
+    <circle cx="458.11" cy="562" r="2.5"/>
+    <circle cx="493.04" cy="562" r="2.5"/>
+    <circle cx="450.27" cy="562" r="2.5"/>
+    <circle cx="491.01" cy="562" r="2.5"/>
+    <circle cx="394.83" cy="562" r="2.5"/>
+    <circle cx="505.57" cy="562" r="2.5"/>
+    <circle cx="470.01" cy="582" r="2.5"/>
+    <circle cx="362.7" cy="582" r="2.5"/>
+    <circle cx="468.33" cy="582" r="2.5"/>
+    <circle cx="411.07" cy="582" r="2.5"/>
+    <circle cx="473.44" cy="582" r="2.5"/>
+    <circle cx="503.54" cy="582" r="2.5"/>
+    <circle cx="431.23" cy="582" r="2.5"/>
+    <circle cx="382.23" cy="582" r="2.5"/>
+    <circle cx="389.72" cy="602" r="2.5"/>
+    <circle cx="351.01" cy="602" r="2.5"/>
+    <circle cx="429.9" cy="602" r="2.5"/>
+    <circle cx="415.76" cy="602" r="2.5"/>
+    <circle cx="520.27" cy="602" r="2.5"/>
+    <circle cx="417.93" cy="602" r="2.5"/>
+    <circle cx="498.15" cy="602" r="2.5"/>
+    <circle cx="438.02" cy="602" r="2.5"/>
+  </g>
+  <circle cx="274.69" cy="170" r="5" fill="currentColor" style="stroke:var(--ground,#f6f7f9)" stroke-width="1.5"/>
+  <g fill="#3b6ef6" style="stroke:var(--ground,#f6f7f9)" stroke-width="1.5">
+    <circle cx="464.09" cy="194" r="5"/>
+    <circle cx="438.31" cy="218" r="5"/>
+    <circle cx="478.69" cy="310" r="5"/>
+    <circle cx="477.09" cy="330" r="5"/>
+    <circle cx="470.56" cy="350" r="5"/>
+    <circle cx="458.65" cy="370" r="5"/>
+    <circle cx="446.08" cy="390" r="5"/>
+    <circle cx="444.67" cy="410" r="5"/>
+    <circle cx="442.78" cy="430" r="5"/>
+    <circle cx="436.58" cy="450" r="5"/>
+    <circle cx="460.1" cy="502" r="5"/>
+    <circle cx="455.11" cy="522" r="5"/>
+    <circle cx="451.92" cy="542" r="5"/>
+    <circle cx="450.93" cy="562" r="5"/>
+    <circle cx="437.82" cy="582" r="5"/>
+    <circle cx="432.6" cy="602" r="5"/>
+  </g>
+  <g stroke="currentColor" stroke-opacity="0.44">
+    <line x1="393.25" y1="666" x2="511.79" y2="666" stroke-width="6"/>
+    <line x1="511.79" y1="666" x2="588.66" y2="666" stroke-width="1.5"/>
+    <line x1="588.66" y1="660" x2="588.66" y2="672" stroke-width="1.5"/>
+  </g>
+  <circle cx="449.64" cy="666" r="5" fill="#3b6ef6" style="stroke:var(--ground,#f6f7f9)" stroke-width="1.5"/>
+  <g font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" fill="currentColor" text-anchor="middle">
+    <text x="381.25" y="694">784.6</text>
+    <text x="449.64" y="694">865.2</text>
+    <text x="521.79" y="694">954.0</text>
+    <text x="588.66" y="694">1,063.8</text>
+  </g>
+  <g font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" letter-spacing="0.06em" fill="currentColor" fill-opacity="0.62" text-anchor="middle">
+    <text x="381.25" y="710">10TH PCT</text>
+    <text x="449.64" y="710">MEDIAN</text>
+    <text x="521.79" y="710">90TH PCT</text>
+    <text x="588.66" y="710">FASTEST</text>
+  </g>
+  <text x="0" y="748" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" letter-spacing="0.06em" fill="currentColor" fill-opacity="0.62">SOURCE: EZO LABS RESEARCH</text>
+</svg>

@@ -1,0 +1,44 @@
+# env-box-a-mk2.txt — the env of config X' (#84, 2026-10-30), paired with stack-b300-box-a-mk2.args
+# (boxes/box-a.env's ENV_SEED) on our SGLang fork prod 4943d6ed90. It is env-box-a-mk.txt (kept as
+# the rollback) with box-c's four wins added before the TP probe block:
+#   SGLANG_HICACHE_HOST_PARALLEL_ALLOC_THREADS=32   the host-cache pool allocated by 32 threads (boot time)
+#   SGLANG_DSV4_EXACT_DECODER_TRIM=1                 the exact decoder trim; needs the args' bounded replay
+#                                                    (--enable-decoder-swa-bounded-replay)
+#   SGLANG_MM_CACHED_REFS=1, SGLANG_MM_CACHED_REFS_EMBEDDING_CACHE=0
+#                                                    the engine side of the router's cached image refs
+#                                                    (admission.cached_image_bytes), embedding cache off as on box-c
+# then the branch's TP-consistency probe, on while box-a serves:
+#   SGLANG_MK_TP_PROBE=1 SGLANG_MK_TP_PROBE_EVERY=100 SGLANG_MK_TP_PROBE_ASSERT=1
+#   (the gate boot ran without these three lines: qa/prod-merge-20261030/raw/gate/NOTES.md).
+# WAY BACK: env-box-a-mk.txt with stack-b300-box-a-mk.args on 9ec65dacaf.
+SGLANG_ENABLE_REQUEST_DECOMPRESSION=1
+SGLANG_SWA_BRANCH_REBUILD=true
+PYTHONFAULTHANDLER=1
+SGLANG_SBR_PHASE_TIMING=1
+SGLANG_SBR_PHASE_TIMING_DETAIL=1
+SGLANG_SBR_PHASE_TIMING_GATE_FILE=/workspace/tools/sbr-phase-timing.gate
+SGLANG_SBR_SCHEMA_MEMO=1
+SGLANG_SBR_SCHEMA_MEMO_GATE_FILE=/workspace/tools/sbr-schema-memo.gate
+SGLANG_EVENT_LOOP_LAG_INTERVAL_S=0
+SGLANG_SBR_UNFINISHED_REUSE=1
+SGLANG_SBR_UNFINISHED_REUSE_GATE_FILE=/workspace/tools/sbr-unfinished-reuse.gate
+SGLANG_TOOL_STRICT_LEVEL=1
+SGLANG_SBR_TOOL_STRICT_GATE_FILE=/workspace/tools/tool-strict.on
+SGLANG_DEFAULT_THINKING=1
+SGLANG_DSV41_REASONING_EFFORT=high
+SGLANG_UNIFIED_RADIX_TREE_CORE_BACKEND=python
+SGLANG_FORWARD_UNKNOWN_TOOLS=1
+SGLANG_OPT_DSV41_BF16_INDEX_LOGITS=0
+SGLANG_ENABLE_DSV41_ENGRAM_HOST_TABLE=1
+SGLANG_DSV41_ENGRAM_HOST_TABLE_LAYOUT=per_rank
+TRITON_PRINT_AUTOTUNING=1
+SGLANG_SPEC_TP_SYNC=rng,-dspark-accept-sample
+PATH=/opt/sglang-mk29/bin:/root/.cargo/bin:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+XDG_CACHE_HOME=/workspace/cache-mk29
+SGLANG_HICACHE_HOST_PARALLEL_ALLOC_THREADS=32
+SGLANG_DSV4_EXACT_DECODER_TRIM=1
+SGLANG_MM_CACHED_REFS=1
+SGLANG_MM_CACHED_REFS_EMBEDDING_CACHE=0
+SGLANG_MK_TP_PROBE=1
+SGLANG_MK_TP_PROBE_EVERY=100
+SGLANG_MK_TP_PROBE_ASSERT=1

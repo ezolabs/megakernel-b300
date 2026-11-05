@@ -1,0 +1,189 @@
+diff --git a/box-c/qa/box-a-megakernel-20261029/harness/quality/json_format.py b/box-c/qa/box-a-megakernel-20261029/harness/quality/json_format.py
+index 3e9e5ce5..b7f688f9 100755
+--- a/box-c/qa/box-a-megakernel-20261029/harness/quality/json_format.py
++++ b/box-c/qa/box-a-megakernel-20261029/harness/quality/json_format.py
+@@ -5,7 +5,10 @@
+ with line items and a total, an event with a date pattern and an enum, a review's sentiment, a service config
+ with an open `env` map), each a short synthetic text plus the JSON Schema the answer must satisfy. Two cells:
+ 
+-  schema  response_format {"type": "json_schema", "json_schema": {"name", "schema", "strict": true}}
++  schema  response_format {"type": "json_schema", "json_schema": {"name", "schema", "strict"}}: strict true
++          only for a schema that fits strict mode (`strict_fits`: closed objects, every property required);
++          the config family's open `env` map does not, so it goes strict false (still grammar-enforced).
++          Each record carries `strict`; `valid@strict` / `valid@nonstrict` split the primary metric
+   object  response_format {"type": "json_object"}
+ 
+ The schema is in the prompt in both cells, so `schema` measures the engine's grammar enforcement on top of
+@@ -281,18 +284,87 @@ def lenient_parse(txt):
+         return None
+ 
+ 
++# The strict subset, as deepseek-recipe 0.2.0 deserializes it (src/protocol/json_schema.rs): a node is a `type`
++# (one name, or a list of the simple names only), an `anyOf` of single-`type` nodes, or a `$ref`; nothing else.
++_STRICT_SIMPLE = {'string', 'number', 'integer', 'boolean', 'null'}
++_STRICT_TYPES = _STRICT_SIMPLE | {'object', 'array'}
++_STRICT_FORMATS = {'email', 'hostname', 'ipv4', 'ipv6', 'uuid'}
++_STRICT_INT_KEYS = ('const', 'default', 'minimum', 'maximum', 'exclusiveMinimum', 'exclusiveMaximum', 'multipleOf')
++# Keywords strict mode has no place for: recipe refuses a node that has only these, and silently drops them
++# beside a `type`, so the strict constraint would not be the schema as written.
++_STRICT_NONE = ('oneOf', 'allOf', 'not', 'if', 'then', 'else', 'prefixItems', 'patternProperties')
++# Definition maps: `$defs` (2019-09+), `definitions` (draft-07) and recipe's own `$def` (the only one it keeps).
++_STRICT_DEFS = ('$defs', 'definitions', '$def')
++
++def strict_fits(s):
++    """Whether `s` fits strict mode, so `strict: true` is safe to send. The top level is an object, and every
++    object is closed: non-empty `properties`, every property in `required` (once), `additionalProperties`
++    false. Types are single names or lists of the simple ones (`["object", "null"]` is outside the subset);
++    combinators are `anyOf` only; definition maps ($defs, definitions, $def) are checked like the rest.
++    deepseek-recipe refuses any other schema with strict: true (400 "Invalid json schema: ..."), so such an
++    item goes strict: false, where the engine still grammar-enforces the raw schema."""
++    return isinstance(s, dict) and s.get('type') == 'object' and _strict_node(s)
++
++def _strict_node(s):
++    if not isinstance(s, dict) or any(k in s for k in _STRICT_NONE):
++        return False
++    t, subs = s.get('type'), []
++    if isinstance(t, list):
++        if not t or not all(isinstance(x, str) and x in _STRICT_SIMPLE for x in t):
++            return False
++    elif t is not None:
++        if t not in _STRICT_TYPES:
++            return False
++        if t == 'object':
++            props, req = s.get('properties'), s.get('required')
++            if not isinstance(props, dict) or not props or s.get('additionalProperties') is not False:
++                return False
++            if not isinstance(req, list) or len(req) != len(set(req)) or set(req) != set(props):
++                return False
++            subs += props.values()
++        elif t == 'array':
++            if not isinstance(s.get('items'), dict):
++                return False
++            subs.append(s['items'])
++        elif t == 'string':
++            if 'enum' in s and not (isinstance(s['enum'], list) and all(isinstance(x, str) for x in s['enum'])):
++                return False
++            if 'format' in s and s['format'] not in _STRICT_FORMATS:
++                return False
++        elif t == 'integer':
++            if any(k in s and (isinstance(s[k], bool) or not isinstance(s[k], int)) for k in _STRICT_INT_KEYS):
++                return False
++    elif 'anyOf' not in s and not isinstance(s.get('$ref'), str):
++        return False
++    if 'anyOf' in s:
++        br = s['anyOf']
++        if not isinstance(br, list) or not br or not all(isinstance(b, dict) and isinstance(b.get('type'), str)
++                                                          for b in br):
++            return False
++        subs += br
++    for k in _STRICT_DEFS:
++        if k in s:
++            if not isinstance(s[k], dict):
++                return False
++            subs += s[k].values()
++    return all(_strict_node(x) for x in subs)
++
++
+ def response_format(cell, schema):
+     if cell == 'schema':
+-        return {'type': 'json_schema', 'json_schema': {'name': 'answer', 'schema': schema, 'strict': True}}
++        return {'type': 'json_schema', 'json_schema': {'name': 'answer', 'schema': schema,
++                                                       'strict': strict_fits(schema)}}
+     return {'type': 'json_object'}
+ 
+ 
+ def make_scorer(conn, cell, a):
+     def score(it):
++        rf = response_format(cell, it['schema'])
+         r = qlib.chat(conn, [{'role': 'user', 'content': it['prompt']}], max_tokens=a.max_tokens,
+-                      temperature=a.temperature, top_p=a.top_p, effort=a.effort,
+-                      response_format=response_format(cell, it['schema']))
++                      temperature=a.temperature, top_p=a.top_p, effort=a.effort, response_format=rf)
+         rec = {'id': it['id'], 'family': it['family']}
++        if cell == 'schema':
++            rec['strict'] = rf['json_schema']['strict']
+         if r.error:
+             rec.update(ok=None, error=r.error, wall_s=round(r.wall, 3))
+             return rec
+@@ -359,6 +431,10 @@ def main():
+         metrics = {k: qlib.metric_from_records(recs, k) for k in ('valid', 'parse', 'fields', 'parse_lenient')}
+         for fam in sorted({it['family'] for it in items}):
+             metrics[f'valid@{fam}'] = qlib.metric_from_records(recs, 'valid', where=lambda r, f=fam: r['family'] == f)
++        if cell == 'schema':   # valid@strict is like for like with a pre-patch run, which answered only those
++            for name, val in (('strict', True), ('nonstrict', False)):
++                metrics[f'valid@{name}'] = qlib.metric_from_records(recs, 'valid',
++                                                                    where=lambda r, v=val: r.get('strict') is v)
+         means = {'completion_tokens': qlib.mean_ci([r.get('completion_tokens') for r in recs if r.get('ok') is not None])}
+         qlib.write_summary(out, 'json', cell, recs, primary='valid', metrics=metrics, means=means, condition=cond,
+                            wall_s=wall, tag=a.tag, conn=conn, extra={'supported': True, 'probe_error': why})
+diff --git a/box-c/qa/box-a-megakernel-20261029/harness/quality/test_quality.py b/box-c/qa/box-a-megakernel-20261029/harness/quality/test_quality.py
+index b588cac1..94a72c4c 100755
+--- a/box-c/qa/box-a-megakernel-20261029/harness/quality/test_quality.py
++++ b/box-c/qa/box-a-megakernel-20261029/harness/quality/test_quality.py
+@@ -140,6 +140,51 @@ class Json(unittest.TestCase):
+         self.assertTrue(json_format.validate(b2, ev['schema']))
+         self.assertEqual(json_format.validate(True, {'type': 'integer'}), ['$: expected integer, got bool'])
+ 
++    def test_strict_only_inside_strict_subset(self):
++        # deepseek-recipe 0.2.0 refuses strict: true outside DeepSeek's strict subset with a 400
++        # ("Invalid json schema: invalid type: map, expected a boolean"); those schemas go strict: false
++        fams = {}
++        for x in json_format.make_items(10, 'schema'):
++            fams[x['family']] = json_format.response_format('schema', x['schema'])['json_schema']['strict']
++        self.assertEqual(fams, {'person': True, 'invoice': True, 'event': True, 'sentiment': True, 'config': False})
++        self.assertFalse(json_format.strict_fits({'type': 'object', 'properties': {'a': {'type': 'array', 'items': {
++            'type': 'object', 'properties': {'m': {'type': 'object', 'additionalProperties': {'type': 'string'}}}}}}}))
++        def obj(props, **kw):
++            return {'type': 'object', 'additionalProperties': False, 'required': list(props), 'properties': props,
++                    **kw}
++        fits = json_format.strict_fits
++        ok = {'type': 'boolean'}
++        self.assertTrue(fits(obj({'ok': ok})))
++        self.assertFalse(fits({'type': 'object', 'additionalProperties': False, 'properties': {}, 'required': []}))
++        # required unset: recipe would fill it in, but strict mode as specified (DeepSeek, OpenAI) needs it listed
++        self.assertFalse(fits({'type': 'object', 'additionalProperties': False, 'properties': {'ok': ok}}))
++        self.assertFalse(fits({'type': 'object', 'required': ['ok'], 'properties': {'ok': ok}}))  # not closed
++        self.assertFalse(fits(obj({'ok': ok, 'n': {'type': 'integer'}}, required=['ok'])))     # one optional
++        self.assertFalse(fits({'type': 'array', 'items': obj({'ok': ok})}))                    # top level not an object
++        # definition maps: every spelling is checked, a $ref into them is fine
++        bad = {'type': 'object', 'additionalProperties': {'type': 'string'}}
++        for k in ('$defs', 'definitions', '$def'):
++            self.assertTrue(fits(obj({'r': {'$ref': f'#/{k}/D'}}, **{k: {'D': obj({'ok': ok})}})), k)
++            self.assertFalse(fits(obj({'r': {'$ref': f'#/{k}/D'}}, **{k: {'D': bad}})), k)
++        # combinators: anyOf branches are checked; oneOf/allOf/not are outside strict mode
++        self.assertTrue(fits(obj({'u': {'anyOf': [obj({'ok': ok}), {'type': 'null'}]}})))
++        self.assertFalse(fits(obj({'u': {'anyOf': [bad, {'type': 'null'}]}})))
++        for k in ('oneOf', 'allOf'):
++            self.assertFalse(fits(obj({'u': {k: [obj({'ok': ok}), {'type': 'null'}]}})), k)
++        self.assertFalse(fits(obj({'u': {'type': 'string', 'not': {'enum': ['x']}}})))
++        # type lists: simple names only; a nullable object is spelled anyOf
++        self.assertTrue(fits(obj({'s': {'type': ['string', 'null']}})))
++        self.assertFalse(fits(obj({'o': {'type': ['object', 'null'], 'properties': {'ok': ok}, 'required': ['ok'],
++                                         'additionalProperties': False}})))
++        self.assertFalse(fits(obj({'o': {'type': ['object', 'null'], 'additionalProperties': {'type': 'string'}}})))
++        # nodes recipe cannot type, and keyword values it cannot deserialize
++        self.assertFalse(fits(obj({'x': {}})))
++        self.assertFalse(fits(obj({'x': {'enum': ['a', 'b']}})))
++        self.assertFalse(fits(obj({'d': {'type': 'string', 'format': 'date'}})))
++        self.assertTrue(fits(obj({'d': {'type': 'string', 'format': 'uuid'}})))
++        self.assertFalse(fits(obj({'n': {'type': 'integer', 'minimum': 0.5}})))
++        self.assertFalse(fits(obj({'a': {'type': 'array'}})))
++
+     def test_fields(self):
+         for x in json_format.make_items(10, 'object'):
+             self.assertTrue(json_format.check_fields(x['family'], json_format_answer(x), x['gold']), x['family'])
+@@ -293,11 +338,13 @@ class EndToEnd(unittest.TestCase):
+         self.assertLess(self.summ(bad, 'agent-prod')['metrics']['call_valid']['p'], 1.0)
+         self.assertGreater(self.summ(bad, 'gsm8k-t0')['errors'], 0)       # the 500s are errors, not wrong answers
+         self.assertEqual(self.summ(good, 'json-schema')['metrics']['fields']['p'], 1.0)
++        js = self.summ(good, 'json-schema')['metrics']
++        self.assertEqual((js['valid@strict']['n'], js['valid@nonstrict']['n']), (16, 4))   # config is every 5th item
+         self.assertEqual(self.summ(good, 'images-t0')['metrics']['control']['n'], 4)
+         # compare: good vs bad shows B worse on gsm8k (paired), and runs over every common file
+         r = subprocess.run([sys.executable, os.path.join(HERE, 'compare.py'), 'dirs', good, bad, '--labels',
+                             'final,mk', '--json', os.path.join(self.tmp, 'cmp.json')], capture_output=True, text=True)
+-        self.assertEqual(r.returncode, 0, r.stderr)
++        self.assertEqual(r.returncode, 2, r.stderr)   # B is degraded on purpose: a WORSE verdict exits 2
+         cmp_ = json.load(open(os.path.join(self.tmp, 'cmp.json')))
+         self.assertEqual(len(cmp_['results']), 9)
+         g8 = next(x for x in cmp_['results'] if x['suite'] == 'gsm8k' and x['cell_a'] == 't0')

@@ -1,0 +1,15 @@
+boot  tree        n   errs  mean   median  sd     min    max    TTFT C1 ms (mean)
+A1    9a9ede7ae0  32     0   867.0  864.1   72.3   737.8 1063.8   39.3
+B1    4943d6ed90  32     0   878.1  866.7   55.1   791.2 1015.9   38.9
+A2    9a9ede7ae0  32     0   868.5  863.5   66.6   773.8 1001.4   43.7
+B2    4943d6ed90  32     0   855.4  850.8   56.2   771.3  949.5   40.9
+
+pair A1-B1:  -11.0 tok/s (-1.26 %), Welch 95 % CI over requests [-43.5, +21.4] tok/s ([-4.95, +2.44] %), df 58
+pair A2-B2:  +13.1 tok/s (+1.53 %), Welch 95 % CI over requests [-17.7, +43.9] tok/s ([-2.07, +5.13] %), df 60
+over the two pairs (pair = unit, t(1)): mean +1.0 tok/s (+0.12 %), 95 % CI [-152.0, +154.1] ([-17.54, +17.77] %)
+over requests, pooled (A 64 vs B 64): +1.0 tok/s (+0.12 %), Welch 95 % CI [-21.0, +23.0] ([-2.43, +2.66] %), df 121
+over requests, pair-blocked OLS (dec ~ tree + pair): +1.0 tok/s (+0.12 %), 95 % CI [-21.0, +23.1] ([-2.43, +2.66] %), df 125
+boot = unit (4 boot means, Welch): +1.0 tok/s, 95 % CI [-143.3, +145.3], df 1.0
+
+both pairs A >= 2 % slower: False (-1.26 %, +1.53 %); CI over requests excludes 0 on the slow side: False
+VERDICT: no cost confirmed

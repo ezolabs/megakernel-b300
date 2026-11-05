@@ -1,0 +1,5 @@
+greedy-box-b.jsonl vs greedy-MKP1b.jsonl: 32/32 byte-equal; differ at []; common prefix chars median 753 min 192
+greedy-box-b.jsonl vs greedy-MKL2.jsonl: 32/32 byte-equal; differ at []; common prefix chars median 753 min 192
+greedy-box-b.jsonl vs greedy-MKL1.jsonl: 32/32 byte-equal; differ at []; common prefix chars median 753 min 192
+greedy-box-b.jsonl vs greedy-MK3a.jsonl: 32/32 byte-equal; differ at []; common prefix chars median 753 min 192
+greedy-box-b.jsonl vs greedy-FB.jsonl: 1/32 byte-equal; differ at [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 31]; common prefix chars median 111 min 14

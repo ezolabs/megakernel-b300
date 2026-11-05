@@ -1,0 +1,2 @@
+box-b/dmon-box-b.txt pclk min 2032 pviol>0 samples 0 tviol samples 0 mean gtemp 33.9561
+box-a/dmon-box-a.txt pclk min 2032 pviol>0 samples 6 tviol samples 0 mean gtemp 35.3085

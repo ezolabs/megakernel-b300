@@ -1,0 +1,42 @@
+band: 2.5 x sigma-hat x sqrt(1 + 1/1) over 1 base run(s); sigma-hat = one boot mean's noise, the base runs' pooled within-boot SE (rep sd / sqrt(n)) x sqrt(1 + BOOT_EXCESS^2), BOOT_EXCESS decode 0.25, aggregate 0.25, ttft 1.2, fill 2, dip 0.7, gap 1.3 (else 0)
+  WARNING: ONE base run (--allow-one-base): the base mean carries one boot's effect, and a null arm on two boots FAILs ~10% of the time (test_gates.py NullSim); a second base boot brings it under 5%
+A/A model check (printed, not in the band; a group's run means more than 3 sigma-hat apart):
+  no --base-aa group given
+outlier policy: a rep > 2x above or below its run's median; base side dropped; arm side FAILed if worse than the base median, else reported and dropped (whatever the base's rate)
+  dropped (base side, band): MKL1 ttft C=8: rep 1 = 0.209 (run median 0.0985, > 2x off) dropped
+  arm outlier: none
+metric     box unit                    arm       base   delta     band sigma^        95% CI arm-base  verdict
+decode       1 b2                    849.0      885.8   -4.2%     5.9%  1.67%          [-74.1, -3.6]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/1))
+decode       2 b2                    688.5      687.9   +0.1%     4.6%  1.29%          [-33.2, 33.6]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/1))
+decode       4 b2                    557.5      556.6   +0.2%     2.5%  0.71%          [-14.9, 18.1]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/1))
+decode       8 b2                    402.4      392.0   +2.7%     3.6%  1.01%           [-0.6, 20.8]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/1))
+decode      16 b2                    296.7      297.9   -0.4%     3.8%  1.08%            [-7.1, 5.2]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/1))
+aggregate    1 b2                    849.1      885.9   -4.1%     5.9%  1.67%          [-70.0, -2.5]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/1))
+aggregate    2 b2                   1272.8     1271.6   +0.1%     4.8%  1.37%          [-54.9, 51.2]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/1))
+aggregate    4 b2                   1991.4     2013.1   -1.1%     3.7%  1.04%          [-95.5, 44.4]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/1))
+aggregate    8 b2                   2806.2     2775.6   +1.1%     7.3%  2.07%         [-65.0, 159.1]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/1))
+aggregate   16 b2                   4142.6     4183.8   -1.0%     3.9%  1.11%         [-135.1, 56.4]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/1))
+ttft         1 b2                   41.2ms     44.5ms   -7.3%    57.6% 16.29%       [-13.5ms, 4.5ms]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/1))
+ttft         2 b2                   61.1ms     60.9ms   +0.4%    14.7%  4.16%        [-3.6ms, 3.6ms]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/1))
+ttft         4 b2                   85.5ms     82.9ms   +3.2%    16.1%  4.54%       [-4.4ms, 11.5ms]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/1))
+ttft         8 b2                  103.3ms     98.0ms   +5.4%    14.3%  4.06%       [-2.7ms, 13.0ms]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/1))
+ttft        16 b2                  115.4ms    119.3ms   -3.2%    12.0%  3.39%       [-11.4ms, 2.6ms]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/1))
+fill         - b2                   1.450s     1.419s   +2.2%     6.2%  1.76%       [0.005s, 0.057s]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/1))
+dip          - b2                    75.8%      77.0%   -1.5%     4.2%  1.20%           [-2.8, +0.8]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/1))
+gap          - b2                  149.6ms    154.8ms   -3.3%     6.9%  1.94%       [-10.8ms, 1.2ms]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/1))
+resume       - b2                  203.9ms    203.5ms   +0.2%    12.0%  3.38%      [-19.1ms, 20.9ms]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/1))
+quality      - b2               gsm8k 98/100 PASS  PASS
+gate decode    NEUTRAL     (gain 0, neutral 5, regression 0, unconfirmed 0 of 5 sub-gates)
+gate aggregate NEUTRAL     (gain 0, neutral 5, regression 0, unconfirmed 0 of 5 sub-gates)
+gate ttft      NEUTRAL     (gain 0, neutral 5, regression 0, unconfirmed 0 of 5 sub-gates)
+gate fill      NEUTRAL     (gain 0, neutral 1, regression 0, unconfirmed 0 of 1 sub-gates)
+gate dip       NEUTRAL     (gain 0, neutral 1, regression 0, unconfirmed 0 of 1 sub-gates)
+gate gap       NEUTRAL     (gain 0, neutral 1, regression 0, unconfirmed 0 of 1 sub-gates)
+gate resume    NEUTRAL     (gain 0, neutral 1, regression 0, unconfirmed 0 of 1 sub-gates)
+gate quality   PASS (1/1 arm runs pass)
+proven gain: none
+gain on every boot: 0 of 19 sub-gates
+neutral (no proven gain, no regression): decode, aggregate, ttft, fill, dip, gap, resume
+unconfirmed (a regression not on every boot or on the only one, not a FAIL): none
+null check: a null arm (the base config again) on 2 boots would FAIL this design's 19 sub-gates ~9% of the time (1 base run(s); Gaussian model with the real A/A boot effects, BOOT_EXCESS)
+OVERALL: ONE BOOT (0 regression(s) in 19 metric sub-gates, 0 unconfirmed (worse on some boots only), 0 quality miss(es) in 1 arm runs) -> no verdict: a regression must replicate on both boots and a gain must beat the band on both, so run a second arm boot (exit 3)

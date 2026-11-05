@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 482" width="720" height="482" role="img" aria-labelledby="title desc">
+  <title id="title">How much faster each stream decodes with the megakernel, by streams at once</title>
+  <desc id="desc">Bar chart drawn to scale from zero of the gain in per-stream decode speed from NVIDIA's megakernel over our tuned stack without it, on one 4×B300 node, by the number of streams decoding at once, for two boots of the same build. First boot and second boot: plus 38.8% and plus 33.0% at 1 stream, plus 29.6% and plus 29.8% at 2, plus 23.7% and plus 23.9% at 4, plus 11.7% and plus 14.7% at 8, and plus 1.1% and plus 0.7% at 16. At one stream, 638.4 tokens per second without the megakernel, 885.8 and 849.0 with it.</desc>
+  <text x="0" y="24" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="500" letter-spacing="-0.01em" fill="currentColor">How much faster each stream decodes with the megakernel</text>
+  <text x="0" y="46" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor" fill-opacity="0.62">Gain over our tuned stack without it, one 4×B300 node, by streams decoding at once</text>
+  <rect x="0" y="66" width="12" height="12" rx="2" fill="#3b6ef6"/>
+  <text x="18" y="77" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor">First boot</text>
+  <rect x="112.75" y="66.75" width="10.5" height="10.5" rx="1.25" fill="#3b6ef6" fill-opacity="0.16" stroke="#3b6ef6" stroke-width="1.5"/>
+  <text x="130" y="77" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor">Second boot of the same build</text>
+  <text x="110" y="108" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" letter-spacing="0.06em" fill="currentColor" fill-opacity="0.62">GAIN IN DECODE SPEED PER STREAM</text>
+  <g stroke="currentColor" stroke-width="1" fill="none">
+    <line x1="240" y1="118" x2="240" y2="384" stroke-opacity="0.2" stroke-dasharray="3 4"/>
+    <line x1="370" y1="118" x2="370" y2="384" stroke-opacity="0.2" stroke-dasharray="3 4"/>
+    <line x1="500" y1="118" x2="500" y2="384" stroke-opacity="0.2" stroke-dasharray="3 4"/>
+    <line x1="630" y1="118" x2="630" y2="384" stroke-opacity="0.2" stroke-dasharray="3 4"/>
+    <line x1="110" y1="118" x2="110" y2="384" stroke-opacity="0.6"/>
+  </g>
+  <text x="0" y="147" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor">1 stream</text>
+  <path d="M110 124H608.4A6 6 0 0 1 614.4 130V134A6 6 0 0 1 608.4 140H110Z" fill="#3b6ef6"/>
+  <text x="620.4" y="136" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" fill="currentColor">+38.8%</text>
+  <path d="M110.75 144.75H533A5.25 5.25 0 0 1 538.25 150V154A5.25 5.25 0 0 1 533 159.25H110.75Z" fill="#3b6ef6" fill-opacity="0.16" stroke="#3b6ef6" stroke-width="1.5"/>
+  <text x="545" y="156" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" fill="currentColor" fill-opacity="0.62">+33.0%</text>
+  <text x="0" y="199" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor">2 streams</text>
+  <path d="M110 176H488.8A6 6 0 0 1 494.8 182V186A6 6 0 0 1 488.8 192H110Z" fill="#3b6ef6"/>
+  <text x="500.8" y="188" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" fill="currentColor">+29.6%</text>
+  <path d="M110.75 196.75H491.4A5.25 5.25 0 0 1 496.65 202V206A5.25 5.25 0 0 1 491.4 211.25H110.75Z" fill="#3b6ef6" fill-opacity="0.16" stroke="#3b6ef6" stroke-width="1.5"/>
+  <text x="503.4" y="208" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" fill="currentColor" fill-opacity="0.62">+29.8%</text>
+  <text x="0" y="251" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor">4 streams</text>
+  <path d="M110 228H412.1A6 6 0 0 1 418.1 234V238A6 6 0 0 1 412.1 244H110Z" fill="#3b6ef6"/>
+  <text x="424.1" y="240" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" fill="currentColor">+23.7%</text>
+  <path d="M110.75 248.75H414.7A5.25 5.25 0 0 1 419.95 254V258A5.25 5.25 0 0 1 414.7 263.25H110.75Z" fill="#3b6ef6" fill-opacity="0.16" stroke="#3b6ef6" stroke-width="1.5"/>
+  <text x="426.7" y="260" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" fill="currentColor" fill-opacity="0.62">+23.9%</text>
+  <text x="0" y="303" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor">8 streams</text>
+  <path d="M110 280H256.1A6 6 0 0 1 262.1 286V290A6 6 0 0 1 256.1 296H110Z" fill="#3b6ef6"/>
+  <text x="268.1" y="292" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" fill="currentColor">+11.7%</text>
+  <path d="M110.75 300.75H295.1A5.25 5.25 0 0 1 300.35 306V310A5.25 5.25 0 0 1 295.1 315.25H110.75Z" fill="#3b6ef6" fill-opacity="0.16" stroke="#3b6ef6" stroke-width="1.5"/>
+  <text x="307.1" y="312" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" fill="currentColor" fill-opacity="0.62">+14.7%</text>
+  <text x="0" y="355" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor">16 streams</text>
+  <path d="M110 332H118.3A6 6 0 0 1 124.3 338V342A6 6 0 0 1 118.3 348H110Z" fill="#3b6ef6"/>
+  <text x="130.3" y="344" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" fill="currentColor">+1.1%</text>
+  <path d="M110.75 352.75H113.1A5.25 5.25 0 0 1 118.35 358V362A5.25 5.25 0 0 1 113.1 367.25H110.75Z" fill="#3b6ef6" fill-opacity="0.16" stroke="#3b6ef6" stroke-width="1.5"/>
+  <text x="125.1" y="364" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" fill="currentColor" fill-opacity="0.62">+0.7%</text>
+  <g font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" text-anchor="middle" fill="currentColor" fill-opacity="0.62">
+    <text x="110" y="402">0</text>
+    <text x="240" y="402">+10%</text>
+    <text x="370" y="402">+20%</text>
+    <text x="500" y="402">+30%</text>
+    <text x="630" y="402">+40%</text>
+  </g>
+  <text x="0" y="438" font-family="Inter, system-ui, sans-serif" font-size="14" fill="currentColor">At one stream: 638.4 tokens per second without the megakernel; 885.8 and 849.0 with it.</text>
+  <text x="0" y="470" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" letter-spacing="0.06em" fill="currentColor" fill-opacity="0.62">SOURCE: EZO LABS RESEARCH</text>
+</svg>

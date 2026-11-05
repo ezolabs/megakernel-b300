@@ -1,0 +1,76 @@
+diff --git a/python/sglang/srt/speculative/dspark_components/dspark_verify.py b/python/sglang/srt/speculative/dspark_components/dspark_verify.py
+index c77d2337..e22367a4 100644
+--- a/python/sglang/srt/speculative/dspark_components/dspark_verify.py
++++ b/python/sglang/srt/speculative/dspark_components/dspark_verify.py
+@@ -988,11 +988,18 @@ class DsparkVerifyEpilogue:
+         )
+ 
+     def read_block_accept_lens(self, bs: int) -> Optional[torch.Tensor]:
+-        """commit_lens + cap_trim_lens from the in-graph accept, or None."""
++        """commit_lens + cap_trim_lens from the in-graph accept, or None: a view,
++        the ``block_accept_lens_out`` target. Readers take the snapshot."""
+         if self.block_accept_lens_buf is None:
+             return None
+         return self.block_accept_lens_buf[:bs]
+ 
++    def snapshot_block_accept_lens(self, bs: int) -> Optional[torch.Tensor]:
++        # read_accept's hazard: the overlap readback on copy_stream may run after
++        # the next replay rewrites the buffer, so hand the result a copy.
++        view = self.read_block_accept_lens(bs)
++        return None if view is None else view.clone()
++
+     @property
+     def folds_commit(self) -> bool:
+         if self.commit_ctx is None:
+diff --git a/python/sglang/srt/speculative/dspark_components/dspark_worker_v2.py b/python/sglang/srt/speculative/dspark_components/dspark_worker_v2.py
+index b60c87cc..4fb36372 100644
+--- a/python/sglang/srt/speculative/dspark_components/dspark_worker_v2.py
++++ b/python/sglang/srt/speculative/dspark_components/dspark_worker_v2.py
+@@ -1434,7 +1434,7 @@ class DSparkWorkerV2(BaseSpecWorker):
+ 
+     def _block_accept_lens(self, *, accept, folded_accept: bool, bs: int):
+         in_graph = (
+-            self._verify_epilogue.read_block_accept_lens(bs)
++            self._verify_epilogue.snapshot_block_accept_lens(bs)
+             if folded_accept and self._verify_epilogue is not None
+             else None
+         )
+diff --git a/test/registered/unit/spec/test_dspark_read_accept_no_alias.py b/test/registered/unit/spec/test_dspark_read_accept_no_alias.py
+index 1d1374a4..90e83eab 100644
+--- a/test/registered/unit/spec/test_dspark_read_accept_no_alias.py
++++ b/test/registered/unit/spec/test_dspark_read_accept_no_alias.py
+@@ -80,6 +80,34 @@ class TestDsparkReadAcceptNoAlias(unittest.TestCase):
+         for name in _FIELDS:
+             self.assertTrue(torch.equal(getattr(outs, name), written[name]), name)
+ 
++    def test_block_accept_lens_snapshot_survives_the_next_replay(self):
++        ep = _epilogue()
++        ep.block_accept_lens_buf = None
++        self.assertIsNone(ep.snapshot_block_accept_lens(4))
++        ep.block_accept_lens_buf = torch.arange(8, dtype=torch.int32)
++        # The in-graph accept still writes through the view.
++        ep.read_block_accept_lens(4).copy_(torch.full((4,), 7, dtype=torch.int32))
++        snap = ep.snapshot_block_accept_lens(4)
++        self.assertNotEqual(
++            snap.untyped_storage().data_ptr(),
++            ep.block_accept_lens_buf.untyped_storage().data_ptr(),
++        )
++        ep.block_accept_lens_buf.fill_(-1)  # the next verify replay
++        self.assertEqual(snap.tolist(), [7, 7, 7, 7])
++
++    def test_worker_hands_the_result_a_snapshot(self):
++        from sglang.srt.speculative.dspark_components.dspark_worker_v2 import (
++            DSparkWorkerV2,
++        )
++
++        ep = _epilogue()
++        ep.block_accept_lens_buf = torch.full((8,), 7, dtype=torch.int32)
++        worker = DSparkWorkerV2.__new__(DSparkWorkerV2)
++        worker._verify_epilogue = ep
++        lens = worker._block_accept_lens(accept=None, folded_accept=True, bs=4)
++        ep.block_accept_lens_buf.fill_(-1)  # the next verify replay
++        self.assertEqual(lens.tolist(), [7, 7, 7, 7])
++
+ 
+ if __name__ == "__main__":
+     unittest.main()

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 560" width="1600" height="560" role="img" aria-labelledby="title desc">
+  <title id="title">Per-stream decode gain from NVIDIA's megakernel on a 4x B300 node, by streams at once</title>
+  <desc id="desc">Bar chart drawn to scale from zero of the gain in per-stream decode speed from NVIDIA's megakernel over our tuned stack without it, one 4x B300 node, by streams decoding at once, for two boots of the same build. 1 stream: plus 38.8% on the first boot and plus 33.0% on the second; 2 streams: plus 29.6% on the first boot and plus 29.8% on the second; 4 streams: plus 23.7% on the first boot and plus 23.9% on the second; 8 streams: plus 11.7% on the first boot and plus 14.7% on the second; 16 streams: plus 1.1% on the first boot and plus 0.7% on the second. At one stream that is 638.4 tokens per second without the megakernel, 885.8 and 849.0 with it. Baseline values by streams: 638.4, 530.6, 450, 350.9, 294.6 tokens per second. Bars for the second boot are lighter. Data: article/figures/lead.csv.</desc>
+  <rect width="1600" height="560" fill="#f6f7f9"/>
+  <text x="64" y="56" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="40" font-weight="700" letter-spacing="-0.8" font-feature-settings="'ss01' 1" fill="#141310">Up to 38.8% faster per stream on the megakernel</text>
+  <text x="64" y="88" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="22" fill="#141310" fill-opacity="0.72">Per-stream decode gain over our tuned stack without it, one 4x B300 node, by streams decoding at once</text>
+  <rect x="1086" y="104" width="14" height="14" rx="2" fill="#3b6ef6"/>
+  <text x="1108" y="117" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="18" fill="#141310" fill-opacity="0.72">First boot</text>
+  <rect x="1234" y="104" width="14" height="14" rx="2" fill="#3b6ef6" fill-opacity="0.38"/>
+  <text x="1256" y="117" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="18" fill="#141310" fill-opacity="0.72">Second boot, same build</text>
+  <line x1="190" y1="140" x2="190" y2="430" stroke="#3a3b40" stroke-opacity="0.22" stroke-width="1" stroke-dasharray="3 4"/>
+  <line x1="495.9090909090909" y1="140" x2="495.9090909090909" y2="430" stroke="#3a3b40" stroke-opacity="0.22" stroke-width="1" stroke-dasharray="3 4"/>
+  <line x1="801.8181818181818" y1="140" x2="801.8181818181818" y2="430" stroke="#3a3b40" stroke-opacity="0.22" stroke-width="1" stroke-dasharray="3 4"/>
+  <line x1="1107.7272727272727" y1="140" x2="1107.7272727272727" y2="430" stroke="#3a3b40" stroke-opacity="0.22" stroke-width="1" stroke-dasharray="3 4"/>
+  <line x1="1413.6363636363635" y1="140" x2="1413.6363636363635" y2="430" stroke="#3a3b40" stroke-opacity="0.22" stroke-width="1" stroke-dasharray="3 4"/>
+  <line x1="190" y1="140" x2="190" y2="430" stroke="#3a3b40" stroke-opacity="0.57" stroke-width="1"/>
+  <text x="190" y="456" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" text-anchor="middle" fill="#141310" fill-opacity="0.72">0%</text>
+  <text x="495.9090909090909" y="456" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" text-anchor="middle" fill="#141310" fill-opacity="0.72">10%</text>
+  <text x="801.8181818181818" y="456" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" text-anchor="middle" fill="#141310" fill-opacity="0.72">20%</text>
+  <text x="1107.7272727272727" y="456" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" text-anchor="middle" fill="#141310" fill-opacity="0.72">30%</text>
+  <text x="1413.6363636363635" y="456" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" text-anchor="middle" fill="#141310" fill-opacity="0.72">40%</text>
+  <text x="170" y="176" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" text-anchor="end" fill="#141310">1 stream</text>
+  <rect x="190" y="148" width="1186.9" height="18" rx="2" fill="#3b6ef6"/>
+  <rect x="190" y="172" width="1009.5" height="18" rx="2" fill="#3b6ef6" fill-opacity="0.38"/>
+  <text x="1386.9" y="161" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#141310">+38.8%</text>
+  <text x="1209.5" y="185" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#141310" fill-opacity="0.72">+33.0%</text>
+  <text x="170" y="234" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" text-anchor="end" fill="#141310">2 streams</text>
+  <rect x="190" y="206" width="905.5" height="18" rx="2" fill="#3b6ef6"/>
+  <rect x="190" y="230" width="911.6" height="18" rx="2" fill="#3b6ef6" fill-opacity="0.38"/>
+  <text x="1105.5" y="219" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#141310">+29.6%</text>
+  <text x="1111.6" y="243" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#141310" fill-opacity="0.72">+29.8%</text>
+  <text x="170" y="292" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" text-anchor="end" fill="#141310">4 streams</text>
+  <rect x="190" y="264" width="725.0" height="18" rx="2" fill="#3b6ef6"/>
+  <rect x="190" y="288" width="731.1" height="18" rx="2" fill="#3b6ef6" fill-opacity="0.38"/>
+  <text x="925.0" y="277" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#141310">+23.7%</text>
+  <text x="931.1" y="301" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#141310" fill-opacity="0.72">+23.9%</text>
+  <text x="170" y="350" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" text-anchor="end" fill="#141310">8 streams</text>
+  <rect x="190" y="322" width="357.9" height="18" rx="2" fill="#3b6ef6"/>
+  <rect x="190" y="346" width="449.7" height="18" rx="2" fill="#3b6ef6" fill-opacity="0.38"/>
+  <text x="557.9" y="335" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#141310">+11.7%</text>
+  <text x="649.7" y="359" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#141310" fill-opacity="0.72">+14.7%</text>
+  <text x="170" y="408" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" text-anchor="end" fill="#141310">16 streams</text>
+  <rect x="190" y="380" width="33.6" height="18" rx="2" fill="#3b6ef6"/>
+  <rect x="190" y="404" width="21.4" height="18" rx="2" fill="#3b6ef6" fill-opacity="0.38"/>
+  <text x="233.7" y="393" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#141310">+1.1%</text>
+  <text x="221.4" y="417" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#141310" fill-opacity="0.72">+0.7%</text>
+  <text x="190" y="482" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="0.9" fill="#141310" fill-opacity="0.72">GAIN IN DECODE SPEED PER STREAM</text>
+  <text x="64" y="518" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="18" fill="#141310" fill-opacity="0.72">At one stream: 638.4 tok/s without the megakernel, 885.8 and 849.0 with it, on two boots.</text>
+  <text x="64" y="542" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" fill="#141310" fill-opacity="0.72">Source: record/HEADLINE.md</text>
+</svg>

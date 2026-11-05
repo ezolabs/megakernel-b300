@@ -1,0 +1,3 @@
+coldfill-box-b.jsonl n=8 fill_pt 60000.0 cached 0.0 ttft_s 0.864 prefill_tok_s 69494.0 bg_pre 524.5 bg_during 161.9 dip 69.1% max_gap_s 0.085
+coldfill-box-a.jsonl n=8 fill_pt 60000.0 cached 0.0 ttft_s 1.036 prefill_tok_s 57919.0 bg_pre 544.7 bg_during 183.4 dip 66.3% max_gap_s 0.148
+coldfill-MKP1.jsonl n=8 fill_pt 60000.0 cached 0.0 ttft_s 0.982 prefill_tok_s 61114.0 bg_pre 546.2 bg_during 180.9 dip 66.9% max_gap_s 0.141

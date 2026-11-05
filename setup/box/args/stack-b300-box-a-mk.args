@@ -1,0 +1,23 @@
+# DeepSeek-V4.1-Flash boot line, stack-b300-box-a-mk — what box-a SERVES since its return to the router
+# on 2026-10-30 (#39, the root's verdict "SAFE as a monitored canary beside box-c"): config X of
+# qa/box-a-megakernel-20261029/, byte for byte the flag line of that record's args/mk-latest.args. Paired
+# with env-box-a-mk.txt (boxes/box-a.env's ENV_SEED) on /workspace/mk29/sglang @ 9ec65dacaf52
+# (our SGLang fork branch box-a-mk-latest) in /opt/sglang-mk29, with the NVIDIA megakernel plugin
+# /workspace/mk29/sgl-nvidia-mega 54b4289 + its B300 patch (resident_blocks 148, Feature.KV_OFFLOAD).
+# The flag line is stack-b300-box-a.args' flag line with four values changed and one flag appended:
+#   --ep-size 4 -> 1                            the megakernel runs the MoE at EP1 (its arm's shape)
+#   --load-publish-endpoint tcp://*:5559 -> tcp://127.0.0.1:5559   loopback load feed (this tree can;
+#       819756d4 cannot, so stack-b300-box-a.args keeps the wildcard)
+#   --hicache-io-backend kernel -> direct, --hicache-mem-layout page_first -> page_first_direct
+#       the host-cache layout the megakernel's KV_OFFLOAD path takes
+#   --enable-nvidia-megakernel                  the plugin's fused decode
+# KV pool 49,879,552 tokens (the final's rows carried 55,363,328): the router rows' kv capacity.
+# Record and gates: qa/box-a-megakernel-20261029/ (README, raw/box-a-return/NOTES.md). Not byte-exact vs the
+# final; hangwatch.py (--service --on-hang kill) and the TP probe (env-box-a-mk.txt) watch it in serving.
+# WAY BACK: stack-b300-box-a.args + env-box-a-w1.txt on 819756d4 (VENV=/opt/sglang-box-e,
+# SGLANG_TREE=/workspace/box-e-up), the box file's rollback comment.
+# The TREE line pins the file to the megakernel tree (check-import.sh: the basename of
+# SGLANG_TREE=/workspace/mk29/sglang).
+# TREE: sglang
+# Tuning flags only, per args/README.md's composition rule. Not a rung, not a -b200 mirror.
+--tp-size 4 --ep-size 1 --mem-fraction-static 0.75 --speculative-algorithm DSPARK --speculative-dspark-block-size 5 --cuda-graph-max-bs-decode 64 --max-running-requests 64 --context-length 1048576 --chunked-prefill-size 8192 --reasoning-parser auto --tool-call-parser auto --enable-metrics --trust-remote-code --prefill-decode-interval 4 --enable-cache-report --swa-prefix-tails 2048 --enable-priority-scheduling --disable-priority-preemption --default-priority-value 1 --max-queued-requests 512 --kv-events-config '{"publisher":"zmq","endpoint":"tcp://127.0.0.1:5557","bind":true,"replay_endpoint":"tcp://127.0.0.1:5558"}' --load-publish-endpoint tcp://127.0.0.1:5559 --metric-label-denylist priority model_name --short-prefill-token-threshold 3072 --short-prefill-chunk-size 1024 --short-prefill-max-tokens 4096 --short-prefill-lookahead 8 --short-prefill-swap-limit 16384 --enable-hierarchical-cache --hicache-ratio 2 --hicache-write-policy write_through --hicache-io-backend direct --hicache-mem-layout page_first_direct --hicache-host-memory-mode cache --no-enable-decoder-swa-bounded-replay --speculative-use-block-verification --cuda-graph-backend-prefill breakable --cuda-graph-max-bs-prefill 2048 --cuda-graph-prefill-max-context 131072 --flashinfer-allreduce-fusion-backend trtllm --enable-nvidia-megakernel

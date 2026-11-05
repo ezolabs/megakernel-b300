@@ -1,0 +1,13 @@
+diff --git a/sgl_nvidia_mega/deepseek_v41/spec.py b/sgl_nvidia_mega/deepseek_v41/spec.py
+index 0fe6f30..295212c 100644
+--- a/sgl_nvidia_mega/deepseek_v41/spec.py
++++ b/sgl_nvidia_mega/deepseek_v41/spec.py
+@@ -124,7 +124,7 @@ REQUIREMENTS = Requirements(
+     hf_config={**HF_CONFIG, "model_type": "deepseek_v41"},
+     env={
+         # the TP sync setting every measured launch ran with
+-        "SGLANG_SPEC_TP_SYNC": "rng,-dspark-accept-sample",
++        "SGLANG_SPEC_TP_SYNC": "all",
+         # slot engram reads the per-rank host table SGLang builds only with these (no
+         # per-table NUMA placement; SGLang's process membind, SGLANG_NUMA_BIND_V2, only)
+         **(

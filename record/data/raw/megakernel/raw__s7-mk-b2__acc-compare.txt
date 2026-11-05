@@ -1,0 +1,22 @@
+== c1  final FREF [3.199, 3.069, 3.222, 3.109] mean 3.150
+   MKL1                     n=4 mean 3.059  -2.9%  t -0.8
+   MKL2                     n=4 mean 3.151  +0.1%  t +0.0
+   S6B                      n=3 mean 3.008  -4.5%  t -2.2
+   MKL1+MKL2 (plain MK)     n=8 mean 3.106  -1.4%  t -0.7
+   MKL1+S6B (old pool)      n=7 mean 3.038  -3.6%  t -1.5
+   MKL1+MKL2+S6B (all MK)   n=11 mean 3.079  -2.2%  t -1.2
+== c4-identical  final FREF [3.109, 3.154, 3.191, 3.197] mean 3.163
+   MKL1                     n=4 mean 3.090  -2.3%  t -2.7
+   MKL2                     n=4 mean 3.075  -2.8%  t -2.2
+   S6B                      n=3 mean 3.075  -2.8%  t -3.2
+   MKL1+MKL2 (plain MK)     n=8 mean 3.083  -2.5%  t -2.9
+   MKL1+S6B (old pool)      n=7 mean 3.083  -2.5%  t -3.3
+   MKL1+MKL2+S6B (all MK)   n=11 mean 3.080  -2.6%  t -3.4
+== c4-mixed  final FREF [2.927, 2.912, 2.903, 2.901] mean 2.911
+   MKL1                     n=4 mean 2.912  +0.0%  t +0.1
+   MKL2                     n=4 mean 2.912  +0.0%  t +0.1
+   S6B                      n=3 mean 2.885  -0.9%  t -1.7
+   MKL1+MKL2 (plain MK)     n=8 mean 2.912  +0.0%  t +0.1
+   MKL1+S6B (old pool)      n=7 mean 2.900  -0.4%  t -0.9
+   MKL1+MKL2+S6B (all MK)   n=11 mean 2.904  -0.2%  t -0.6
+caveat: t is over reps (rep-to-rep noise); boots are the true unit (1 final boot, 3 MK boots).

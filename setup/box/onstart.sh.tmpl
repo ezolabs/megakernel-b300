@@ -1,0 +1,333 @@
+#!/bin/bash
+# box-c-RESTART-SAFETY (#6325, 2026-09-29): this template carries the serve-model.env launcher plus #5928's two
+# hygiene edits -- the on-box onstart copy box-c was hand-swapped to (sha d39d87db...) is now what a render yields.
+# box-c-STAGED-LAUNCHER (#6327, 2026-09-29): when __TOOLS_REMOTE__/relaunch.staged.sh (a copy of stage.sh's
+# lib.sh launcher) is present, a restart restores it as relaunch.sh instead of writing the inline copy, and
+# exports BOX (pid 1's env has none; lib.sh dies without it). Without the staged copy it writes the inline one.
+# box-c-BOX-BOTH-ARMS (#6435, 2026-09-29): BOX is exported ABOVE the launcher choice, so the inline arm's watchdog
+# (watchdog.sh sources lib.sh) also comes up. A relaunch.sh that is already the staged lib.sh launcher is kept
+# as-is and re-copied to relaunch.staged.sh, so a later stage.sh of a newer launcher never gets rolled back to
+# an older backup; the backup is restored only when relaunch.sh is not the staged launcher.
+# box-c-HUB-PIN (ledger #66, #76; 2026-10-17): the download gate's hub install is pinned to the range the
+# image's own transformers needs, and the hub/transformers probe is a function called from BOTH arms of
+# that gate -- a restart whose checkpoint already landed skips the download whole, and that boot path is
+# the one the marker exists to instrument. HF_HUB_ENABLE_HF_TRANSFER=1 went with the pin, beside the
+# hf_transfer extra it paired with: both are dead on the hub 1.x line. The runtime detail is at the
+# install and the probe themselves, inside the gate below.
+# box-c-STOCK-PIN (ledger #491, 2026-10-17): the checkpoint download names its revision. Unpinned,
+# `hf download __HF_REPO__` takes that repo's DEFAULT-BRANCH TIP, so STOCK_DIR -- a directory whose
+# `<repo name>` path already claims this build -- would hold whatever the tip happened to be at the
+# boot. __HF_REV__ is build-onstart.sh's HF_REV, the checkpoint's sha of record
+# (the grafting kit's model notes name the same revision), and
+# the graft download bringup.sh runs is pinned the same way (#470). Every retry below passes it, so
+# a tip that moves mid-boot cannot land a second revision's shards beside the first's. It pins the
+# repo; it is not a gate: the file-count gate below counts files, and apply_graft.py's own stock
+# check covers only the shards a graft touches.
+# Box onstart TEMPLATE (box-parametrized, ported from the earlier per-box onstart scripts) --
+# rendered by build-onstart.sh, which substitutes every double-underscored placeholder below
+# (never spell one out in a comment here -- the renderer replaces every occurrence textually, and
+# a leftover one fails the render) and emits the gzip+base64 blob that `hostctl create instance
+# --onstart-cmd` carries. The
+# onstart is create-frozen, so everything a first boot needs is here: the sshd key-mode fix, the
+# checkpoint download with a file-count gate, the args file, the launcher. The rest of the tool
+# set (lib.sh, boxes/, watchdog.sh, cutover.sh, restart.sh, probes) is staged over rsync/scp by
+# stage.sh once ssh works -- this script's inlined launcher starts the watchdog only when its
+# file already exists, which it never does on a first boot.
+#
+# STOCK_DIR vs MODEL_DIR: the download above always targets STOCK_DIR (the stock checkpoint
+# __HF_REPO__ names, at __HF_REV__). What sglang serve actually loads is MODEL_DIR, read by the
+# inlined launcher below from __TOOLS_REMOTE__/serve-model.env when stage.sh has written one (from the box file's
+# current MODEL_DIR/SERVED_MODEL), else it falls back to this render's own baked-in box values.
+# The split exists because onstart is create-frozen but a box's served model is not: without it, a
+# container restart re-runs this exact script and the inlined launcher would serve whatever
+# MODEL_DIR/SERVED_MODEL were baked in at the last `build-onstart.sh` render -- on a box switched
+# to a repack after create, that resurrects the stock engine. serve-model.env is the fix that needs
+# no re-render: `stage.sh` (or a hand-write on the box) updates it and the very next relaunch --
+# inline-launcher or the staged tools/relaunch.sh, both honour it -- picks up the current model.
+#
+# MODEL SOURCE (ledger #132, 2026-10-26): the box file's ONSTART_MODEL_SOURCE picks one of two arms at
+# RENDER time -- build-onstart.sh keeps the lines between a `#@stock{` or `#@copied{` line and its `#@}`
+# only for the matching source, and the lines between `#@grant{` and `#@}` only when the box file sets
+# ONSTART_GRANT_FILE. `stock` (the default) downloads STOCK_DIR as above. `copied` is a box that serves
+# a repack COPIED onto it (box-a: from box-c): its render carries no download at all and gates the engine
+# on the served MODEL_DIR's files plus the copy's MODEL_READY_MARKER. In both, sshd, the tunnel grant
+# and Caddy come up BEFORE the model gate, so a box that cannot serve still answers ssh, its tunnel and
+# its door.
+echo "===__BOX__-START $(date -u) ==="
+# No core dumps from anything this boot starts (#1300: no prod traffic at rest on a rented box). The
+# box's core_pattern writes to the HOST's disk (/var/lib/hostctl_kaalia/data/core-%e.%p.%h.%t), and a
+# crashed engine's or Caddy's core holds requests; RLIMIT_CORE 0 here is inherited by Caddy, the
+# watchdog and every engine launcher below (relaunch.sh sets it again and its gate refuses any other).
+ulimit -c 0
+# box-c-HYGIENE (#5928, 2026-09-29): the container env's VLLM_API_KEY is the create-time key (pre-#5645
+# rotation). An existing /etc/environment VLLM_API_KEY line is the live, rotated key and is kept; the
+# env copy is appended only when the file has no VLLM_API_KEY line at all (a fresh filesystem).
+env | grep -E '^(XDG_CACHE_HOME|SGLANG_)' >> /etc/environment
+grep -q '^VLLM_API_KEY=' /etc/environment 2>/dev/null || env | grep '^VLLM_API_KEY=' >> /etc/environment
+echo "--- fix: keys + modes (the injector writes authorized_keys as uid 112 mode 644)"
+mkdir -p /root/.ssh; touch /root/.ssh/authorized_keys
+printf '%s\n' "$SSH_PUBLIC_KEY" "__SSH_PUBKEY__" | while IFS= read -r k; do [ -n "$k" ] && ! grep -qxF "$k" /root/.ssh/authorized_keys && printf '%s\n' "$k" >> /root/.ssh/authorized_keys; done
+chown -R 0:0 /root/.ssh; chmod 755 /root; chmod 700 /root/.ssh; chmod 600 /root/.ssh/authorized_keys
+mkdir -p /etc/ssh/sshd_config.d; printf 'StrictModes no\n' > /etc/ssh/sshd_config.d/zz-__BOX__.conf
+pkill -x sshd 2>/dev/null; sleep 1
+/usr/sbin/sshd 2>&1 && echo "sshd restarted rc=0" || echo "sshd restart FAILED"
+stat -c 'after: %U:%G %a %n' /root/.ssh/authorized_keys
+echo "===__BOX__-FIX-DONE==="
+#@grant{
+# TUNNEL GRANT (ONSTART_GRANT_FILE): a router tunnel's key lives in authorized_keys2, which the provider's key
+# injector never writes; the staged copy (stage.sh's rsync never deletes it) puts it back whenever it is
+# missing or different. Here, after the sshd fix (which chowns /root/.ssh) and before the door and the
+# model gate, so the tunnel survives a restart that cannot serve. A missing copy is said, never fatal.
+if [ -s __GRANT_FILE__ ]; then
+  cmp -s __GRANT_FILE__ /root/.ssh/authorized_keys2 || { cp __GRANT_FILE__ /root/.ssh/authorized_keys2 && echo "===__BOX__-GRANT: authorized_keys2 restored from __GRANT_FILE__==="; }
+  chown 0:0 /root/.ssh/authorized_keys2; chmod 600 /root/.ssh/authorized_keys2
+else
+  echo "===__BOX__-GRANT-MISSING: no __GRANT_FILE__ -- authorized_keys2 not restored==="
+fi
+#@}
+# DOOR: Caddy (tls.sh's caddy-relaunch.sh, the allowlisted Caddyfile) before the model gate, so the
+# door is back on a restart even when the engine cannot start; the watchdog keeps it up once the
+# launcher runs. Absent on a first boot (tls.sh has not run yet), so a no-op there. Same process
+# match as watchdog.sh's.
+if [ -x __TOOLS_REMOTE__/caddy-relaunch.sh ] && ! pgrep -f "__TOOLS_REMOTE__/cadd[y]-relaunch.sh|cadd[y] run" >/dev/null; then
+  bash __TOOLS_REMOTE__/caddy-relaunch.sh >> /workspace/__BOX__-caddy.log 2>&1; echo "===__BOX__-DOOR: caddy-relaunch.sh rc=$?==="
+fi
+# IPROUTE2: relaunch.sh's per-engine port check reads `ss -ltn` (it falls back to /proc/net/tcp
+# without it), and the image ships no iproute2 -- a recreated container lost the one installed by hand.
+# Best-effort and never fatal, and in the BACKGROUND (its own session, like the engines): ss is a
+# nicety, never a need, and an apt that cannot reach a mirror would otherwise hold this boot -- the
+# model gate and every engine launch behind it -- for up to the two 300 s timeouts. One attempt per
+# boot, never retried. Started before the model gate so even a box that cannot serve gets it; the
+# start is said at once, in this boot log; the background job writes everything -- apt's own output,
+# then the outcome line -- to the box's apt log, like every other background job here, never to this
+# boot log.
+iproute2_install() {
+  if timeout 300 apt-get update -qq && DEBIAN_FRONTEND=noninteractive timeout 300 apt-get install -y -qq iproute2 && command -v ss >/dev/null 2>&1; then
+    echo "===__BOX__-IPROUTE2: installed ($(command -v ss))==="
+  else
+    echo "===__BOX__-IPROUTE2-MISSING: apt-get install iproute2 failed (apt's output above) -- relaunch.sh reads /proc/net/tcp instead==="
+  fi
+}
+if ! command -v ss >/dev/null 2>&1; then
+  nohup setsid bash -c "$(declare -f iproute2_install); iproute2_install" >> /workspace/__BOX__-apt.log 2>&1 < /dev/null &
+  echo "===__BOX__-IPROUTE2-INSTALLING: no ss on PATH -- apt-get install iproute2 started in the background (pid $!; output and outcome in /workspace/__BOX__-apt.log), the engines do not wait for it==="
+fi
+echo "--- diag"
+df -h /dev/shm /workspace 2>&1
+nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv 2>&1
+nvidia-smi topo -m 2>&1 | head -12
+command -v sglang; command -v nvcc && nvcc --version | tail -1
+#@stock{
+# STOCK_DIR: the onstart's own hf-download target, always the checkpoint __HF_REPO__ names, at
+# __HF_REV__. This is deliberately NOT the served model's directory -- a box that serves a repack (or
+# anything else derived from the stock checkpoint) points MODEL_DIR elsewhere; see the
+# serve-model.env read below, right before the launcher is written out.
+STOCK=__STOCK_DIR__
+mkdir -p __TOOLS_REMOTE__ __CACHE__ "$STOCK"
+(while true; do echo "PROGRESS_shards_$(ls -1 $STOCK/model-*.safetensors 2>/dev/null | wc -l)"; sleep 30; done) >> /workspace/progress.log 2>&1 &
+HB=$!
+#@}
+#@copied{
+# COPIED: nothing is downloaded. The gate below counts the directory the launcher will SERVE, which it
+# names STOCK in this arm too: serve-model.env's MODEL_DIR read the launcher's way (last line wins), else
+# this render's own MODEL_DIR. Never created here -- an absent copy is a not-ready box, not an empty dir.
+STOCK=__MODEL_DIR__
+SM=$(sed -n 's/^MODEL_DIR=//p' __TOOLS_REMOTE__/serve-model.env 2>/dev/null | tail -1)
+[ -n "$SM" ] && STOCK=$SM
+mkdir -p __TOOLS_REMOTE__ __CACHE__
+#@}
+# The gate counts FILES, never log lines: __SHARD_COUNT__ shards + index + config + tokenizer, 0 .incomplete.
+complete() { [ "$(ls -1 $STOCK/model-*.safetensors 2>/dev/null | wc -l)" -ge __SHARD_COUNT__ ] && [ -f "$STOCK/model.safetensors.index.json" ] && [ -f "$STOCK/config.json" ] && [ -f "$STOCK/tokenizer.json" ] && [ -f "$STOCK/tokenizer_config.json" ] && [ "$(find "$STOCK" -name '*.incomplete' 2>/dev/null | wc -l)" -eq 0 ]; }
+# Name the hub/transformers pair the download and the serve both need, and let a venv whose two cannot
+# be imported together say so HERE, in the boot log, instead of only in the engine's ImportError later.
+# A function because BOTH arms of the download gate below call it: the fresh-boot arm right after the
+# pinned install, and the restart arm, where the gate is skipped whole. Inline in the gate it reported
+# nothing on a container restart of a box whose checkpoint had already landed -- the one boot path this
+# marker exists to instrument, a venv that drifted back into the ImportError since the last boot.
+# `python` is the same PATH-resolved interpreter as the `pip` install below -- the image puts the venv's
+# bin first, which is how the un-pinned install reached the venv's transformers at all. Diagnostic only:
+# nothing here aborts the boot, since the six download attempts below may still complete. Same
+# `===box-MARKER===` shape as the xgrammar line further down. `hf_xet` is probed SEPARATELY, never
+# folded into the pair above: a missing xet backend only drops the pull to plain HTTPS, so it must never
+# raise the IMPORT-FAILED marker -- the healthy line reports it as a field instead, and the failing one
+# claims no cause at all, just the error line the next `sglang serve` would die on.
+hub_probe() {
+  if python -c 'import transformers, huggingface_hub' 2>/dev/null; then
+    xet=present; python -c 'import hf_xet' 2>/dev/null || xet='MISSING (this pull falls back to plain HTTPS)'
+    echo "===__BOX__-HUB: huggingface_hub $(python -c 'import huggingface_hub; print(huggingface_hub.__version__)') / transformers $(python -c 'import transformers; print(transformers.__version__)') / hf_xet $xet==="
+  else
+    echo "===__BOX__-HUB-IMPORT-FAILED: $(python -c 'import transformers, huggingface_hub' 2>&1 | grep -m1 -E '^[A-Za-z_.]*Error' | cut -c1-240 || echo 'no error line -- see /workspace/setup.log')==="
+  fi
+}
+#@copied{
+# The copy pre-sizes its shards, so a file count proves nothing mid-copy: the engine also waits for
+# MODEL_READY_MARKER, which the copy's own sha256 check writes when every shard verified. Not ready
+# exits here, with sshd, the grant and the door already up.
+hub_probe
+if ! complete || [ ! -e "__READY_MARKER__" ]; then
+  echo "===__BOX__-MODEL-NOT-READY $(date -u): MODEL_DIR=$STOCK files $(complete && echo complete || echo INCOMPLETE), __READY_MARKER__ $([ -e "__READY_MARKER__" ] && echo present || echo ABSENT); engine NOT launched==="
+  exit 1
+fi
+echo "===__BOX__-MODEL-READY: $STOCK (files complete, __READY_MARKER__ present)==="
+#@}
+#@stock{
+if ! complete; then
+  export HF_XET_HIGH_PERFORMANCE=1
+  # box-c-HUB-PIN (2026-10-17): the pin IS this line. Un-pinned, `-U` resolved to
+  # hub 2.2.0 and the image's transformers 5.12.1 needs `huggingface-hub>=1.5.0,<2.0`, so the first
+  # `sglang serve` died with
+  #   ImportError: huggingface-hub>=1.5.0,<2.0 is required for a normal functioning of this module,
+  #     but found huggingface-hub==2.2.0
+  # on every box created after hub 2.x shipped. The version PAIR is an IMAGE fact -- transformers
+  # 5.12.1 arrives with the CONTAINER_IMAGE digest the box file pins -- so this range is that
+  # transformers' own requirement and moves only together with the image, never with the index.
+  # `-U` stays: inside the range it takes the newest 1.x (1.33.0 at the time of writing), which is
+  # exactly what an operator hand-installed to repair a broken box. The `[hf_transfer]` extra the
+  # un-pinned line used to carry is not carried here, and neither is HF_HUB_ENABLE_HF_TRANSFER=1: the
+  # hf_transfer backend is gone from hub 1.x (1.33.0's constants.py says so verbatim, "hf_transfer is
+  # not used anymore"), so the extra has nothing left to install, and that same file reads the variable
+  # for one thing only -- a FutureWarning, which fires only when HF_XET_HIGH_PERFORMANCE is unset, and
+  # this script sets it above. Nothing is lost by dropping either: the fast path is `hf-xet`, a core
+  # dependency of hub 1.x on x86_64/arm64, driven by HF_XET_HIGH_PERFORMANCE=1.
+  pip install -q --no-cache-dir -U "huggingface_hub>=1.5.0,<2.0" >> /workspace/setup.log 2>&1 || true
+  hub_probe
+  # box-c-HYGIENE (#5928): HF_TOKEN is read from /root/.hf.env (root, 0600), not inlined here.
+  # box-c-STOCK-PIN (#491): every attempt names --revision __HF_REV__, so all six fetch ONE revision --
+  # a tip that moves between two tries cannot land a second revision's shards beside the first's.
+  # Where the flag sits on the line is hf's own choice -- its options come in any order -- and the
+  # checks that read this render are order-blind: build-onstart.sh refuses a download COMMAND line
+  # that does not name --revision __HF_REV__, and tests/build-onstart.test.sh requires the repo,
+  # --local-dir and that same pin on every such line (the needle that bound --local-dir to the
+  # repo's immediate right is retired -- #506). Moving the pin beside the repo is a reorder, never
+  # an unpinning.
+  for i in 1 2 3 4 5 6; do
+    complete && break
+    HF_TOKEN="$(sed -n 's/^HF_TOKEN=//p' /root/.hf.env 2>/dev/null | head -1)" hf download __HF_REPO__ --local-dir "$STOCK" --revision __HF_REV__ --max-workers 16 >> /workspace/download.log 2>&1
+    sleep 20
+  done
+  echo COSMOS_DOWNLOAD_COMPLETE >> /workspace/download.log
+else
+  # A restart of a box whose checkpoint already landed skips the whole arm above -- install and probe
+  # included -- so the probe runs here too, and EVERY boot names the hub/transformers pair the next
+  # `sglang serve` will load. That restart is the path this marker was added for: the venv can have
+  # drifted back into the ImportError since the last boot (a hand-install, a pip run, an image layer).
+  hub_probe
+fi
+kill $HB 2>/dev/null
+complete || { echo "===__BOX__-DOWNLOAD-INCOMPLETE $(date -u): not serving a partial checkpoint==="; exit 1; }
+#@}
+# XGRAMMAR (the 0044b roll): the image's editable sglang install sits on xgrammar 0.2.1, and the served fork
+# tree (0044 onward, upstream #39026's deepseek_v4_1 structural tag) needs 0.2.8. Bump the venv before the
+# first launch so a fresh bring-up matches the live box: the wheel staged in /workspace/wheels when one is
+# there, else the package index. --no-deps keeps the image's apache-tvm-ffi 0.1.11 (0.2.8 needs >= 0.1.11).
+# A no-op once 0.2.8 is installed; drop this block once the image itself bakes 0.2.8 (ISSUES.md).
+XGR_WANT=0.2.8
+xgr_have() { /opt/sglang/bin/pip show xgrammar 2>/dev/null | sed -n 's/^Version: //p'; }
+if [ "$(xgr_have)" != "$XGR_WANT" ]; then
+  if ls /workspace/wheels/xgrammar-$XGR_WANT-*.whl >/dev/null 2>&1; then
+    /opt/sglang/bin/pip install --no-deps --no-index /workspace/wheels/xgrammar-$XGR_WANT-*.whl >> /workspace/setup.log 2>&1
+  else
+    /opt/sglang/bin/pip install --no-deps "xgrammar==$XGR_WANT" >> /workspace/setup.log 2>&1
+  fi
+fi
+echo "===__BOX__-XGRAMMAR: $(xgr_have) (want $XGR_WANT)==="
+mkdir -p __TOOLS_REMOTE__
+# The args file wins if it already exists (a tuned line survives a container restart).
+[ -s __TOOLS_REMOTE__/sglang-args.txt ] || cat > __TOOLS_REMOTE__/sglang-args.txt <<'EOF_ARGS'
+__ARGS__
+EOF_ARGS
+# box-c-STAGED-LAUNCHER (#6327): prefer the staged lib.sh launcher (its guards: dies without sglang-env.txt,
+# `note` logging) over the inline copy below, when it and what it sources are on the box.
+# box-c-BOX-BOTH-ARMS (#6435): BOX for whichever launcher runs, and for the watchdog.sh either one starts.
+export BOX="${BOX:-__BOX__}"
+LAUNCHER=inline
+if [ -r __TOOLS_REMOTE__/lib.sh ] && [ -r __TOOLS_REMOTE__/boxes/__BOX__.env ] && grep -qF '. "$(dirname "$0")/lib.sh"' __TOOLS_REMOTE__/relaunch.sh 2>/dev/null; then
+  LAUNCHER=staged
+  cp -p __TOOLS_REMOTE__/relaunch.sh __TOOLS_REMOTE__/relaunch.staged.sh
+  echo "===__BOX__-LAUNCHER: staged (relaunch.sh kept, relaunch.staged.sh refreshed, BOX=$BOX)==="
+elif [ -s __TOOLS_REMOTE__/relaunch.staged.sh ] && [ -r __TOOLS_REMOTE__/lib.sh ] && [ -r __TOOLS_REMOTE__/boxes/__BOX__.env ]; then
+  LAUNCHER=staged
+  cp -p __TOOLS_REMOTE__/relaunch.staged.sh __TOOLS_REMOTE__/relaunch.sh
+  echo "===__BOX__-LAUNCHER: staged (restored from relaunch.staged.sh, BOX=$BOX)==="
+else
+echo "===__BOX__-LAUNCHER: inline (no staged launcher, BOX=$BOX)==="
+cat > __TOOLS_REMOTE__/relaunch.sh <<'EOF_RELAUNCH'
+__RELAUNCH__
+EOF_RELAUNCH
+fi
+chmod +x __TOOLS_REMOTE__/relaunch.sh
+# box-c-ENGINES (#429/#497): the staged box file's ENGINES (box-c's 2xTP4, lib.sh) boots every engine it
+# names, `relaunch.sh <id>` each -- its own GPUs, ports, args/env pair, serve log, warm gate and
+# `watchdog.sh <id>` (lib.sh engine_select), so the watchdogs a reboot leaves behind iterate the same
+# ids. Read from the box file at BOOT, never baked into this render (it is create-frozen), and only
+# under the staged launcher: the inline copy knows one engine. Any doubt boots the legacy line below
+# (sglang-args.txt, the TP8 line on ENGINE_PORT): a malformed ENGINES (lib.sh refuses it), or an
+# engine whose sglang-args-<id>.txt / sglang-env-<id>.txt is not on the box (restart.sh --engine
+# installs them). A rollback that must survive a reboot reverts the box file's ENGINES line and
+# re-stages; `restart.sh --single` alone leaves the per-engine pair, and this block, in place.
+ENGINE_IDS=""
+if [ "$LAUNCHER" = staged ]; then
+  if ENGINE_IDS=$(bash -c '. "$1"; engines_list' _ __TOOLS_REMOTE__/lib.sh 2>> /workspace/setup.log); then
+    ENGINE_IDS=$(echo $ENGINE_IDS)
+  else
+    echo "===__BOX__-ENGINES-REFUSED: lib.sh could not list the box file's ENGINES (see /workspace/setup.log) -- booting the legacy line==="
+    ENGINE_IDS=""
+  fi
+  for id in $ENGINE_IDS; do
+    if [ ! -s __TOOLS_REMOTE__/sglang-args-$id.txt ] || [ ! -f __TOOLS_REMOTE__/sglang-env-$id.txt ]; then
+      echo "===__BOX__-ENGINES-INCOMPLETE: ENGINES names '$ENGINE_IDS' but engine $id has no sglang-args-$id.txt/sglang-env-$id.txt -- booting the legacy line==="
+      ENGINE_IDS=""
+      break
+    fi
+  done
+fi
+if [ -n "$ENGINE_IDS" ]; then
+  for id in $ENGINE_IDS; do
+    echo "===__BOX__-SERVE-$id: $(grep -v '^#' __TOOLS_REMOTE__/sglang-args-$id.txt)==="
+  done
+else
+echo "===__BOX__-SERVE: $(grep -v '^#' __TOOLS_REMOTE__/sglang-args.txt)==="
+fi
+# box-c-KEYHOLDERS (#3003): the serve log carries the key (the engine's server_args= line), so it is
+# CREATED 0600 -- in a subshell, so the umask never reaches the launcher or the engine; `>>` keeps the
+# mode of a log that already exists. And the container env's VLLM_API_KEY (create-time -e) stops here:
+# both launchers read the key from /etc/environment, so the engine's environ never carries it.
+unset VLLM_API_KEY
+if [ -n "$ENGINE_IDS" ]; then
+  for id in $ENGINE_IDS; do
+    ( umask 077; : >> /workspace/sglang-serve-$id.log )
+    nohup setsid bash __TOOLS_REMOTE__/relaunch.sh "$id" >> /workspace/sglang-serve-$id.log 2>&1 < /dev/null &
+    echo "===__BOX__-ENGINE-$id: relaunch.sh $id started (log /workspace/sglang-serve-$id.log)==="
+  done
+else
+( umask 077; : >> /workspace/sglang-serve.log )
+nohup setsid bash __TOOLS_REMOTE__/relaunch.sh >> /workspace/sglang-serve.log 2>&1 < /dev/null &
+fi
+#@hangwatch{
+# box-c-HANGWATCH (autopool B1): the box file's HANGWATCH_CMD, after the launch above (relaunch.sh
+# starts the watchdog) -- it holds its own BOOT grace while the engine loads. A running copy (same
+# script, same --out: a hand start, a re-run of this file) is kept.
+if pgrep -f '__HANGWATCH_PAT__' > /dev/null; then
+  echo "===__BOX__-HANGWATCH: already running (__HANGWATCH_OUT__) -- kept==="
+elif [ ! -f __HANGWATCH_SCRIPT__ ]; then
+  echo "===__BOX__-HANGWATCH-MISSING: no __HANGWATCH_SCRIPT__ on the box -- not started==="
+else
+  mkdir -p __HANGWATCH_OUT__
+  nohup setsid __HANGWATCH_CMD__ >> __HANGWATCH_OUT__/nohup.log 2>&1 < /dev/null &
+  echo "===__BOX__-HANGWATCH: started (pid $!, out __HANGWATCH_OUT__)==="
+fi
+#@}
+#@freezegc{
+# FREEZEGC (#958): the box file's FREEZEGC_CMD, after the launch above -- the recurring /freeze_gc that keeps
+# the schedulers' gen2 collections short (qa/eviction-stall-20261105/NOTES.md). Its own session, so a watchdog
+# relaunch or a hangwatch kill never touches it. It logs engine=down while the engine loads; a running copy
+# holds __FREEZEGC_OUT__/timer.lock, so a second start (a re-run of this file, a hand start) exits at once.
+if [ ! -f __FREEZEGC_SCRIPT__ ]; then
+  echo "===__BOX__-FREEZEGC-MISSING: no __FREEZEGC_SCRIPT__ on the box -- not started==="
+else
+  mkdir -p __FREEZEGC_OUT__
+  nohup setsid __FREEZEGC_CMD__ >> __FREEZEGC_OUT__/nohup.log 2>&1 < /dev/null &
+  echo "===__BOX__-FREEZEGC: started (pid $!, out __FREEZEGC_OUT__; exits at once if a timer holds timer.lock)==="
+fi
+#@}
+echo "===__BOX__-END $(date -u) ==="

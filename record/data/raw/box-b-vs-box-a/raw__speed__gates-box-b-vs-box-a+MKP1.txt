@@ -1,0 +1,34 @@
+$ python3 gates.py --arm d13=box-b@box-b --base box-a@box-a --base mkp1=../../../prod-merge-20261030/raw/gate/arm@MKP1 --levels 1,2,4 --metrics decode,aggregate,ttft,fill,dip,gap
+band: 2.5 x sigma-hat x sqrt(1 + 1/2) over 2 base run(s); sigma-hat = one boot mean's noise, the base runs' pooled within-boot SE (rep sd / sqrt(n)) x sqrt(1 + BOOT_EXCESS^2), BOOT_EXCESS decode 0.25, aggregate 0.25, ttft 1.2, fill 2, dip 0.7, gap 1.3 (else 0)
+A/A model check (printed, not in the band; a group's run means more than 3 sigma-hat apart):
+  no --base-aa group given
+outlier policy: a rep > 2x above or below its run's median; base side dropped; arm side FAILed if worse than the base median, else reported and dropped (whatever the base's rate)
+  dropped (base side, band): box-a ttft C=2: rep 1 = 0.174 (run median 0.066, > 2x off) dropped
+  dropped (base side, band): MKP1 ttft C=2: rep 5 = 0.134 (run median 0.061, > 2x off) dropped
+  arm outlier: none
+metric     box unit                    arm       base   delta     band sigma^        95% CI arm-base  verdict
+decode       1 d13                   860.1      875.5   -1.8%     7.4%  2.43%          [-80.2, 50.6]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+decode       2 d13                   687.1      698.0   -1.6%     5.8%  1.91%          [-39.1, 20.5]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+decode       4 d13                   554.6      553.4   +0.2%     4.6%  1.51%          [-13.0, 15.6]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+aggregate    1 d13                   860.4      875.6   -1.7%     7.4%  2.42%          [-74.7, 51.4]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+aggregate    2 d13                  1316.2     1292.2   +1.9%     5.3%  1.72%          [-33.0, 90.3]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+aggregate    4 d13                  2048.1     2015.8   +1.6%     4.7%  1.55%          [-28.5, 96.8]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+ttft         1 d13                  26.8ms     42.5ms  -37.1%    17.5%  5.73%     [-18.9ms, -12.4ms]  GAIN (better beyond band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+ttft         2 d13                  38.9ms     61.8ms  -37.1%    21.0%  6.87%     [-27.8ms, -17.7ms]  GAIN (better beyond band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+ttft         4 d13                  52.4ms     84.6ms  -38.1%    31.8% 10.39%     [-42.5ms, -21.7ms]  GAIN (better beyond band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+fill         - d13                  0.869s     1.016s  -14.5%     6.7%  2.20%     [-0.167s, -0.126s]  GAIN (better beyond band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+dip          - d13                   69.0%      66.5%   +3.7%     6.9%  2.26%           [+0.3, +4.5]  NEUTRAL (inside band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+gap          - d13                  85.9ms    147.0ms  -41.6%     8.3%  2.72%     [-66.2ms, -56.7ms]  GAIN (better beyond band; band from 2.5 x sigma-hat x sqrt(1 + 1/2))
+gate decode    NEUTRAL     (gain 0, neutral 3, regression 0, unconfirmed 0 of 3 sub-gates)
+gate aggregate NEUTRAL     (gain 0, neutral 3, regression 0, unconfirmed 0 of 3 sub-gates)
+gate ttft      GAIN        (gain 3, neutral 0, regression 0, unconfirmed 0 of 3 sub-gates)
+gate fill      GAIN        (gain 1, neutral 0, regression 0, unconfirmed 0 of 1 sub-gates)
+gate dip       NEUTRAL     (gain 0, neutral 1, regression 0, unconfirmed 0 of 1 sub-gates)
+gate gap       GAIN        (gain 1, neutral 0, regression 0, unconfirmed 0 of 1 sub-gates)
+proven gain: ttft (3/3), fill (1/1), gap (1/1)
+gain on every boot: 0 of 12 sub-gates
+neutral (no proven gain, no regression): decode, aggregate, dip
+unconfirmed (a regression not on every boot or on the only one, not a FAIL): none
+null check: a null arm (the base config again) on 2 boots would FAIL this design's 12 sub-gates ~2% of the time (2 base run(s); Gaussian model with the real A/A boot effects, BOOT_EXCESS)
+OVERALL: ONE BOOT (0 regression(s) in 12 metric sub-gates, 0 unconfirmed (worse on some boots only), 0 quality miss(es) in 0 arm runs) -> no verdict: a regression must replicate on both boots and a gain must beat the band on both, so run a second arm boot (exit 3)
+exit=3

@@ -1,0 +1,101 @@
+# live_query.py http://127.0.0.1:<local-port> window 2026-10-30T21:26:28Z .. 2026-10-30T22:01:00Z (34.5 min)
+## whole window
+  eng ITL p50 ms         box-a      1.151  box-b      1.087  box-b/box-a    -5.5 %   | histogram_quantile(0.5, sum by (backend, le) (increase(sglang:inter_token_latency_seconds_bucket[2072s])))
+  eng ITL p90 ms         box-a      2.678  box-b      1.956  box-b/box-a   -26.9 %   | histogram_quantile(0.9, sum by (backend, le) (increase(sglang:inter_token_latency_seconds_bucket[2072s])))
+  eng ITL mean ms        box-a      1.424  box-b      1.145  box-b/box-a   -19.6 %   | sum by (backend)(increase(sglang:inter_token_latency_seconds_sum[2072s])) / sum by (backend)(increase(sglang:inter_token_latency_seconds_count[2072s]))
+  eng TPOT p50 ms        box-a      1.093  box-b      1.011  box-b/box-a    -7.5 %   | histogram_quantile(0.5, sum by (backend, le) (increase(sglang:request_time_per_output_token_seconds_bucket[2072s])))
+  eng TPOT p90 ms        box-a      1.967  box-b       1.82  box-b/box-a    -7.5 %   | histogram_quantile(0.9, sum by (backend, le) (increase(sglang:request_time_per_output_token_seconds_bucket[2072s])))
+  eng gen tok/s          box-a      584.2  box-b      231.4  box-b/box-a   -60.4 %   | sum by (backend)(increase(sglang:generation_tokens_total[2072s])) / 2072
+  eng prompt tok/s       box-a  1.474e+05  box-b  4.745e+04  box-b/box-a   -67.8 %   | sum by (backend)(increase(sglang:prompt_tokens_total[2072s])) / 2072
+  eng cached share       box-a     0.9871  box-b     0.9686  box-b/box-a    -1.9 %   | sum by (backend)(increase(sglang:cached_tokens_total[2072s])) / sum by (backend)(increase(sglang:prompt_tokens_total[2072s]))
+  eng requests           box-a       1127  box-b        522  box-b/box-a   -53.7 %   | sum by (backend)(increase(sglang:num_requests_total[2072s]))
+  eng running mean       box-a     0.8406  box-b     0.2536  box-b/box-a   -69.8 %   | avg by (backend)(avg_over_time(sglang:num_running_reqs[2072s]))
+  eng running max        box-a          5  box-b          3  box-b/box-a   -40.0 %   | max by (backend)(max_over_time(sglang:num_running_reqs[2072s]))
+  eng queue mean         box-a   0.007246  box-b   0.007246  box-b/box-a    +0.0 %   | avg by (backend)(avg_over_time(sglang:num_queue_reqs[2072s]))
+  eng accept len mean    box-a      3.996  box-b      4.045  box-b/box-a    +1.2 %   | avg by (backend)(avg_over_time(sglang:spec_accept_length[2072s]))
+  rtr ITL p50 ms         box-a      5.105  box-b      3.654  box-b/box-a   -28.4 %   | histogram_quantile(0.5, sum by (backend, le) (increase(sbr_itl_seconds_bucket[2072s])))
+  rtr ITL p90 ms         box-a       7.69  box-b      7.214  box-b/box-a    -6.2 %   | histogram_quantile(0.9, sum by (backend, le) (increase(sbr_itl_seconds_bucket[2072s])))
+  rtr decode tok/s p50   box-a      854.6  box-b       1055  box-b/box-a   +23.4 %   | histogram_quantile(0.5, sum by (backend, le) (increase(sbr_decode_tokens_per_second_bucket[2072s])))
+  rtr decode tok/s p90   box-a       1728  box-b       1860  box-b/box-a    +7.6 %   | histogram_quantile(0.9, sum by (backend, le) (increase(sbr_decode_tokens_per_second_bucket[2072s])))
+  rtr TTFT p50 ms        box-a      439.3  box-b      306.3  box-b/box-a   -30.3 %   | histogram_quantile(0.5, sum by (backend, le) (increase(sbr_ttft_seconds_bucket[2072s])))
+  rtr TTFT p90 ms        box-a      679.5  box-b       1119  box-b/box-a   +64.7 %   | histogram_quantile(0.9, sum by (backend, le) (increase(sbr_ttft_seconds_bucket[2072s])))
+  rtr TTFT count         box-a       1062  box-b        457  box-b/box-a   -57.0 %   | sum by (backend)(increase(sbr_ttft_seconds_count[2072s]))
+  -> tok/s @ eng ITL p50 box-a      868.8  box-b      920.0  box-b/box-a     +5.9 %
+  -> tok/s @ eng ITL p90 box-a      373.4  box-b      511.2  box-b/box-a    +36.9 %
+  -> tok/s @ eng ITL mean box-a      702.2  box-b      873.4  box-b/box-a    +24.4 %
+  -> tok/s @ rtr ITL p50 box-a      195.9  box-b      273.7  box-b/box-a    +39.7 %
+## slice 21:26:28Z .. 21:37:59Z
+  eng ITL p50 ms         box-a      1.141  box-b      1.071  box-b/box-a    -6.2 %
+  eng ITL p90 ms         box-a      2.573  box-b      1.927  box-b/box-a   -25.1 %
+  eng ITL mean ms        box-a      1.406  box-b      1.092  box-b/box-a   -22.3 %
+  eng TPOT p50 ms        box-a      1.123  box-b          1  box-b/box-a   -10.9 %
+  eng TPOT p90 ms        box-a        2.2  box-b        1.8  box-b/box-a   -18.2 %
+  eng gen tok/s          box-a      456.6  box-b      70.22  box-b/box-a   -84.6 %
+  eng prompt tok/s       box-a  1.692e+05  box-b   1.23e+04  box-b/box-a   -92.7 %
+  eng cached share       box-a     0.9888  box-b     0.9373  box-b/box-a    -5.2 %
+  eng requests           box-a        427  box-b         78  box-b/box-a   -81.7 %
+  eng running mean       box-a     0.5435  box-b     0.1087  box-b/box-a   -80.0 %
+  eng running max        box-a          3  box-b          1  box-b/box-a   -66.7 %
+  eng queue mean         box-a          0  box-b          0  box-b/box-a         —
+  eng accept len mean    box-a      3.985  box-b      4.053  box-b/box-a    +1.7 %
+  rtr ITL p50 ms         box-a      4.854  box-b      3.168  box-b/box-a   -34.7 %
+  rtr ITL p90 ms         box-a      7.583  box-b      6.246  box-b/box-a   -17.6 %
+  rtr decode tok/s p50   box-a        825  box-b      982.7  box-b/box-a   +19.1 %
+  rtr decode tok/s p90   box-a       1660  box-b       1824  box-b/box-a    +9.8 %
+  rtr TTFT p50 ms        box-a      401.5  box-b        520  box-b/box-a   +29.5 %
+  rtr TTFT p90 ms        box-a      650.1  box-b       1155  box-b/box-a   +77.7 %
+  rtr TTFT count         box-a        404  box-b         57  box-b/box-a   -85.9 %
+  -> tok/s @ eng ITL p50 box-a      876.4  box-b      933.7  box-b/box-a     +6.5 %
+  -> tok/s @ eng ITL p90 box-a      388.7  box-b      518.9  box-b/box-a    +33.5 %
+  -> tok/s @ eng ITL mean box-a      711.2  box-b      915.8  box-b/box-a    +28.8 %
+  -> tok/s @ rtr ITL p50 box-a      206.0  box-b      315.7  box-b/box-a    +53.2 %
+## slice 21:37:59Z .. 21:49:30Z
+  eng ITL p50 ms         box-a      1.152  box-b       1.07  box-b/box-a    -7.1 %
+  eng ITL p90 ms         box-a      2.678  box-b      1.927  box-b/box-a   -28.1 %
+  eng ITL mean ms        box-a      1.389  box-b      1.084  box-b/box-a   -21.9 %
+  eng TPOT p50 ms        box-a       1.06  box-b      1.009  box-b/box-a    -4.8 %
+  eng TPOT p90 ms        box-a      1.909  box-b      1.817  box-b/box-a    -4.8 %
+  eng gen tok/s          box-a      522.9  box-b      157.2  box-b/box-a   -69.9 %
+  eng prompt tok/s       box-a  1.326e+05  box-b  3.205e+04  box-b/box-a   -75.8 %
+  eng cached share       box-a     0.9892  box-b      0.982  box-b/box-a    -0.7 %
+  eng requests           box-a        284  box-b        131  box-b/box-a   -53.9 %
+  eng running mean       box-a     0.8478  box-b     0.1739  box-b/box-a   -79.5 %
+  eng running max        box-a          4  box-b          1  box-b/box-a   -75.0 %
+  eng queue mean         box-a          0  box-b    0.02174  box-b/box-a         —
+  eng accept len mean    box-a      3.971  box-b      3.981  box-b/box-a    +0.3 %
+  rtr ITL p50 ms         box-a      4.953  box-b      3.257  box-b/box-a   -34.2 %
+  rtr ITL p90 ms         box-a      7.626  box-b      6.534  box-b/box-a   -14.3 %
+  rtr decode tok/s p50   box-a      872.2  box-b       1086  box-b/box-a   +24.5 %
+  rtr decode tok/s p90   box-a       1755  box-b       1870  box-b/box-a    +6.5 %
+  rtr TTFT p50 ms        box-a      469.2  box-b        920  box-b/box-a   +96.1 %
+  rtr TTFT p90 ms        box-a      868.3  box-b       1243  box-b/box-a   +43.1 %
+  rtr TTFT count         box-a        263  box-b        111  box-b/box-a   -57.8 %
+  -> tok/s @ eng ITL p50 box-a      868.1  box-b      934.6  box-b/box-a     +7.7 %
+  -> tok/s @ eng ITL p90 box-a      373.4  box-b      518.9  box-b/box-a    +39.0 %
+  -> tok/s @ eng ITL mean box-a      719.9  box-b      922.5  box-b/box-a    +28.1 %
+  -> tok/s @ rtr ITL p50 box-a      201.9  box-b      307.0  box-b/box-a    +52.1 %
+## slice 21:49:30Z .. 22:01:01Z
+  eng ITL p50 ms         box-a      1.156  box-b      1.095  box-b/box-a    -5.2 %
+  eng ITL p90 ms         box-a      2.732  box-b      1.971  box-b/box-a   -27.8 %
+  eng ITL mean ms        box-a      1.458  box-b      1.174  box-b/box-a   -19.5 %
+  eng TPOT p50 ms        box-a      1.086  box-b      1.014  box-b/box-a    -6.6 %
+  eng TPOT p90 ms        box-a      1.955  box-b      1.825  box-b/box-a    -6.6 %
+  eng gen tok/s          box-a      772.4  box-b      466.6  box-b/box-a   -39.6 %
+  eng prompt tok/s       box-a  1.402e+05  box-b  9.793e+04  box-b/box-a   -30.1 %
+  eng cached share       box-a     0.9829  box-b     0.9681  box-b/box-a    -1.5 %
+  eng requests           box-a        416  box-b        313  box-b/box-a   -24.8 %
+  eng running mean       box-a       1.13  box-b     0.4783  box-b/box-a   -57.7 %
+  eng running max        box-a          5  box-b          3  box-b/box-a   -40.0 %
+  eng queue mean         box-a    0.02174  box-b          0  box-b/box-a         —
+  eng accept len mean    box-a      4.032  box-b      4.101  box-b/box-a    +1.7 %
+  rtr ITL p50 ms         box-a       5.35  box-b      4.026  box-b/box-a   -24.7 %
+  rtr ITL p90 ms         box-a      7.792  box-b      7.403  box-b/box-a    -5.0 %
+  rtr decode tok/s p50   box-a      872.5  box-b       1066  box-b/box-a   +22.1 %
+  rtr decode tok/s p90   box-a       1762  box-b       1863  box-b/box-a    +5.7 %
+  rtr TTFT p50 ms        box-a      448.5  box-b      258.4  box-b/box-a   -42.4 %
+  rtr TTFT p90 ms        box-a      632.9  box-b      609.6  box-b/box-a    -3.7 %
+  rtr TTFT count         box-a        402  box-b        289  box-b/box-a   -28.1 %
+  -> tok/s @ eng ITL p50 box-a      865.1  box-b      913.2  box-b/box-a     +5.6 %
+  -> tok/s @ eng ITL p90 box-a      366.0  box-b      507.4  box-b/box-a    +38.6 %
+  -> tok/s @ eng ITL mean box-a      685.9  box-b      851.8  box-b/box-a    +24.2 %
+  -> tok/s @ rtr ITL p50 box-a      186.9  box-b      248.4  box-b/box-a    +32.9 %
