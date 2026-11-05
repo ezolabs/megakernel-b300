@@ -35,8 +35,10 @@ from our SGLang fork (449 files, 64,558 insertions, 2.7 MB; 152 commits listed i
 git clone https://github.com/sgl-project/sglang.git sglang
 cd sglang
 git checkout 3a3a8611a45f5a81fd07ffa6b0ed3ba33e7a4db9
-git apply /path/to/setup/sglang-fork/fork-vs-upstream-3a3a8611a4.diff
+git apply --exclude='test/srt/sbr/fixtures/*.jsonl.gz' /path/to/setup/sglang-fork/fork-vs-upstream-3a3a8611a4.diff
 ```
+
+The two excluded files are test fixtures: not shipped, and not needed to serve.
 
 Check out the result where the box expects it (`SGLANG_TREE=/workspace/mk29/sglang` is the box file's value; any
 path works if you write it down), then build a venv over it, editable, beside the plugin:

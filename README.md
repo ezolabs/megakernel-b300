@@ -125,8 +125,10 @@ The full runbook is [`setup/README.md`](setup/README.md). The steps of record, i
    git clone https://github.com/sgl-project/sglang.git sglang
    cd sglang
    git checkout 3a3a8611a45f5a81fd07ffa6b0ed3ba33e7a4db9
-   git apply /path/to/setup/sglang-fork/fork-vs-upstream-3a3a8611a4.diff
+   git apply --exclude='test/srt/sbr/fixtures/*.jsonl.gz' /path/to/setup/sglang-fork/fork-vs-upstream-3a3a8611a4.diff
    ```
+
+   The two excluded files are test fixtures: not shipped, and not needed to serve.
 
    ```bash
    /opt/sglang/bin/uv pip install --python /opt/sglang-mega/bin/python3 --no-deps --no-build-isolation -e /workspace/mega/sglang/python

@@ -21,8 +21,10 @@ still sits on. (The box files call it `FORK_BASE`; the fork's own history is che
 git clone https://github.com/sgl-project/sglang.git sglang
 cd sglang
 git checkout 3a3a8611a45f5a81fd07ffa6b0ed3ba33e7a4db9
-git apply /path/to/fork-vs-upstream-3a3a8611a4.diff
+git apply --exclude='test/srt/sbr/fixtures/*.jsonl.gz' /path/to/fork-vs-upstream-3a3a8611a4.diff
 ```
+
+The two excluded files are test fixtures: not shipped, and not needed to serve.
 
 A three-way apply (`git apply --3way`) is the same delta with git's merge fallback; the plain form is what the
 diff was cut for and is the one to try first. The tree this produces is the tree the boxes served — the fork's

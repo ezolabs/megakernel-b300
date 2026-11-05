@@ -31,7 +31,7 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="ezo labs // research. DeepSeek-V4.1-Flash breaks 1,000 tokens a second for one user. Fastest bench request 1,064; bench average 870 Megakernel: +33 to 39% over our tuned stack." />
   <meta property="article:published_time" content="2026-10-31T00:00:00Z" />
-  <meta property="article:modified_time" content="2026-11-03T00:00:00Z" />
+  <meta property="article:modified_time" content="2026-11-05T00:00:00Z" />
   <meta property="article:section" content="inference" />
   <meta property="article:tag" content="inference" />
   <meta property="article:tag" content="megakernel" />
@@ -87,7 +87,7 @@
         "description": "DeepSeek-V4.1-Flash topped 1,000 tokens a second for one user on B300: the fastest bench request hit 1,064, and just over half of one quiet node's live replies beat 1,024. The bench averages 870.",
         "abstract": "For one user, DeepSeek-V4.1-Flash now breaks 1,000 tokens per second on B300. The fastest bench request hit 1,064. Over 14 engine starts, the bench averaged 870. That is about twice our first boot's 439, five days earlier, though the steps used different benches. Live, our router timed just over half of one quiet node's replies above 1,024, and the engine averaged 873 there. The biggest step was NVIDIA's megakernel for SGLang. Built for Grace Blackwell Ultra (GB300), it refused B300 at launch. We patched it and added guards to stop the engine if its chips lose sync. One-user decode ran 33 to 39% faster than our tuned stack without the megakernel. Tests detected no quality loss, and 20,818 requests ran with no hang.",
         "datePublished": "2026-10-31T00:00:00Z",
-        "dateModified": "2026-11-03T00:00:00Z",
+        "dateModified": "2026-11-05T00:00:00Z",
         "inLanguage": "en",
         "author": [
           {
@@ -129,8 +129,14 @@
         "identifier": "EZO-R-2026-07",
         "license": "https://ezolabs.io/terms",
         "isAccessibleForFree": true,
-        "wordCount": 3445,
-        "url": "https://ezolabs.io/research/megakernel-b300"
+        "wordCount": 3518,
+        "url": "https://ezolabs.io/research/megakernel-b300",
+        "isBasedOn": {
+          "@type": "SoftwareSourceCode",
+          "name": "github.com/ezolabs/megakernel-b300",
+          "codeRepository": "https://github.com/ezolabs/megakernel-b300",
+          "description": "B300 patch, the measured record behind this post and a setup kit"
+        }
       },
       {
         "@type": "WebPage",
@@ -327,7 +333,7 @@
           </li>
           <li class="numbers__item">
             <span class="numbers__value">0 of 20,818</span>
-            <span class="numbers__label">requests hung; 95% bound over 18,872 of them: at most 1.43 hangs per loaded hour</span>
+            <span class="numbers__label">requests hung; the build we serve is bounded at 0.19 hangs per loaded hour, 95%</span>
           </li>
         </ul>
       </section>
@@ -347,6 +353,7 @@
       </section>
 
       <div class="post__body">
+        <p class="post__code">The B300 patch, the measured record behind this post and a setup kit are in <a href="https://github.com/ezolabs/megakernel-b300">github.com/ezolabs/megakernel-b300</a>.</p>
         <p>On our B300 nodes, we serve DeepSeek-V4.1-Flash, a 1M-token-context open-weight mixture-of-experts model. Tokens are the word pieces the model writes.</p>
         <p>We run it on SGLang, the open-source serving engine, with NVIDIA's low-latency "megakernel" plugin. A megakernel fuses the many small programs the model runs for each token into a few long-running ones on the graphics processor (GPU).</p>
         <figure class="figure" id="figure-1" data-n="1"><div class="figure__art" role="region" tabindex="0" aria-labelledby="figure-1-caption"><svg class="figure__svg" focusable="false" width="540" viewBox="0 0 720 618" role="img" aria-labelledby="megakernel-b300-fig1-title megakernel-b300-fig1-desc">
@@ -1138,17 +1145,17 @@
         </tr>
         </tbody>
         </table></div><p class="table__src"><a href="/research/megakernel-b300/table-3.csv" data-url="ezolabs.io/research/megakernel-b300/table-3.csv">data (csv)</a></p>
-        <p>NVIDIA's own accuracy check scores the output again to measure how much the probabilities assigned to tokens changed. It passed on every boot we checked, and the worst reading was about a quarter of its limit. Most of our accuracy sets have 100 to 300 items. Sets that size would miss a drop smaller than about 7 to 15 points.</p>
+        <p>NVIDIA's own accuracy check scores the output again to measure how much the probabilities assigned to tokens changed. It passed on every boot we checked, and the worst reading was about a third of its limit. Most of our accuracy sets have 100 to 300 items. Sets that size would miss a drop smaller than about 7 to 15 points.</p>
         <h2 id="stability">Stability</h2>
         <p>Two one-hour soak tests, sustained runs to check stability, served 13,410 requests with no hang. With the probe checking every 10 steps, they found no mismatch in 852,300 probe checks per GPU. Production on 30 October added 7,408 requests with no hang, and one engine ran 13 hours without a restart. The soak tests and that build's first production hours together served 18,872 requests in 2.095 loaded hours, counting only time with a request running.</p>
-        <p>Zero hangs over those 18,872 requests caps the rate at 1.43 per loaded hour (95% confidence). That is a bound, not proof of zero, and it cannot yet rule out the community port's one hang every 6 hours; that takes about 18 hang-free loaded hours. A stopped node rejoins the serving pool automatically in about 14 minutes.</p>
+        <p>Zero hangs over those 18,872 requests caps the soak build's rate at 1.43 per loaded hour (95% confidence). Production on the build we serve has since added 15.43 loaded hours on both nodes with zero hangs, capping its rate at 0.19 per loaded hour (95% confidence). That is a bound, not proof of zero, and it cannot yet rule out the community port's one hang every 6 hours. Ruling that out takes about 18 hang-free loaded hours on one build. A stopped node rejoins the serving pool automatically in about 14 minutes.</p>
         <h2 id="what-it-costs">What it costs</h2>
         <p>The plugin needs every GPU to hold a slice of every expert, the small networks a mixture-of-experts model picks from for each token. Our tuned stack gave each GPU whole experts instead. The plugin's layout shrinks the cache that holds each conversation's memory by 25%. The remaining cache is still far larger than one 1M-token request needs. It also nudges output: fed the same text, the build picks the old stack's top token at 94.3% of short-prompt positions. An engine without the megakernel but with that layout changes the same token choices, and no accuracy test we ran detected an effect. With the node kept busy, the one-stream speedup cuts cost per output token by 25 to 28%.</p>
         <h2 id="what-we-do-not-claim">What we do not claim</h2>
         <ul>
         <li>We do not claim to be faster than GB300. Our 90th percentile is 954.0. It sits near GB300's published 928.4 and 945.96, but the workloads, weights, draft acceptance and statistics all differ. Our fastest request, 1,064, does not compare either. What carries over is the relative gain, on hardware the code was not written for.</li>
         <li>Our setup is not supported. The unofficial patch needs re-checking at each plugin update; upstream's <code>sm148</code> opt-in is the supported route.</li>
-        <li>These speeds do not represent every workload. They include speculative decoding and come from short synthetic prompts, 300-token replies and an idle node. Production peaked at 3 to 6 requests at once, and soaks sampled at temperature 1.0 only.</li>
+        <li>These speeds do not represent every workload. They include speculative decoding and come from short synthetic prompts, 300-token replies and an idle node. Production mostly ran 1 to 4 requests at once. Brief peaks reached 13 to 14, some likely our own test traffic. Soaks sampled at temperature 1.0 only.</li>
         </ul>
         <div class="post-cta">
           <p class="post-cta__lead">Running your own GPU inference cluster? We can tune yours the same way.</p>
@@ -1162,9 +1169,9 @@
         <p><strong>Speed history.</strong> Figure 1's steps come from four benches, as logged at the time: the ramp bench (first boot and fast host cores), an older command-line tool (27 October), the megakernel speed gate (<span class="nw">28–30</span> October, and Figure 4's three gate boots) and the decode test above (the 14 boots). The ramp bench is an earlier copy of the program the decode test wraps, and we do not hold its first-boot settings, so steps on different benches do not compare as numbers.</p>
         <p><strong>Live speed.</strong> Over 34.5 minutes on both nodes on 30 October 2026, our router timed each reply's decode rate over its visible stream and counted the rates in histogram buckets. Two of its percentiles for the second node fall inside the 1,024 to 2,048 bucket, where it reads them by straight-line interpolation; together they put 51.5% of that node's replies above 1,024. The rate includes bursts of accepted drafts, so it is not a sustained per-stream speed. That speed is the engine's mean gap between tokens over the same window: 1.145 milliseconds on the second node, 873 tokens per second, and 1.424 on the first, 702. The engine's percentile gaps are not used, since they fall inside its first histogram bucket.</p>
         <p><strong>First token and cold fill.</strong> Time to first token is client-side, from send to the first streamed delta, on an idle, warm node. Cold fill starts four background decode streams, then sends one never-seen 60,000-token prompt, 8 repetitions; fill speed is its length over time to first token. The 1M-token probe is one 979,971-token prompt with hidden facts, checked for the answer and the time.</p>
-        <p><strong>Numerical checks.</strong> Greedy: 32 prompts at temperature 0, 256 tokens, compared byte for byte on an idle node, since batch composition changes decoding. Teacher-forced: the reference's output is fed to the candidate over 32 prompts and top-1 agreement recorded; the long-prompt half sits at a 94 to 95.5% noise floor, so the short half carries the signal. NVIDIA's KL test: temperature 0, the k3 estimator on the sampled token, re-scored by a prefill pass, the mean of per-prompt means; short set 8 LongBench-v2 prompts × 256 tokens, limit 0.03; long set 4 windows of 18,000 to 27,000 tokens × 128 tokens, limit 0.06; 3 repeats per boot. Readings ran 0.0034 to 0.0076 short and 0.0087 to 0.0162 long.</p>
+        <p><strong>Numerical checks.</strong> Greedy: 32 prompts at temperature 0, 256 tokens, compared byte for byte on an idle node, since batch composition changes decoding. Teacher-forced: the reference's output is fed to the candidate over 32 prompts and top-1 agreement recorded; the long-prompt half sits at a 94 to 95.5% noise floor, so the short half carries the signal. NVIDIA's KL test: temperature 0, the k3 estimator on the sampled token, re-scored by a prefill pass, the mean of per-prompt means; short set 8 LongBench-v2 prompts × 256 tokens, limit 0.03; long set 4 windows of 18,000 to 27,000 tokens × 128 tokens, limit 0.06; 3 repeats per boot. Readings ran 0.0034 to 0.0076 short and 0.0087 to 0.0205 long, the 0.0205 run overlapping its warm-up.</p>
         <p><strong>Accuracy.</strong> Newcombe 95% intervals for differences in proportions, McNemar's test for paired items. A build is non-inferior when the interval's lower end is above −3 points. The run against the 8×B200 reference used concurrency 4, temperature 1.0 and two repetitions pooled, unpaired.</p>
-        <p><strong>Hang bound.</strong> With zero events in T loaded hours, the one-sided 95% upper bound on a Poisson rate is 2.996 / T. Builds are never pooled; a build's soak and serving hours are. The later build that took over production on 30 October bounds at 8.76 on its own 0.342 loaded hours.</p>
+        <p><strong>Hang bound.</strong> With zero events in T loaded hours, the one-sided 95% upper bound on a Poisson rate is 2.996 / T. Builds are never pooled; a build's soak and serving hours are. The soak build bounds at 1.43 on 2.095 loaded hours. The build that took over production on 30 October bounds at 0.194 on its 15.43 loaded hours, and the build serving since 31 October at 0.342 on 8.76 loaded hours.</p>
         <p><strong>Data handling.</strong> Every speed and quality prompt is synthetic or from a public benchmark. Live traffic was read only as aggregate metrics.</p>
         <h3 id="sources">Sources</h3>
         <ul>
@@ -1177,7 +1184,7 @@
 
       <div class="post__end">
         <details class="revisions">
-          <summary><span class="label">revisions</span><span class="revisions__dates">first published <time datetime="2026-10-31">2026-10-31</time>, last updated <time datetime="2026-11-03">2026-11-03</time></span><svg class="revisions__chev" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 6l4 4 4-4"/></svg></summary>
+          <summary><span class="label">revisions</span><span class="revisions__dates">first published <time datetime="2026-10-31">2026-10-31</time>, last updated <time datetime="2026-11-05">2026-11-05</time></span><svg class="revisions__chev" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 6l4 4 4-4"/></svg></summary>
           <table class="revisions__table">
             <caption class="vh">revisions to this post</caption>
             <thead><tr><th scope="col">date</th><th scope="col">change</th></tr></thead>
@@ -1185,6 +1192,8 @@
               <tr><td><time datetime="2026-10-31">2026-10-31</time></td><td>Published.</td></tr>
               <tr><td><time datetime="2026-11-01">2026-11-01</time></td><td>Trimmed repeated numbers and caveats, and dropped the short-answer list: the abstract is the summary. No figure changed.</td></tr>
               <tr><td><time datetime="2026-11-03">2026-11-03</time></td><td>Plainer wording: terms defined where they first appear, the climb&#39;s steps say who did what, and the abstract names the megakernel&#39;s baseline. No number or figure changed.</td></tr>
+              <tr><td><time datetime="2026-11-05">2026-11-05</time></td><td>Linked the repo with the B300 patch, the measured record and a setup kit.</td></tr>
+              <tr><td><time datetime="2026-11-05">2026-11-05</time></td><td>Corrected the accuracy-check margin and the hang bound to the author&#39;s corrected record.</td></tr>
             </tbody>
           </table>
         </details>

@@ -4,7 +4,7 @@ slug: megakernel-b300
 draft: false
 featured: true
 date: "2026-10-31"
-updated: "2026-11-03"
+updated: "2026-11-05"
 description: "DeepSeek-V4.1-Flash topped 1,000 tokens a second for one user on B300: the fastest bench request hit 1,064, and just over half of one quiet node's live replies beat 1,024. The bench averages 870."
 abstract: >-
   For one user, DeepSeek-V4.1-Flash now breaks 1,000 tokens per second on B300. The fastest bench request hit 1,064.
@@ -28,6 +28,9 @@ tags:
   - latency
 report_number: EZO-R-2026-07
 lang: en
+code:
+  url: "https://github.com/ezolabs/megakernel-b300"
+  note: "B300 patch, the measured record behind this post and a setup kit"
 og:
   kicker: "EZO LABS // RESEARCH"
   title:
@@ -46,7 +49,7 @@ display:
     - value: "≈2×"
       label: "one-user decode in five days: 439 at first boot, 870 averaged over 14 boots"
     - value: "0 of 20,818"
-      label: "requests hung; 95% bound over 18,872 of them: at most 1.43 hangs per loaded hour"
+      label: "requests hung; the build we serve is bounded at 0.19 hangs per loaded hour, 95%"
   assumptions:
     - text: "Each step of the climb was timed on its own bench, so 439 to 870 is about 2×, not an exact ratio."
     - text: "Live, our router timed each reply, short bursts of accepted drafts included: just over half of one quiet node's replies beat 1,024. The engine's mean gap between tokens there gives 873, beside the bench's 870."
@@ -65,6 +68,10 @@ revisions:
     note: "Trimmed repeated numbers and caveats, and dropped the short-answer list: the abstract is the summary. No figure changed."
   - date: "2026-11-03"
     note: "Plainer wording: terms defined where they first appear, the climb's steps say who did what, and the abstract names the megakernel's baseline. No number or figure changed."
+  - date: "2026-11-05"
+    note: "Linked the repo with the B300 patch, the measured record and a setup kit."
+  - date: "2026-11-05"
+    note: "Corrected the accuracy-check margin and the hang bound to the author's corrected record."
 license: site-terms
 ---
 
@@ -202,13 +209,13 @@ We detected no quality loss against our tuned stack in 9 paired tests using the 
 | MATH-500 slice, competition math | 100 × 2 | 0.900 | 0.890 | +1.0 (−5.1 to +7.1) |
 | HumanEval+, code | 163 × 2 | 0.951 | 0.945 | +0.6 (−2.9 to +4.2) |
 
-NVIDIA's own accuracy check scores the output again to measure how much the probabilities assigned to tokens changed. It passed on every boot we checked, and the worst reading was about a quarter of its limit. Most of our accuracy sets have 100 to 300 items. Sets that size would miss a drop smaller than about 7 to 15 points.
+NVIDIA's own accuracy check scores the output again to measure how much the probabilities assigned to tokens changed. It passed on every boot we checked, and the worst reading was about a third of its limit. Most of our accuracy sets have 100 to 300 items. Sets that size would miss a drop smaller than about 7 to 15 points.
 
 ## Stability
 
 Two one-hour soak tests, sustained runs to check stability, served 13,410 requests with no hang. With the probe checking every 10 steps, they found no mismatch in 852,300 probe checks per GPU. Production on 30 October added 7,408 requests with no hang, and one engine ran 13 hours without a restart. The soak tests and that build's first production hours together served 18,872 requests in 2.095 loaded hours, counting only time with a request running.
 
-Zero hangs over those 18,872 requests caps the rate at 1.43 per loaded hour (95% confidence). That is a bound, not proof of zero, and it cannot yet rule out the community port's one hang every 6 hours; that takes about 18 hang-free loaded hours. A stopped node rejoins the serving pool automatically in about 14 minutes.
+Zero hangs over those 18,872 requests caps the soak build's rate at 1.43 per loaded hour (95% confidence). Production on the build we serve has since added 15.43 loaded hours on both nodes with zero hangs, capping its rate at 0.19 per loaded hour (95% confidence). That is a bound, not proof of zero, and it cannot yet rule out the community port's one hang every 6 hours. Ruling that out takes about 18 hang-free loaded hours on one build. A stopped node rejoins the serving pool automatically in about 14 minutes.
 
 ## What it costs
 
@@ -218,7 +225,7 @@ The plugin needs every GPU to hold a slice of every expert, the small networks a
 
 - We do not claim to be faster than GB300. Our 90th percentile is 954.0. It sits near GB300's published 928.4 and 945.96, but the workloads, weights, draft acceptance and statistics all differ. Our fastest request, 1,064, does not compare either. What carries over is the relative gain, on hardware the code was not written for.
 - Our setup is not supported. The unofficial patch needs re-checking at each plugin update; upstream's `sm148` opt-in is the supported route.
-- These speeds do not represent every workload. They include speculative decoding and come from short synthetic prompts, 300-token replies and an idle node. Production peaked at 3 to 6 requests at once, and soaks sampled at temperature 1.0 only.
+- These speeds do not represent every workload. They include speculative decoding and come from short synthetic prompts, 300-token replies and an idle node. Production mostly ran 1 to 4 requests at once. Brief peaks reached 13 to 14, some likely our own test traffic. Soaks sampled at temperature 1.0 only.
 
 ## Appendix: method
 
@@ -236,11 +243,11 @@ The plugin needs every GPU to hold a slice of every expert, the small networks a
 
 **First token and cold fill.** Time to first token is client-side, from send to the first streamed delta, on an idle, warm node. Cold fill starts four background decode streams, then sends one never-seen 60,000-token prompt, 8 repetitions; fill speed is its length over time to first token. The 1M-token probe is one 979,971-token prompt with hidden facts, checked for the answer and the time.
 
-**Numerical checks.** Greedy: 32 prompts at temperature 0, 256 tokens, compared byte for byte on an idle node, since batch composition changes decoding. Teacher-forced: the reference's output is fed to the candidate over 32 prompts and top-1 agreement recorded; the long-prompt half sits at a 94 to 95.5% noise floor, so the short half carries the signal. NVIDIA's KL test: temperature 0, the k3 estimator on the sampled token, re-scored by a prefill pass, the mean of per-prompt means; short set 8 LongBench-v2 prompts × 256 tokens, limit 0.03; long set 4 windows of 18,000 to 27,000 tokens × 128 tokens, limit 0.06; 3 repeats per boot. Readings ran 0.0034 to 0.0076 short and 0.0087 to 0.0162 long.
+**Numerical checks.** Greedy: 32 prompts at temperature 0, 256 tokens, compared byte for byte on an idle node, since batch composition changes decoding. Teacher-forced: the reference's output is fed to the candidate over 32 prompts and top-1 agreement recorded; the long-prompt half sits at a 94 to 95.5% noise floor, so the short half carries the signal. NVIDIA's KL test: temperature 0, the k3 estimator on the sampled token, re-scored by a prefill pass, the mean of per-prompt means; short set 8 LongBench-v2 prompts × 256 tokens, limit 0.03; long set 4 windows of 18,000 to 27,000 tokens × 128 tokens, limit 0.06; 3 repeats per boot. Readings ran 0.0034 to 0.0076 short and 0.0087 to 0.0205 long, the 0.0205 run overlapping its warm-up.
 
 **Accuracy.** Newcombe 95% intervals for differences in proportions, McNemar's test for paired items. A build is non-inferior when the interval's lower end is above −3 points. The run against the 8×B200 reference used concurrency 4, temperature 1.0 and two repetitions pooled, unpaired.
 
-**Hang bound.** With zero events in T loaded hours, the one-sided 95% upper bound on a Poisson rate is 2.996 / T. Builds are never pooled; a build's soak and serving hours are. The later build that took over production on 30 October bounds at 8.76 on its own 0.342 loaded hours.
+**Hang bound.** With zero events in T loaded hours, the one-sided 95% upper bound on a Poisson rate is 2.996 / T. Builds are never pooled; a build's soak and serving hours are. The soak build bounds at 1.43 on 2.095 loaded hours. The build that took over production on 30 October bounds at 0.194 on its 15.43 loaded hours, and the build serving since 31 October at 0.342 on 8.76 loaded hours.
 
 **Data handling.** Every speed and quality prompt is synthetic or from a public benchmark. Live traffic was read only as aggregate metrics.
 
